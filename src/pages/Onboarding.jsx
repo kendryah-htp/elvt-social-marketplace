@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowRight, ArrowLeft, Check, Palette, AppWindow, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { createPageUrl } from './utils';
+import { createPageUrl } from '@/utils';
 
 const themes = [
   { value: 'luxury', name: 'Luxury', description: 'Dark premium aesthetic with gold accents', preview: 'bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]' },

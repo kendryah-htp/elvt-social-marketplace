@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { Check, CreditCard, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { createPageUrl } from './utils';
+import { createPageUrl } from '@/utils';
 
 export default function PurchaseFlow() {
   const urlParams = new URLSearchParams(window.location.search);

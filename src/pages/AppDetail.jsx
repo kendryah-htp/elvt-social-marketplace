@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Star, Check, ShoppingCart, Eye } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createPageUrl } from './utils';
+import { createPageUrl } from '@/utils';
 import QuoteLoader from '@/components/QuoteLoader';
 
 const badgeStyles = {

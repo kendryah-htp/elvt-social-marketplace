@@ -54,6 +54,7 @@ import Join from './pages/Join';
 import Onboarding from './pages/Onboarding';
 import Storefront from './pages/Storefront';
 import PurchaseFlow from './pages/PurchaseFlow';
+import AffiliateDashboard from './pages/AffiliateDashboard';
 
 
 export const PAGES = {
@@ -64,6 +65,7 @@ export const PAGES = {
     "Onboarding": Onboarding,
     "Storefront": Storefront,
     "PurchaseFlow": PurchaseFlow,
+    "AffiliateDashboard": AffiliateDashboard,
 }
 
 export const pagesConfig = {

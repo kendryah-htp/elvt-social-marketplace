@@ -21,10 +21,9 @@ export default function Storefront() {
   // Track storefront visit
   useEffect(() => {
     if (slug) {
-      base44.entities.StorefrontVisit.create({
+      base44.functions.invoke('trackVisit', {
         affiliate_slug: slug,
-        referrer: document.referrer,
-        visitor_ip: 'anonymous'
+        referrer: document.referrer
       }).catch(() => {}); // Silent fail
     }
   }, [slug]);

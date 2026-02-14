@@ -1,14 +1,152 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
-import { Check, CreditCard, ShieldCheck, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, CreditCard, ShieldCheck } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const navigate = useNavigate();
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!stripe || !elements || !buyerInfo.name || !buyerInfo.email) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    setProcessing(true);
+    setError(null);
+
+    try {
+      const { error: cardError, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: buyerInfo.name,
+          email: buyerInfo.email
+        }
+      });
+
+      if (cardError) {
+        setError(cardError.message);
+        setProcessing(false);
+        return;
+      }
+
+      // Create payment intent via Stripe integration
+      const { data: paymentIntent } = await base44.integrations.Stripe.CreatePaymentIntent({
+        amount: Math.round(app.price * 100),
+        currency: 'usd',
+        payment_method: paymentMethod.id,
+        confirm: true,
+        automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
+        metadata: {
+          app_id: app.id,
+          buyer_email: buyerInfo.email,
+          affiliate_slug: affiliateSlug || ''
+        }
+      });
+
+      if (paymentIntent.status === 'succeeded') {
+        // Complete purchase and trigger emails
+        await base44.functions.invoke('completePurchase', {
+          app_id: app.id,
+          buyer_name: buyerInfo.name,
+          buyer_email: buyerInfo.email,
+          affiliate_slug: affiliateSlug,
+          payment_id: paymentIntent.id
+        });
+
+        navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
+      } else {
+        setError('Payment failed. Please try again.');
+      }
+    } catch (err) {
+      setError(err.message || 'Payment processing error');
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <Label className="text-[#F5F0EB]">Full Name</Label>
+        <Input
+          value={buyerInfo.name}
+          onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
+          placeholder="John Doe"
+          className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+          required
+        />
+      </div>
+
+      <div>
+        <Label className="text-[#F5F0EB]">Email Address</Label>
+        <Input
+          type="email"
+          value={buyerInfo.email}
+          onChange={(e) => setBuyerInfo({ ...buyerInfo, email: e.target.value })}
+          placeholder="john@example.com"
+          className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+          required
+        />
+      </div>
+
+      <div className="border-t border-[#D4AF37]/20 pt-6">
+        <Label className="text-[#F5F0EB] mb-4 block">Card Details</Label>
+        <div className="bg-[#1A1A1A] border border-[#D4AF37]/20 rounded-lg p-4">
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: '16px',
+                  color: '#F5F0EB',
+                  '::placeholder': { color: '#E5E0DB' }
+                }
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+          <p className="text-red-400 text-sm">{error}</p>
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        size="lg"
+        disabled={!stripe || processing}
+        className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
+      >
+        {processing ? 'Processing...' : `Pay $${app.price}`}
+      </Button>
+
+      <div className="flex items-center justify-center gap-2 text-sm text-[#E5E0DB]">
+        <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+        <span>Secure checkout powered by Stripe</span>
+      </div>
+    </form>
+  );
+}
 
 export default function PurchaseFlow() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -37,50 +175,6 @@ export default function PurchaseFlow() {
     },
     enabled: !!ref
   });
-
-  const createPurchaseMutation = useMutation({
-    mutationFn: async (data) => {
-      const purchase = await base44.entities.Purchase.create(data);
-      
-      // Update affiliate earnings
-      if (affiliate) {
-        await base44.entities.AffiliateProfile.update(affiliate.id, {
-          total_earnings: (affiliate.total_earnings || 0) + data.commission_amount
-        });
-      }
-      
-      return purchase;
-    },
-    onSuccess: () => {
-      alert('🎉 Purchase successful! Check your email for access details.');
-    }
-  });
-
-  const handlePurchase = (e) => {
-    e.preventDefault();
-    
-    if (!buyerInfo.name || !buyerInfo.email) {
-      alert('Please fill in all fields');
-      return;
-    }
-
-    const commissionRate = affiliate?.commission_rate || app?.commission_rate || 30;
-    const commissionAmount = (app.price * commissionRate) / 100;
-
-    createPurchaseMutation.mutate({
-      app_id: app.id,
-      buyer_email: buyerInfo.email,
-      buyer_name: buyerInfo.name,
-      affiliate_id: affiliate?.id,
-      affiliate_slug: ref,
-      amount: app.price,
-      commission_rate: commissionRate,
-      commission_amount: commissionAmount,
-      payment_status: 'completed',
-      referral_source: ref ? 'ref_link' : 'direct',
-      product_name: app.name
-    });
-  };
 
   if (appLoading) {
     return (
@@ -140,10 +234,6 @@ export default function PurchaseFlow() {
                   <span>Price</span>
                   <span className="font-semibold">${app.price}</span>
                 </div>
-                <div className="flex justify-between text-[#E5E0DB]">
-                  <span>Tax</span>
-                  <span>$0.00</span>
-                </div>
                 <div className="flex justify-between text-2xl font-bold text-[#D4AF37] pt-3 border-t border-[#D4AF37]/20">
                   <span>Total</span>
                   <span>${app.price}</span>
@@ -167,65 +257,19 @@ export default function PurchaseFlow() {
             transition={{ delay: 0.1 }}
           >
             <Card className="elvt-glass p-8">
-              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Complete Purchase</h2>
+              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 flex items-center gap-2">
+                <CreditCard className="w-6 h-6 text-[#D4AF37]" />
+                Complete Purchase
+              </h2>
               
-              <form onSubmit={handlePurchase} className="space-y-6">
-                <div>
-                  <Label className="text-[#F5F0EB]">Full Name</Label>
-                  <Input
-                    value={buyerInfo.name}
-                    onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
-                    placeholder="John Doe"
-                    className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <Label className="text-[#F5F0EB]">Email Address</Label>
-                  <Input
-                    type="email"
-                    value={buyerInfo.email}
-                    onChange={(e) => setBuyerInfo({ ...buyerInfo, email: e.target.value })}
-                    placeholder="john@example.com"
-                    className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
-                    required
-                  />
-                </div>
-
-                <div className="border-t border-[#D4AF37]/20 pt-6">
-                  <Label className="text-[#F5F0EB] mb-4 block">Payment Method</Label>
-                  
-                  <div className="bg-[#1A1A1A] border border-[#D4AF37]/20 rounded-lg p-6 text-center">
-                    <CreditCard className="w-12 h-12 text-[#D4AF37] mx-auto mb-3" />
-                    <p className="text-[#E5E0DB] mb-2">Payment Integration Placeholder</p>
-                    <p className="text-sm text-[#E5E0DB]/60">
-                      Connect Stripe, PayPal, or your preferred payment processor here
-                    </p>
-                  </div>
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={createPurchaseMutation.isLoading}
-                  className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
-                >
-                  {createPurchaseMutation.isLoading ? (
-                    'Processing...'
-                  ) : (
-                    <>
-                      <Check className="w-5 h-5 mr-2" />
-                      Complete Purchase
-                    </>
-                  )}
-                </Button>
-
-                <div className="flex items-center justify-center gap-2 text-sm text-[#E5E0DB]">
-                  <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-                  <span>Secure checkout powered by ELVT Social</span>
-                </div>
-              </form>
+              <Elements stripe={stripePromise}>
+                <CheckoutForm 
+                  app={app} 
+                  affiliateSlug={ref}
+                  buyerInfo={buyerInfo}
+                  setBuyerInfo={setBuyerInfo}
+                />
+              </Elements>
             </Card>
           </motion.div>
         </div>

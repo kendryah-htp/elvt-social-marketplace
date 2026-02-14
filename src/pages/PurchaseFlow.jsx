@@ -1,0 +1,235 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { base44 } from '@/api/base44Client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card } from '@/components/ui/card';
+import { Check, CreditCard, ShieldCheck, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from './utils';
+
+export default function PurchaseFlow() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const appId = urlParams.get('appId');
+  const ref = urlParams.get('ref');
+  
+  const [buyerInfo, setBuyerInfo] = useState({
+    name: '',
+    email: ''
+  });
+
+  const { data: app, isLoading: appLoading } = useQuery({
+    queryKey: ['app-purchase', appId],
+    queryFn: async () => {
+      const apps = await base44.entities.App.filter({ id: appId });
+      return apps[0];
+    },
+    enabled: !!appId
+  });
+
+  const { data: affiliate } = useQuery({
+    queryKey: ['affiliate-ref', ref],
+    queryFn: async () => {
+      const affiliates = await base44.entities.AffiliateProfile.filter({ slug: ref });
+      return affiliates[0];
+    },
+    enabled: !!ref
+  });
+
+  const createPurchaseMutation = useMutation({
+    mutationFn: async (data) => {
+      const purchase = await base44.entities.Purchase.create(data);
+      
+      // Update affiliate earnings
+      if (affiliate) {
+        await base44.entities.AffiliateProfile.update(affiliate.id, {
+          total_earnings: (affiliate.total_earnings || 0) + data.commission_amount
+        });
+      }
+      
+      return purchase;
+    },
+    onSuccess: () => {
+      alert('🎉 Purchase successful! Check your email for access details.');
+    }
+  });
+
+  const handlePurchase = (e) => {
+    e.preventDefault();
+    
+    if (!buyerInfo.name || !buyerInfo.email) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    const commissionRate = affiliate?.commission_rate || app?.commission_rate || 30;
+    const commissionAmount = (app.price * commissionRate) / 100;
+
+    createPurchaseMutation.mutate({
+      app_id: app.id,
+      buyer_email: buyerInfo.email,
+      buyer_name: buyerInfo.name,
+      affiliate_id: affiliate?.id,
+      affiliate_slug: ref,
+      amount: app.price,
+      commission_rate: commissionRate,
+      commission_amount: commissionAmount,
+      payment_status: 'completed',
+      referral_source: ref ? 'ref_link' : 'direct',
+      product_name: app.name
+    });
+  };
+
+  if (appLoading) {
+    return (
+      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[#E5E0DB]">Loading checkout...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!app) {
+    return (
+      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+        <p className="text-[#E5E0DB]">App not found</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen elvt-gradient py-12">
+      <div className="max-w-5xl mx-auto px-6">
+        <Link to={createPageUrl('AppDetail') + '?id=' + appId}>
+          <Button variant="ghost" className="text-[#D4AF37] hover:text-[#E5C158] mb-8">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to App
+          </Button>
+        </Link>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Order Summary */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <Card className="elvt-glass p-8">
+              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Order Summary</h2>
+              
+              <div className="space-y-4 mb-6">
+                {app.thumbnail_url && (
+                  <img
+                    src={app.thumbnail_url}
+                    alt={app.name}
+                    className="w-full aspect-video object-cover rounded-lg"
+                  />
+                )}
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-[#F5F0EB]">{app.name}</h3>
+                  <p className="text-[#E5E0DB] text-sm mt-1">{app.short_description}</p>
+                </div>
+              </div>
+
+              <div className="border-t border-[#D4AF37]/20 pt-6 space-y-3">
+                <div className="flex justify-between text-[#E5E0DB]">
+                  <span>Price</span>
+                  <span className="font-semibold">${app.price}</span>
+                </div>
+                <div className="flex justify-between text-[#E5E0DB]">
+                  <span>Tax</span>
+                  <span>$0.00</span>
+                </div>
+                <div className="flex justify-between text-2xl font-bold text-[#D4AF37] pt-3 border-t border-[#D4AF37]/20">
+                  <span>Total</span>
+                  <span>${app.price}</span>
+                </div>
+              </div>
+
+              {affiliate && (
+                <div className="mt-6 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-lg p-4">
+                  <p className="text-sm text-[#E5E0DB] text-center">
+                    Supporting: <span className="font-semibold text-[#D4AF37]">{affiliate.full_name}</span>
+                  </p>
+                </div>
+              )}
+            </Card>
+          </motion.div>
+
+          {/* Payment Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <Card className="elvt-glass p-8">
+              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Complete Purchase</h2>
+              
+              <form onSubmit={handlePurchase} className="space-y-6">
+                <div>
+                  <Label className="text-[#F5F0EB]">Full Name</Label>
+                  <Input
+                    value={buyerInfo.name}
+                    onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
+                    placeholder="John Doe"
+                    className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-[#F5F0EB]">Email Address</Label>
+                  <Input
+                    type="email"
+                    value={buyerInfo.email}
+                    onChange={(e) => setBuyerInfo({ ...buyerInfo, email: e.target.value })}
+                    placeholder="john@example.com"
+                    className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+                    required
+                  />
+                </div>
+
+                <div className="border-t border-[#D4AF37]/20 pt-6">
+                  <Label className="text-[#F5F0EB] mb-4 block">Payment Method</Label>
+                  
+                  <div className="bg-[#1A1A1A] border border-[#D4AF37]/20 rounded-lg p-6 text-center">
+                    <CreditCard className="w-12 h-12 text-[#D4AF37] mx-auto mb-3" />
+                    <p className="text-[#E5E0DB] mb-2">Payment Integration Placeholder</p>
+                    <p className="text-sm text-[#E5E0DB]/60">
+                      Connect Stripe, PayPal, or your preferred payment processor here
+                    </p>
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={createPurchaseMutation.isLoading}
+                  className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
+                >
+                  {createPurchaseMutation.isLoading ? (
+                    'Processing...'
+                  ) : (
+                    <>
+                      <Check className="w-5 h-5 mr-2" />
+                      Complete Purchase
+                    </>
+                  )}
+                </Button>
+
+                <div className="flex items-center justify-center gap-2 text-sm text-[#E5E0DB]">
+                  <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Secure checkout powered by ELVT Social</span>
+                </div>
+              </form>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

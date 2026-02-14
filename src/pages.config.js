@@ -51,6 +51,9 @@ import Home from './pages/Home';
 import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
 import Join from './pages/Join';
+import Onboarding from './pages/Onboarding';
+import Storefront from './pages/Storefront';
+import PurchaseFlow from './pages/PurchaseFlow';
 
 
 export const PAGES = {
@@ -58,6 +61,9 @@ export const PAGES = {
     "AppCatalog": AppCatalog,
     "AppDetail": AppDetail,
     "Join": Join,
+    "Onboarding": Onboarding,
+    "Storefront": Storefront,
+    "PurchaseFlow": PurchaseFlow,
 }
 
 export const pagesConfig = {

@@ -55,6 +55,7 @@ import Onboarding from './pages/Onboarding';
 import Storefront from './pages/Storefront';
 import PurchaseFlow from './pages/PurchaseFlow';
 import AffiliateDashboard from './pages/AffiliateDashboard';
+import AdminPanel from './pages/AdminPanel';
 
 
 export const PAGES = {
@@ -66,6 +67,7 @@ export const PAGES = {
     "Storefront": Storefront,
     "PurchaseFlow": PurchaseFlow,
     "AffiliateDashboard": AffiliateDashboard,
+    "AdminPanel": AdminPanel,
 }
 
 export const pagesConfig = {

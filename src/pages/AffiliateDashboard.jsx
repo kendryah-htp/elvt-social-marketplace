@@ -136,7 +136,8 @@ export default function AffiliateDashboard() {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <div className="text-center">
-          <p className="text-[#E5E0DB] mb-6">Loading your dashboard...</p>
+          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[#E5E0DB]">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -263,26 +264,32 @@ export default function AffiliateDashboard() {
           <div>
             <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Apps on Your Storefront</h2>
             <div className="space-y-3">
-              {allApps.map(app => (
-                <Card key={app.id} className="elvt-glass p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-[#F5F0EB]">{app.name}</h4>
-                      <p className="text-sm text-[#E5E0DB]">${app.price} · {app.commission_rate}% commission</p>
-                    </div>
-                    <Button
-                      size="sm"
-                      onClick={() => handleToggleApp(app.id)}
-                      className={profile.selected_app_ids?.includes(app.id)
-                        ? 'bg-red-500 hover:bg-red-600'
-                        : 'bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]'
-                      }
-                    >
-                      {profile.selected_app_ids?.includes(app.id) ? 'Remove' : 'Add'}
-                    </Button>
-                  </div>
+              {allApps.length === 0 ? (
+                <Card className="elvt-glass p-8 text-center">
+                  <p className="text-[#E5E0DB]">No apps available yet</p>
                 </Card>
-              ))}
+              ) : (
+                allApps.map(app => (
+                  <Card key={app.id} className="elvt-glass p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-[#F5F0EB]">{app.name}</h4>
+                        <p className="text-sm text-[#E5E0DB]">${app.price} · {app.commission_rate}% commission</p>
+                      </div>
+                      <Button
+                        size="sm"
+                        onClick={() => handleToggleApp(app.id)}
+                        className={profile.selected_app_ids?.includes(app.id)
+                          ? 'bg-red-500 hover:bg-red-600'
+                          : 'bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]'
+                        }
+                      >
+                        {profile.selected_app_ids?.includes(app.id) ? 'Remove' : 'Add'}
+                      </Button>
+                    </div>
+                  </Card>
+                ))
+              )}
             </div>
           </div>
 

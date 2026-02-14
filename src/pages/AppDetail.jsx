@@ -46,10 +46,20 @@ export default function AppDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#E5E0DB]">Loading app details...</p>
+      <div className="min-h-screen elvt-gradient">
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <div className="aspect-video bg-[#2A2A2A] rounded-2xl animate-pulse" />
+              <div className="h-12 bg-[#2A2A2A] rounded animate-pulse" />
+            </div>
+            <div className="space-y-6">
+              <div className="h-12 bg-[#2A2A2A] rounded animate-pulse" />
+              <div className="h-8 bg-[#2A2A2A] rounded animate-pulse" />
+              <div className="h-24 bg-[#2A2A2A] rounded animate-pulse" />
+              <div className="h-16 bg-[#2A2A2A] rounded animate-pulse" />
+            </div>
+          </div>
         </div>
       </div>
     );

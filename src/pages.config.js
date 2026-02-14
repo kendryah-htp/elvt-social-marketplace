@@ -47,30 +47,30 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import Home from './pages/Home';
+import AdminPanel from './pages/AdminPanel';
+import AffiliateDashboard from './pages/AffiliateDashboard';
 import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
+import Home from './pages/Home';
 import Join from './pages/Join';
 import Onboarding from './pages/Onboarding';
-import Storefront from './pages/Storefront';
 import PurchaseFlow from './pages/PurchaseFlow';
-import AffiliateDashboard from './pages/AffiliateDashboard';
-import AdminPanel from './pages/AdminPanel';
 import PurchaseSuccess from './pages/PurchaseSuccess';
+import Storefront from './pages/Storefront';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "Home": Home,
+    "AdminPanel": AdminPanel,
+    "AffiliateDashboard": AffiliateDashboard,
     "AppCatalog": AppCatalog,
     "AppDetail": AppDetail,
+    "Home": Home,
     "Join": Join,
     "Onboarding": Onboarding,
-    "Storefront": Storefront,
     "PurchaseFlow": PurchaseFlow,
-    "AffiliateDashboard": AffiliateDashboard,
-    "AdminPanel": AdminPanel,
     "PurchaseSuccess": PurchaseSuccess,
+    "Storefront": Storefront,
 }
 
 export const pagesConfig = {

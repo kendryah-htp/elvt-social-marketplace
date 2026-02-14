@@ -1,17 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User, LayoutDashboard, LogOut, Sparkles, Palette } from 'lucide-react';
+import { Menu, X, User, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/components/ThemeContext';
 
 export default function Layout({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, changeTheme } = useTheme();
+  const [theme, setTheme] = useState('dark');
   const location = useLocation();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('elvt-theme') || 'dark';
+    setTheme(savedTheme);
+    applyTheme(savedTheme);
+  }, []);
+
+  const applyTheme = (themeName) => {
+    const root = document.documentElement;
+    const themes = {
+      dark: {
+        '--bg-primary': '#0A0A0A',
+        '--bg-secondary': '#1A1A1A',
+        '--bg-tertiary': '#2A2A2A',
+        '--text-primary': '#F5F0EB',
+        '--text-secondary': '#E5E0DB',
+        '--text-muted': '#A0A0A0',
+        '--accent': '#D4AF37',
+        '--border': 'rgba(212, 175, 55, 0.1)',
+      },
+      light: {
+        '--bg-primary': '#FFFFFF',
+        '--bg-secondary': '#F8F6F2',
+        '--bg-tertiary': '#EDE8E0',
+        '--text-primary': '#1A1A1A',
+        '--text-secondary': '#333333',
+        '--text-muted': '#666666',
+        '--accent': '#D4AF37',
+        '--border': 'rgba(0, 0, 0, 0.1)',
+      }
+    };
+    const themeVars = themes[themeName] || themes.dark;
+    Object.entries(themeVars).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  };
+
+  const changeTheme = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem('elvt-theme', newTheme);
+    applyTheme(newTheme);
+  };
 
   const { data: user } = useQuery({
     queryKey: ['user'],
@@ -128,69 +169,88 @@ export default function Layout({ children, currentPageName }) {
 
           {/* Mobile Menu */}
           <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden border-t border-[#D4AF37]/10"
-                style={{ backgroundColor: 'var(--bg-primary)' }}
+          {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-[#D4AF37]/10"
+            style={{ backgroundColor: 'var(--bg-primary)' }}
+          >
+            <div className="px-6 py-4 space-y-3">
+              <Link
+                to={createPageUrl('AppCatalog')}
+                className="block py-2 hover:text-[#D4AF37] transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
+                onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="px-6 py-4 space-y-3">
-                  <Link
-                    to={createPageUrl('AppCatalog')}
-                    className="block py-2 hover:text-[#D4AF37] transition-colors"
-                    style={{ color: 'var(--text-secondary)' }}
-                    onClick={() => setMobileMenuOpen(false)}
+                Marketplace
+              </Link>
+              <Link
+                to={createPageUrl('Join')}
+                className="block py-2 hover:text-[#D4AF37] transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Become an Affiliate
+              </Link>
+              {user && user.role === 'admin' && (
+                <div className="flex gap-2 py-2">
+                  <button
+                    onClick={() => { changeTheme('dark'); setMobileMenuOpen(false); }}
+                    className={`flex-1 px-2 py-1 rounded text-sm ${theme === 'dark' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
                   >
-                    Marketplace
-                  </Link>
-                  <Link
-                    to={createPageUrl('Join')}
-                    className="block py-2 hover:text-[#D4AF37] transition-colors"
-                    style={{ color: 'var(--text-secondary)' }}
-                    onClick={() => setMobileMenuOpen(false)}
+                    Dark
+                  </button>
+                  <button
+                    onClick={() => { changeTheme('light'); setMobileMenuOpen(false); }}
+                    className={`flex-1 px-2 py-1 rounded text-sm ${theme === 'light' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
                   >
-                    Become an Affiliate
-                  </Link>
-                  {user ? (
-                    <>
-                      {profile && (
-                        <Link
-                          to={createPageUrl('AffiliateDashboard')}
-                          className="block py-2 text-[#E5E0DB] hover:text-[#D4AF37] transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Dashboard
-                        </Link>
-                      )}
-                      {user.role === 'admin' && (
-                        <Link
-                          to={createPageUrl('AdminPanel')}
-                          className="block py-2 text-[#E5E0DB] hover:text-[#D4AF37] transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Admin Panel
-                        </Link>
-                      )}
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left py-2 text-[#E5E0DB] hover:text-[#D4AF37] transition-colors"
-                      >
-                        Sign Out
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => base44.auth.redirectToLogin()}
-                      className="w-full text-left py-2 text-[#D4AF37] font-semibold"
-                    >
-                      Sign In
-                    </button>
-                  )}
+                    Light
+                  </button>
                 </div>
-              </motion.div>
-            )}
+              )}
+              {user ? (
+                <>
+                  {profile && (
+                    <Link
+                      to={createPageUrl('AffiliateDashboard')}
+                      className="block py-2 hover:text-[#D4AF37] transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  {user.role === 'admin' && (
+                    <Link
+                      to={createPageUrl('AdminPanel')}
+                      className="block py-2 hover:text-[#D4AF37] transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Admin Panel
+                    </Link>
+                  )}
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left py-2 hover:text-[#D4AF37] transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => base44.auth.redirectToLogin()}
+                  className="w-full text-left py-2 text-[#D4AF37] font-semibold"
+                >
+                  Sign In
+                </button>
+              )}
+            </div>
+          </motion.div>
+          )}
           </AnimatePresence>
         </nav>
       )}

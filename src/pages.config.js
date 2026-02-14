@@ -57,7 +57,6 @@ import Onboarding from './pages/Onboarding';
 import PurchaseFlow from './pages/PurchaseFlow';
 import PurchaseSuccess from './pages/PurchaseSuccess';
 import Storefront from './pages/Storefront';
-import Root from './pages/Root';
 import __Layout from './Layout.jsx';
 
 
@@ -72,7 +71,6 @@ export const PAGES = {
     "PurchaseFlow": PurchaseFlow,
     "PurchaseSuccess": PurchaseSuccess,
     "Storefront": Storefront,
-    "Root": Root,
 }
 
 export const pagesConfig = {

@@ -57,6 +57,7 @@ import PurchaseFlow from './pages/PurchaseFlow';
 import AffiliateDashboard from './pages/AffiliateDashboard';
 import AdminPanel from './pages/AdminPanel';
 import PurchaseSuccess from './pages/PurchaseSuccess';
+import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
@@ -75,4 +76,5 @@ export const PAGES = {
 export const pagesConfig = {
     mainPage: "Home",
     Pages: PAGES,
+    Layout: __Layout,
 };

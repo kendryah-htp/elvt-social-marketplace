@@ -41,23 +41,37 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#0A0A0A] text-[#F5F0EB] font-['Inter'];
+    @apply bg-[#0A0A0A] text-[#F5F0EB] font-['Inter'] antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
   }
 }
 
 @layer utilities {
   .elvt-gradient {
-    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+    position: relative;
+  }
+  
+  .elvt-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+    pointer-events: none;
   }
   
   .elvt-glass {
     background: rgba(26, 26, 26, 0.6);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
   .elvt-gold-glow {
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.15);
   }
   
   .text-gradient {
@@ -65,6 +79,14 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold text-gradient mb-4;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
   }
 }
 

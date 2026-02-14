@@ -47,8 +47,20 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import Home from './pages/Home';
+import AppCatalog from './pages/AppCatalog';
+import AppDetail from './pages/AppDetail';
+import Join from './pages/Join';
 
-export const pagesConfig = {
-	Pages: {}
+
+export const PAGES = {
+    "Home": Home,
+    "AppCatalog": AppCatalog,
+    "AppDetail": AppDetail,
+    "Join": Join,
 }
 
+export const pagesConfig = {
+    mainPage: "Home",
+    Pages: PAGES,
+};

@@ -4,11 +4,13 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
+import { Menu, X, User, LayoutDashboard, LogOut, Sparkles, Palette } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '@/components/ThemeContext';
 
 export default function Layout({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, changeTheme } = useTheme();
   const location = useLocation();
 
   const { data: user } = useQuery({
@@ -48,22 +50,40 @@ export default function Layout({ children, currentPageName }) {
               <div className="hidden md:flex items-center gap-8">
                 <Link 
                   to={createPageUrl('AppCatalog')}
-                  className="text-[#E5E0DB] hover:text-[#D4AF37] transition-colors font-medium"
+                  className="hover:text-[#D4AF37] transition-colors font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   Marketplace
                 </Link>
                 <Link 
                   to={createPageUrl('Join')}
-                  className="text-[#E5E0DB] hover:text-[#D4AF37] transition-colors font-medium"
+                  className="hover:text-[#D4AF37] transition-colors font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   Become an Affiliate
                 </Link>
 
                 {user ? (
                   <div className="flex items-center gap-3">
+                    {user.role === 'admin' && (
+                      <div className="flex items-center gap-1 bg-black/20 rounded-lg p-1">
+                        <button
+                          onClick={() => changeTheme('dark')}
+                          className={`px-3 py-1 rounded transition-colors ${theme === 'dark' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
+                        >
+                          Dark
+                        </button>
+                        <button
+                          onClick={() => changeTheme('light')}
+                          className={`px-3 py-1 rounded transition-colors ${theme === 'light' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
+                        >
+                          Light
+                        </button>
+                      </div>
+                    )}
                     {profile && (
                       <Link to={createPageUrl('AffiliateDashboard')}>
-                        <Button variant="outline" className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A]">
+                        <Button variant="outline" className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]">
                           <LayoutDashboard className="w-4 h-4 mr-2" />
                           Dashboard
                         </Button>
@@ -79,7 +99,8 @@ export default function Layout({ children, currentPageName }) {
                     <Button
                       variant="ghost"
                       onClick={handleLogout}
-                      className="text-[#E5E0DB] hover:text-[#D4AF37]"
+                      style={{ color: 'var(--text-secondary)' }}
+                      className="hover:text-[#D4AF37]"
                     >
                       <LogOut className="w-4 h-4" />
                     </Button>
@@ -87,7 +108,7 @@ export default function Layout({ children, currentPageName }) {
                 ) : (
                   <Button
                     onClick={() => base44.auth.redirectToLogin()}
-                    className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-semibold"
+                    className="bg-[#D4AF37] hover:bg-[#E5C158] text-black font-semibold"
                   >
                     <User className="w-4 h-4 mr-2" />
                     Sign In
@@ -112,19 +133,22 @@ export default function Layout({ children, currentPageName }) {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden border-t border-[#D4AF37]/10 bg-[#0A0A0A]"
+                className="md:hidden border-t border-[#D4AF37]/10"
+                style={{ backgroundColor: 'var(--bg-primary)' }}
               >
                 <div className="px-6 py-4 space-y-3">
                   <Link
                     to={createPageUrl('AppCatalog')}
-                    className="block py-2 text-[#E5E0DB] hover:text-[#D4AF37] transition-colors"
+                    className="block py-2 hover:text-[#D4AF37] transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Marketplace
                   </Link>
                   <Link
                     to={createPageUrl('Join')}
-                    className="block py-2 text-[#E5E0DB] hover:text-[#D4AF37] transition-colors"
+                    className="block py-2 hover:text-[#D4AF37] transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Become an Affiliate

@@ -13,6 +13,16 @@
     --elvt-warm-white: #F5F0EB;
     --elvt-warm-gray: #E5E0DB;
     
+    /* Theme Variables */
+    --bg-primary: #0A0A0A;
+    --bg-secondary: #1A1A1A;
+    --bg-tertiary: #2A2A2A;
+    --text-primary: #F5F0EB;
+    --text-secondary: #E5E0DB;
+    --text-muted: #A0A0A0;
+    --accent: #D4AF37;
+    --border: rgba(212, 175, 55, 0.1);
+    
     --background: 0 0% 4%;
     --foreground: 36 20% 95%;
     --card: 0 0% 10%;
@@ -41,17 +51,20 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#0A0A0A] text-[#F5F0EB] font-['Inter'] antialiased;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply font-['Inter'] antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
     @apply font-semibold tracking-tight;
   }
 }
 
 @layer utilities {
   .elvt-gradient {
-    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
     position: relative;
   }
   
@@ -64,9 +77,9 @@
   }
   
   .elvt-glass {
-    background: rgba(26, 26, 26, 0.6);
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--border);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
@@ -75,7 +88,7 @@
   }
   
   .text-gradient {
-    background: linear-gradient(135deg, #D4AF37 0%, #F5F0EB 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--text-primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

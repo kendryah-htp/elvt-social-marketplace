@@ -12,7 +12,9 @@ import { createPageUrl } from '@/utils';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+  : null;
 
 function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
   const stripe = useStripe();
@@ -262,14 +264,24 @@ export default function PurchaseFlow() {
                 Complete Purchase
               </h2>
               
-              <Elements stripe={stripePromise}>
-                <CheckoutForm 
-                  app={app} 
-                  affiliateSlug={ref}
-                  buyerInfo={buyerInfo}
-                  setBuyerInfo={setBuyerInfo}
-                />
-              </Elements>
+              {stripePromise ? (
+                <Elements stripe={stripePromise}>
+                  <CheckoutForm 
+                    app={app} 
+                    affiliateSlug={ref}
+                    buyerInfo={buyerInfo}
+                    setBuyerInfo={setBuyerInfo}
+                  />
+                </Elements>
+              ) : (
+                <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-lg p-6 text-center">
+                  <CreditCard className="w-12 h-12 text-[#D4AF37] mx-auto mb-4" />
+                  <p className="text-[#E5E0DB] font-semibold mb-2">Payment Setup Required</p>
+                  <p className="text-sm text-[#E5E0DB]/80">
+                    Stripe integration is not configured. Please add VITE_STRIPE_PUBLISHABLE_KEY to your environment variables.
+                  </p>
+                </div>
+              )}
             </Card>
           </motion.div>
         </div>

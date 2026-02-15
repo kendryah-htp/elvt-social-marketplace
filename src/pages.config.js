@@ -51,18 +51,18 @@ import AdminPanel from './pages/AdminPanel';
 import AffiliateDashboard from './pages/AffiliateDashboard';
 import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
+import Blog from './pages/Blog';
+import Docs from './pages/Docs';
+import FAQ from './pages/FAQ';
 import Home from './pages/Home';
 import Join from './pages/Join';
 import Onboarding from './pages/Onboarding';
+import Pricing from './pages/Pricing';
 import PurchaseFlow from './pages/PurchaseFlow';
 import PurchaseSuccess from './pages/PurchaseSuccess';
-import Storefront from './pages/Storefront';
-import Pricing from './pages/Pricing';
-import FAQ from './pages/FAQ';
 import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
-import Docs from './pages/Docs';
-import Blog from './pages/Blog';
+import Storefront from './pages/Storefront';
 import __Layout from './Layout.jsx';
 
 
@@ -71,18 +71,18 @@ export const PAGES = {
     "AffiliateDashboard": AffiliateDashboard,
     "AppCatalog": AppCatalog,
     "AppDetail": AppDetail,
+    "Blog": Blog,
+    "Docs": Docs,
+    "FAQ": FAQ,
     "Home": Home,
     "Join": Join,
     "Onboarding": Onboarding,
+    "Pricing": Pricing,
     "PurchaseFlow": PurchaseFlow,
     "PurchaseSuccess": PurchaseSuccess,
-    "Storefront": Storefront,
-    "Pricing": Pricing,
-    "FAQ": FAQ,
     "SolutionsByRole": SolutionsByRole,
     "SolutionsByUseCase": SolutionsByUseCase,
-    "Docs": Docs,
-    "Blog": Blog,
+    "Storefront": Storefront,
 }
 
 export const pagesConfig = {

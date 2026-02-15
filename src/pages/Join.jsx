@@ -62,9 +62,9 @@ export default function Join() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="elvt-glass px-6 py-3 rounded-full inline-flex items-center gap-2 mb-6">
-            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-            <span className="text-[#D4AF37] font-semibold text-sm">FREE AFFILIATE PROGRAM</span>
+          <div className="elvt-glass px-6 py-3 rounded-full inline-flex items-center gap-2 mb-6 border" style={{ borderColor: 'var(--border)' }}>
+            <Sparkles className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+            <span className="font-semibold text-sm" style={{ color: 'var(--accent)' }}>FREE AFFILIATE PROGRAM</span>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -72,7 +72,7 @@ export default function Join() {
             <span className="text-gradient block mt-2">Premium Products</span>
           </h1>
           
-          <p className="text-xl text-[#E5E0DB] max-w-2xl mx-auto mb-8">
+          <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
             Get your own branded storefront and earn up to 30% commission on every sale. Setup takes less than 3 minutes.
           </p>
         </motion.div>
@@ -85,7 +85,7 @@ export default function Join() {
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <h2 className="text-3xl font-bold text-[#F5F0EB] mb-8">What You Get:</h2>
+            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What You Get:</h2>
             
             {[
               {
@@ -111,14 +111,14 @@ export default function Join() {
                 transition={{ delay: 0.3 + idx * 0.1 }}
                 className="elvt-glass rounded-xl p-6 flex gap-4"
               >
-                <div className="w-12 h-12 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0">
-                  <benefit.icon className="w-6 h-6 text-[#D4AF37]" />
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                  <benefit.icon className="w-6 h-6" style={{ color: 'var(--accent)' }} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[#F5F0EB] mb-2">
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                     {benefit.title}
                   </h3>
-                  <p className="text-[#E5E0DB] text-sm">
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                     {benefit.description}
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export default function Join() {
             
             <form onSubmit={handleSignup} className="space-y-6">
               <div className="text-center">
-                <p className="text-[#E5E0DB] mb-6">
+                <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
                   Click below to create your free affiliate account. You'll be redirected to complete the quick onboarding.
                 </p>
                 
@@ -153,7 +153,8 @@ export default function Join() {
                   type="submit"
                   size="lg"
                   disabled={isLoading}
-                  className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg group"
+                  className="w-full font-bold py-6 text-lg group pulse-glow"
+                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
                 >
                   {isLoading ? (
                     <span>Setting up your account...</span>
@@ -166,23 +167,23 @@ export default function Join() {
                 </Button>
               </div>
 
-              <div className="pt-6 border-t border-[#D4AF37]/20">
-                <div className="space-y-4 text-sm text-[#E5E0DB]">
+              <div className="pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
+                <div className="space-y-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
                     </div>
                     <p>No credit card required</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
                     </div>
                     <p>Get your storefront live in under 3 minutes</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
                     </div>
                     <p>Start earning immediately</p>
                   </div>

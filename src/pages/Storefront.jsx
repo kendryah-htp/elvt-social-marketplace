@@ -64,8 +64,8 @@ export default function Storefront() {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#E5E0DB]">Loading storefront...</p>
+          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading storefront...</p>
         </div>
       </div>
     );
@@ -75,8 +75,8 @@ export default function Storefront() {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#F5F0EB] mb-4">Storefront Not Found</h1>
-          <p className="text-[#E5E0DB] mb-8">This affiliate storefront doesn't exist</p>
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Storefront Not Found</h1>
+          <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>This affiliate storefront doesn't exist</p>
         </div>
       </div>
     );

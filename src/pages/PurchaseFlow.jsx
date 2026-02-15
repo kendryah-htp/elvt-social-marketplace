@@ -213,24 +213,39 @@ export default function PurchaseFlow() {
 
   if (appLoading) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center"
-        >
-          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen elvt-gradient flex items-center justify-center"
+      >
+        <div className="text-center">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full mx-auto mb-4"
+          />
           <p className="text-[#E5E0DB] font-semibold">Loading checkout...</p>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     );
   }
 
   if (!app) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
-        <p className="text-[#E5E0DB]">App not found</p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen elvt-gradient flex items-center justify-center"
+      >
+        <div className="text-center">
+          <p className="text-[#E5E0DB] text-lg mb-6">App not found</p>
+          <Link to={createPageUrl('AppCatalog')}>
+            <Button style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+              Browse Apps
+            </Button>
+          </Link>
+        </div>
+      </motion.div>
     );
   }
 

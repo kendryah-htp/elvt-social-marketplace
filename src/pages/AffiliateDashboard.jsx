@@ -133,12 +133,21 @@ export default function AffiliateDashboard() {
 
   if (profileLoading || !profile) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen elvt-gradient flex items-center justify-center"
+      >
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
-          <p style={{ color: 'var(--text-secondary)' }}>Loading your dashboard...</p>
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-t-transparent rounded-full mx-auto mb-4"
+            style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }}
+          />
+          <p style={{ color: 'var(--text-secondary)' }} className="font-semibold">Loading your dashboard...</p>
         </div>
-      </div>
+      </motion.div>
     );
   }
 

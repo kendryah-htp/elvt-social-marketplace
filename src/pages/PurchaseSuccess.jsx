@@ -10,10 +10,15 @@ export default function PurchaseSuccess() {
   const appName = urlParams.get('app') || 'your app';
 
   return (
-    <div className="min-h-screen elvt-gradient flex items-center justify-center px-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen elvt-gradient flex items-center justify-center px-6"
+    >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.1 }}
         className="text-center max-w-lg"
       >
         <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 elvt-glow" style={{ backgroundColor: 'var(--accent)' }}>
@@ -36,6 +41,6 @@ export default function PurchaseSuccess() {
           </Link>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

@@ -51,6 +51,9 @@ export default function Onboarding() {
     onSuccess: () => {
       queryClient.invalidateQueries(['profile']);
       navigate(createPageUrl('AffiliateDashboard'));
+    },
+    onError: (err) => {
+      console.error('Profile update failed:', err);
     }
   });
 

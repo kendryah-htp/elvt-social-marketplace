@@ -30,7 +30,7 @@ export default function PurchaseSuccess() {
         </p>
         <div className="space-y-3">
           <Link to={createPageUrl('AppCatalog')}>
-            <Button className="w-full font-semibold" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+            <Button className="w-full font-semibold text-white" style={{ backgroundColor: 'var(--accent)' }}>
               Browse More Apps
             </Button>
           </Link>

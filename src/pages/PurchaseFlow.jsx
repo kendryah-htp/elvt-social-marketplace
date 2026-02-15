@@ -52,13 +52,11 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
         return;
       }
 
-      // Create payment intent via Stripe integration
-      const { data: paymentIntent } = await base44.integrations.Stripe.CreatePaymentIntent({
+      // Create payment intent via backend function
+      const { data: paymentIntent } = await base44.functions.invoke('createPaymentIntent', {
         amount: Math.round(app.price * 100),
         currency: 'usd',
         payment_method: paymentMethod.id,
-        confirm: true,
-        automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
         metadata: {
           app_id: app.id,
           buyer_email: buyerInfo.email,

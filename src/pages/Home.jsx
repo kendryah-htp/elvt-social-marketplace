@@ -7,6 +7,7 @@ import { createPageUrl } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import SocialProofFeed from '@/components/SocialProofFeed';
+import TrustSignals from '@/components/TrustSignals';
 
 export default function Home() {
   const { data: apps = [] } = useQuery({
@@ -20,6 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen elvt-gradient overflow-hidden">
       <SocialProofFeed />
+      
       {/* 1. Hero Block */}
       <div className="relative">
         <div className="absolute inset-0 overflow-hidden">
@@ -109,6 +111,9 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+
+      {/* Trust Signals */}
+      <TrustSignals />
 
       {/* 2. Trust Signals Block */}
       <div className="max-w-7xl mx-auto px-6 py-16">

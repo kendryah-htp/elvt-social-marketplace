@@ -48,14 +48,17 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import AdminPanel from './pages/AdminPanel';
+import AdminSetupGuide from './pages/AdminSetupGuide';
 import AffiliateDashboard from './pages/AffiliateDashboard';
 import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
 import Blog from './pages/Blog';
+import BlogOnboarding from './pages/BlogOnboarding';
 import Docs from './pages/Docs';
 import FAQ from './pages/FAQ';
 import Home from './pages/Home';
 import Join from './pages/Join';
+import Milo from './pages/Milo';
 import Onboarding from './pages/Onboarding';
 import Pricing from './pages/Pricing';
 import PurchaseFlow from './pages/PurchaseFlow';
@@ -63,23 +66,23 @@ import PurchaseSuccess from './pages/PurchaseSuccess';
 import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
-import AdminSetupGuide from './pages/AdminSetupGuide';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
-import BlogOnboarding from './pages/BlogOnboarding';
-import Milo from './pages/Milo';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "AdminPanel": AdminPanel,
+    "AdminSetupGuide": AdminSetupGuide,
     "AffiliateDashboard": AffiliateDashboard,
     "AppCatalog": AppCatalog,
     "AppDetail": AppDetail,
     "Blog": Blog,
+    "BlogOnboarding": BlogOnboarding,
     "Docs": Docs,
     "FAQ": FAQ,
     "Home": Home,
     "Join": Join,
+    "Milo": Milo,
     "Onboarding": Onboarding,
     "Pricing": Pricing,
     "PurchaseFlow": PurchaseFlow,
@@ -87,10 +90,7 @@ export const PAGES = {
     "SolutionsByRole": SolutionsByRole,
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
-    "AdminSetupGuide": AdminSetupGuide,
     "UserOnboardingGuide": UserOnboardingGuide,
-    "BlogOnboarding": BlogOnboarding,
-    "Milo": Milo,
 }
 
 export const pagesConfig = {

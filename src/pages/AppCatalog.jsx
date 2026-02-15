@@ -9,6 +9,8 @@ import { Search, Star, ShoppingCart, Filter, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AppDemoModal from '@/components/AppDemoModal';
+import LazyImage from '@/components/LazyImage';
+import { trackConversion } from '@/components/AnalyticsTracker';
 import {
   Select,
   SelectContent,
@@ -43,6 +45,7 @@ export default function AppCatalog() {
   const handleViewDemo = (app, e) => {
     e.preventDefault();
     e.stopPropagation();
+    trackConversion('demo_viewed', { app_id: app.id, app_name: app.name });
     setDemoApp(app);
     setIsDemoOpen(true);
   };
@@ -154,10 +157,12 @@ export default function AppCatalog() {
                   <div className="elvt-glass rounded-2xl overflow-hidden cursor-pointer group h-full flex flex-col transition-all duration-300 hover:elvt-glow">
                     {app.thumbnail_url && (
                       <div className="aspect-video bg-[#2A2A2A] overflow-hidden">
-                        <img
+                        <LazyImage
                           src={app.thumbnail_url}
                           alt={app.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          width={400}
+                          height={300}
                         />
                       </div>
                     )}

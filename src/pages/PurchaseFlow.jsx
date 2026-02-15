@@ -12,6 +12,7 @@ import { createPageUrl } from '@/utils';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { trackConversion } from '@/components/AnalyticsTracker';
 
 const stripePromise = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY 
   ? loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
@@ -28,8 +29,19 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!stripe || !elements || !buyerInfo.name || !buyerInfo.email) {
-      setError('Please fill in all fields');
+    if (!stripe || !elements) {
+      setError('Payment system not ready. Please refresh and try again.');
+      trackConversion('checkout_error', { error_type: 'stripe_not_ready' });
+      return;
+    }
+
+    if (!buyerInfo.name?.trim()) {
+      setError('Please enter your full name');
+      return;
+    }
+
+    if (!buyerInfo.email?.trim() || !buyerInfo.email.includes('@')) {
+      setError('Please enter a valid email address');
       return;
     }
 
@@ -65,6 +77,12 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
       });
 
       if (paymentIntent.status === 'succeeded') {
+        trackConversion('purchase_completed', { 
+          app_id: app.id, 
+          amount: app.price,
+          affiliate_slug: affiliateSlug || 'direct'
+        });
+        
         // Complete purchase and trigger emails
         try {
           await base44.functions.invoke('completePurchase', {
@@ -77,7 +95,6 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
 
           navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
         } catch (completionError) {
-          // Purchase recorded but email may have failed - still redirect to success
           console.warn('Purchase completion error:', completionError);
           navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
         }

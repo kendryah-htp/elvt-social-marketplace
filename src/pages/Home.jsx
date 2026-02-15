@@ -11,8 +11,14 @@ import TrustSignals from '@/components/TrustSignals';
 import HeroSection from '@/components/HeroSection';
 import StatCard from '@/components/StatCard';
 import FeatureCard from '@/components/FeatureCard';
+import LazyImage from '@/components/LazyImage';
+import AnalyticsTracker, { trackConversion } from '@/components/AnalyticsTracker';
 
 export default function Home() {
+  return <HomeContent />;
+}
+
+function HomeContent() {
   const { data: apps = [] } = useQuery({
     queryKey: ['featured-apps'],
     queryFn: async () => {
@@ -23,6 +29,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen elvt-gradient overflow-hidden">
+      <AnalyticsTracker />
       <SocialProofFeed />
       
       {/* 1. Hero Block */}
@@ -204,11 +211,11 @@ export default function Home() {
               transition={{ delay: idx * 0.15 }}
               whileHover={{ y: -8 }}
             >
-              <Link to={createPageUrl('AppDetail') + '?id=' + app.id}>
+              <Link to={createPageUrl('AppDetail') + '?id=' + app.id} onClick={() => trackConversion('app_clicked', { app_id: app.id, app_name: app.name })}>
                 <div className="elvt-glass rounded-2xl overflow-hidden cursor-pointer group hover:elvt-glow transition-all duration-300">
                   {app.thumbnail_url && (
                     <div className="aspect-video overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      <img src={app.thumbnail_url} alt={app.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <LazyImage src={app.thumbnail_url} alt={app.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={400} height={300} />
                     </div>
                   )}
                   <div className="p-6">
@@ -268,7 +275,7 @@ export default function Home() {
               <p style={{ color: 'var(--text-secondary)' }}>Commission on sales</p>
             </div>
           </div>
-          <Link to={createPageUrl('Pricing')}>
+          <Link to={createPageUrl('Pricing')} onClick={() => trackConversion('pricing_clicked')}>
             <Button size="lg" className="text-white font-semibold" style={{ backgroundColor: 'var(--accent)' }}>
               View All Plans
             </Button>

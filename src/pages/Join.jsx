@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Sparkles, TrendingUp, Users, Zap, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { trackConversion } from '@/components/AnalyticsTracker';
 
 export default function Join() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function Join() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+
+    trackConversion('signup_started');
 
     try {
       const user = await base44.auth.me().catch(() => null);
@@ -49,6 +52,7 @@ export default function Join() {
         is_active: true
       });
 
+      trackConversion('signup_completed', { user_email: user.email });
       navigate(createPageUrl('Onboarding'));
     } catch (err) {
       console.error('Signup error:', err);

@@ -34,10 +34,13 @@ export default function Onboarding() {
     queryFn: () => base44.auth.me()
   });
 
-  const { data: profile } = useQuery({
+  const { data: profile, isLoading: profileLoading } = useQuery({
     queryKey: ['profile', user?.email],
-    queryFn: () => base44.entities.AffiliateProfile.filter({ user_email: user.email }),
-    select: (data) => data[0],
+    queryFn: async () => {
+      const profiles = await base44.entities.AffiliateProfile.filter({ user_email: user.email });
+      if (!profiles[0]) throw new Error('Profile not found');
+      return profiles[0];
+    },
     enabled: !!user
   });
 
@@ -58,10 +61,12 @@ export default function Onboarding() {
   });
 
   useEffect(() => {
-    if (profile?.onboarding_completed) {
+    if (!profileLoading && !profile) {
+      navigate(createPageUrl('Join'));
+    } else if (profile?.onboarding_completed) {
       navigate(createPageUrl('AffiliateDashboard'));
     }
-  }, [profile, navigate]);
+  }, [profile, profileLoading, navigate]);
 
   const handleNext = () => {
     if (step < 3) setStep(step + 1);
@@ -87,6 +92,17 @@ export default function Onboarding() {
         : [...prev.selectedApps, appId]
     }));
   };
+
+  if (!user || (profileLoading)) {
+    return (
+      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--accent)' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen elvt-gradient flex items-center justify-center p-6">

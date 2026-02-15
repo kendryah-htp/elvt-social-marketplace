@@ -42,6 +42,10 @@ export default function AppDetail() {
   };
 
   const handlePurchase = () => {
+    if (!appId) {
+      console.error('App ID not found');
+      return;
+    }
     const ref = urlParams.get('ref');
     navigate(createPageUrl('PurchaseFlow') + '?appId=' + appId + (ref ? '&ref=' + ref : ''));
   };

@@ -82,9 +82,14 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
           navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
         }
       } else if (paymentIntent.status === 'requires_action') {
-        setError('Please complete the additional verification step.');
+        setError('Please complete the additional verification step with your bank.');
+        setRetryCount(Math.min(retryCount + 1, 2));
+      } else if (paymentIntent.status === 'requires_payment_method') {
+        setError('Payment method was declined. Please try a different card.');
+        setRetryCount(Math.min(retryCount + 1, 2));
       } else {
-        setError(`Payment failed (${paymentIntent.status}). ${retryCount < 2 ? 'Please try again.' : 'Contact support if this persists.'}`);
+        setError(`Payment failed. ${retryCount < 2 ? 'Please try again or use a different card.' : 'Contact support if this persists.'}`);
+        setRetryCount(Math.min(retryCount + 1, 2));
       }
     } catch (err) {
       setError(err.message || 'Payment processing error');

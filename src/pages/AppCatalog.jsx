@@ -213,14 +213,14 @@ export default function AppCatalog() {
                         {app.demo_url && (
                           <Button
                             onClick={(e) => handleViewDemo(app, e)}
-                            className="flex-1 font-semibold hover:opacity-90 transition-all text-[var(--accent)]"
-                            style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}
+                            className="flex-1 font-semibold hover:opacity-90 transition-all !text-inherit"
+                            style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--accent)' }}
                           >
                             <Eye className="w-4 h-4 mr-2" />
                             Demo
                           </Button>
                         )}
-                        <Button className="flex-1 font-semibold pulse-glow text-white" style={{ backgroundColor: 'var(--accent)' }}>
+                        <Button className="flex-1 font-semibold pulse-glow text-white !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
                           Details
                         </Button>
                       </div>

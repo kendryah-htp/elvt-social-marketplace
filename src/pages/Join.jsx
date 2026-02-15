@@ -31,22 +31,27 @@ export default function Join() {
       const existing = await base44.entities.AffiliateProfile.filter({ user_email: user.email });
       
       if (existing.length > 0) {
-        navigate(createPageUrl('Onboarding'));
+        navigate(createPageUrl('AffiliateDashboard'));
         return;
       }
 
-      // Create affiliate profile
-      const slug = user.email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+      // Create affiliate profile with unique slug
+      let slug = user.email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+      // Add timestamp to ensure uniqueness
+      const timestamp = Date.now().toString().slice(-6);
+      slug = `${slug}-${timestamp}`;
       
       await base44.entities.AffiliateProfile.create({
         user_email: user.email,
         full_name: user.full_name || user.email,
         slug: slug,
-        onboarding_completed: false
+        onboarding_completed: false,
+        is_active: true
       });
 
       navigate(createPageUrl('Onboarding'));
     } catch (err) {
+      console.error('Signup error:', err);
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);

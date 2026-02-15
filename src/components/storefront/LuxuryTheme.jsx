@@ -119,7 +119,7 @@ export default function LuxuryTheme({ profile, apps, products, onAppClick, onPro
                     </p>
                   )}
                   
-                  <Button className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-semibold">
+                  <Button className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-semibold !text-inherit">
                     View Details
                   </Button>
                 </div>

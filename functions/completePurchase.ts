@@ -3,12 +3,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me();
     
-    if (!user) {
-      return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { 
       app_id, 
       affiliate_product_id,
@@ -17,6 +12,15 @@ Deno.serve(async (req) => {
       affiliate_slug,
       payment_id 
     } = await req.json();
+
+    // Validate required fields
+    if (!buyer_email || !buyer_name) {
+      return Response.json({ error: 'buyer_email and buyer_name required' }, { status: 400 });
+    }
+    
+    if (!app_id && !affiliate_product_id) {
+      return Response.json({ error: 'Either app_id or affiliate_product_id required' }, { status: 400 });
+    }
 
     // Get app or product details
     let productName, amount, commissionRate, affiliateId;
@@ -52,19 +56,19 @@ Deno.serve(async (req) => {
 
     // Create purchase record
     const purchase = await base44.asServiceRole.entities.Purchase.create({
-      app_id,
-      affiliate_product_id,
+      app_id: app_id || null,
+      affiliate_product_id: affiliate_product_id || null,
       buyer_email,
       buyer_name,
-      affiliate_id: affiliateId,
+      affiliate_id: affiliateId || null,
       affiliate_slug: affiliate_slug || null,
-      amount,
+      amount: amount || 0,
       commission_rate: commissionRate,
       commission_amount: commissionAmount,
       payment_status: 'completed',
-      payment_id,
+      payment_id: payment_id || null,
       referral_source: affiliate_slug ? 'storefront' : 'direct',
-      product_name: productName
+      product_name: productName || 'Unknown Product'
     });
 
     // Update affiliate earnings

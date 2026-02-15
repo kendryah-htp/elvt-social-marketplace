@@ -12,9 +12,9 @@ export default function Milo() {
         className="border-b p-6" style={{ borderColor: 'var(--border)' }}
       >
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gradient">MILO Co-Pilot</h1>
+          <h1 className="text-3xl font-bold text-gradient">MILO Strategy Engine</h1>
           <p style={{ color: 'var(--text-secondary)' }} className="mt-1">
-            Your personal AI assistant for content creation, growth, and success
+            Build high-converting SaaS strategies. No fluff. Architecture-first thinking.
           </p>
         </div>
       </motion.div>

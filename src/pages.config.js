@@ -69,6 +69,7 @@ import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
 import SavedPrompts from './pages/SavedPrompts';
+import LaunchGuide from './pages/LaunchGuide';
 import __Layout from './Layout.jsx';
 
 
@@ -95,6 +96,7 @@ export const PAGES = {
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
     "SavedPrompts": SavedPrompts,
+    "LaunchGuide": LaunchGuide,
 }
 
 export const pagesConfig = {

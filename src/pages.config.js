@@ -67,6 +67,7 @@ import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
+import ContentStudio from './pages/ContentStudio';
 import __Layout from './Layout.jsx';
 
 
@@ -91,6 +92,7 @@ export const PAGES = {
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
+    "ContentStudio": ContentStudio,
 }
 
 export const pagesConfig = {

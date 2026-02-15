@@ -119,6 +119,13 @@ function LayoutContent({ children, currentPageName }) {
                   ✨ MILO
                 </Link>
                 <Link 
+                  to={createPageUrl('ContentStudio')}
+                  className="transition-colors font-medium hover:opacity-70"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Content Studio
+                </Link>
+                <Link 
                   to={createPageUrl('FAQ')}
                   className="transition-colors font-medium hover:opacity-70"
                   style={{ color: 'var(--text-secondary)' }}
@@ -245,6 +252,14 @@ function LayoutContent({ children, currentPageName }) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 ✨ MILO
+              </Link>
+              <Link
+                to={createPageUrl('ContentStudio')}
+                className="block py-2 transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Content Studio
               </Link>
               <Link
                 to={createPageUrl('FAQ')}

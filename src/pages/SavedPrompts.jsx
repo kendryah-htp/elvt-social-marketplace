@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { isSuperAdmin } from '@/components/permissionsUtil';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Sparkles, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+
+// Super Admin emails - hardwired for authorization
+const SUPER_ADMIN_EMAILS = [
+  'kendryah@gmail.com',
+  'support@highticketpurpose.com',
+  'support@elvt.social',
+  'denahornsby@yahoo.com'
+];
+
+const isSuperAdmin = (email) => email && SUPER_ADMIN_EMAILS.includes(email.toLowerCase());
 
 export default function SavedPrompts() {
   const [user, setUser] = useState(null);

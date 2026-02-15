@@ -57,6 +57,14 @@ export default function AdminPanel() {
     custom_instructions: ''
   });
 
+  const [showResourceDialog, setShowResourceDialog] = useState(false);
+  const [newResource, setNewResource] = useState({
+    title: '',
+    description: '',
+    resource_type: 'guide',
+    content_url: ''
+  });
+
   // Check if user is admin
   const { data: user } = useQuery({
     queryKey: ['user'],
@@ -81,6 +89,11 @@ export default function AdminPanel() {
   const { data: emails = [] } = useQuery({
     queryKey: ['admin-emails'],
     queryFn: () => base44.entities.EmailTemplate.list()
+  });
+
+  const { data: resources = [] } = useQuery({
+    queryKey: ['admin-resources'],
+    queryFn: () => base44.entities.AdminResource.filter({ admin_email: user?.email })
   });
 
   const createAppMutation = useMutation({
@@ -117,6 +130,26 @@ export default function AdminPanel() {
     }
   });
 
+  const createResourceMutation = useMutation({
+    mutationFn: (data) => base44.entities.AdminResource.create({
+      ...data,
+      admin_email: user?.email,
+      is_published: true
+    }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['admin-resources']);
+      setShowResourceDialog(false);
+      resetResourceForm();
+    }
+  });
+
+  const deleteResourceMutation = useMutation({
+    mutationFn: (id) => base44.entities.AdminResource.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['admin-resources']);
+    }
+  });
+
   const resetAppForm = () => {
     setNewApp({
       name: '',
@@ -142,6 +175,15 @@ export default function AdminPanel() {
       subject: '',
       body: '',
       custom_instructions: ''
+    });
+  };
+
+  const resetResourceForm = () => {
+    setNewResource({
+      title: '',
+      description: '',
+      resource_type: 'guide',
+      content_url: ''
     });
   };
 
@@ -198,6 +240,7 @@ export default function AdminPanel() {
             <TabsTrigger value="affiliates">Affiliates</TabsTrigger>
             <TabsTrigger value="purchases">Purchases</TabsTrigger>
             <TabsTrigger value="emails">Email Templates</TabsTrigger>
+            <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="settings">Platform Settings</TabsTrigger>
           </TabsList>
 
@@ -530,11 +573,126 @@ export default function AdminPanel() {
             </div>
           </TabsContent>
 
+          {/* Resources Tab */}
+          <TabsContent value="resources" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>User Resources & Documentation</h2>
+                <p style={{ color: 'var(--text-secondary)' }} className="text-sm">Share guides, FAQs, videos, and templates with your users</p>
+              </div>
+
+              <Dialog open={showResourceDialog} onOpenChange={setShowResourceDialog}>
+                <DialogTrigger asChild>
+                  <Button style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Resource
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="elvt-glass max-w-2xl" style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold text-gradient">Share Resource with Users</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 mt-4">
+                    <div>
+                      <Label style={{ color: 'var(--text-primary)' }}>Resource Title</Label>
+                      <Input
+                        value={newResource.title}
+                        onChange={(e) => setNewResource({ ...newResource, title: e.target.value })}
+                        placeholder="e.g., Getting Started Guide"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                      />
+                    </div>
+                    <div>
+                      <Label style={{ color: 'var(--text-primary)' }}>Description</Label>
+                      <Input
+                        value={newResource.description}
+                        onChange={(e) => setNewResource({ ...newResource, description: e.target.value })}
+                        placeholder="Brief description of this resource"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                      />
+                    </div>
+                    <div>
+                      <Label style={{ color: 'var(--text-primary)' }}>Resource Type</Label>
+                      <select 
+                        value={newResource.resource_type}
+                        onChange={(e) => setNewResource({ ...newResource, resource_type: e.target.value })}
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)', padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--border)', width: '100%' }}
+                      >
+                        <option value="guide">📖 Setup Guide</option>
+                        <option value="faq">❓ FAQ / Tips</option>
+                        <option value="video">🎥 Video Tutorial</option>
+                        <option value="template">📋 Template / Checklist</option>
+                        <option value="checklist">✅ Onboarding Checklist</option>
+                        <option value="other">📎 Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <Label style={{ color: 'var(--text-primary)' }}>Resource URL</Label>
+                      <Input
+                        value={newResource.content_url}
+                        onChange={(e) => setNewResource({ ...newResource, content_url: e.target.value })}
+                        placeholder="https://docs.google.com/... or https://youtube.com/..."
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                      />
+                      <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">👉 Use Google Docs, YouTube, Notion, Loom, or any public link</p>
+                    </div>
+                    <Button
+                      onClick={() => createResourceMutation.mutate(newResource)}
+                      className="w-full font-bold"
+                      style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                    >
+                      Publish Resource
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+
+            {resources.length === 0 ? (
+              <Card className="elvt-glass p-12 text-center">
+                <p style={{ color: 'var(--text-secondary)' }}>No resources yet. Create your first one!</p>
+              </Card>
+            ) : (
+              <div className="grid gap-4">
+                {resources.map(resource => (
+                  <Card key={resource.id} className="elvt-glass p-6">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{resource.title}</h3>
+                        <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>{resource.description}</p>
+                        <div className="flex gap-2 items-center">
+                          <Badge variant="outline">{resource.resource_type}</Badge>
+                          <a 
+                            href={resource.content_url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sm hover:underline"
+                            style={{ color: 'var(--accent)' }}
+                          >
+                            View Resource →
+                          </a>
+                        </div>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => deleteResourceMutation.mutate(resource.id)}
+                        className="text-red-400 hover:text-red-500"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </TabsContent>
+
           {/* Platform Settings Tab */}
           <TabsContent value="settings">
             <PlatformSettingsTab />
           </TabsContent>
-        </Tabs>
+          </Tabs>
       </div>
     </div>
   );

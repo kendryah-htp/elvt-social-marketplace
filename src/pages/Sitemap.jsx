@@ -6,32 +6,28 @@ import { ExternalLink } from 'lucide-react';
 
 export default function Sitemap() {
   const pages = [
-    { name: 'Home', slug: 'Home', description: 'Landing page' },
-    { name: 'App Catalog', slug: 'AppCatalog', description: 'Browse all apps and products' },
-    { name: 'App Detail', slug: 'AppDetail', description: 'Individual app details (with ?id=)' },
-    { name: 'Join', slug: 'Join', description: 'Become an affiliate' },
-    { name: 'Onboarding', slug: 'Onboarding', description: 'Affiliate onboarding wizard' },
-    { name: 'Purchase Flow', slug: 'PurchaseFlow', description: 'Checkout (with ?appId=&ref=)' },
-    { name: 'Purchase Success', slug: 'PurchaseSuccess', description: 'Order confirmation' },
-    { name: 'Storefront', slug: 'Storefront', description: 'Affiliate storefront (with ?slug=)' },
-    { name: 'Affiliate Dashboard', slug: 'AffiliateDashboard', description: 'Affiliate control panel' },
-    { name: 'Admin Panel', slug: 'AdminPanel', description: 'Admin dashboard (admin only)' },
-    { name: 'FAQ', slug: 'FAQ', description: 'Frequently asked questions' },
-    { name: 'Pricing', slug: 'Pricing', description: 'Pricing plans' },
-    { name: 'Blog', slug: 'Blog', description: 'Blog posts' },
-    { name: 'Blog Onboarding', slug: 'BlogOnboarding', description: 'Blog setup guide' },
-    { name: 'Docs', slug: 'Docs', description: 'Documentation' },
-    { name: 'Solutions by Role', slug: 'SolutionsByRole', description: 'Solutions for different roles' },
-    { name: 'Solutions by Use Case', slug: 'SolutionsByUseCase', description: 'Solutions by use case' },
-    { name: 'Content Studio', slug: 'ContentStudio', description: 'Content creation tools' },
-    { name: 'Admin Setup Guide', slug: 'AdminSetupGuide', description: 'Admin setup instructions' },
-    { name: 'User Onboarding Guide', slug: 'UserOnboardingGuide', description: 'User onboarding instructions' },
-    { name: 'MILO', slug: 'Milo', description: 'AI content assistant' },
+    { name: 'Home', slug: 'Home', description: 'Landing page', url: 'https://market.htpelevate.com/' },
+    { name: 'App Catalog', slug: 'AppCatalog', description: 'Browse all apps', url: 'https://market.htpelevate.com/AppCatalog' },
+    { name: 'App Detail', slug: 'AppDetail', description: 'Individual app (add ?id=)', url: 'https://market.htpelevate.com/AppDetail?id=APP_ID' },
+    { name: 'Join Affiliate', slug: 'Join', description: 'Become an affiliate', url: 'https://market.htpelevate.com/Join' },
+    { name: 'Affiliate Onboarding', slug: 'Onboarding', description: 'Setup your storefront', url: 'https://market.htpelevate.com/Onboarding' },
+    { name: 'Checkout', slug: 'PurchaseFlow', description: 'Purchase flow (add ?appId=&ref=)', url: 'https://market.htpelevate.com/PurchaseFlow?appId=APP_ID' },
+    { name: 'Order Confirmation', slug: 'PurchaseSuccess', description: 'Success page', url: 'https://market.htpelevate.com/PurchaseSuccess' },
+    { name: 'Affiliate Storefront', slug: 'Storefront', description: 'Public storefront (add ?slug=)', url: 'https://market.htpelevate.com/Storefront?slug=USERNAME' },
+    { name: 'Affiliate Dashboard', slug: 'AffiliateDashboard', description: 'Manage storefront', url: 'https://market.htpelevate.com/AffiliateDashboard' },
+    { name: 'Admin Panel', slug: 'AdminPanel', description: 'Admin only', url: 'https://market.htpelevate.com/AdminPanel' },
+    { name: 'FAQ', slug: 'FAQ', description: 'FAQs', url: 'https://market.htpelevate.com/FAQ' },
+    { name: 'Pricing', slug: 'Pricing', description: 'Pricing plans', url: 'https://market.htpelevate.com/Pricing' },
+    { name: 'Blog', slug: 'Blog', description: 'Blog posts', url: 'https://market.htpelevate.com/Blog' },
+    { name: 'Blog Setup', slug: 'BlogOnboarding', description: 'Blog onboarding', url: 'https://market.htpelevate.com/BlogOnboarding' },
+    { name: 'Docs', slug: 'Docs', description: 'Documentation', url: 'https://market.htpelevate.com/Docs' },
+    { name: 'Solutions by Role', slug: 'SolutionsByRole', description: 'Role-based solutions', url: 'https://market.htpelevate.com/SolutionsByRole' },
+    { name: 'Solutions by Use Case', slug: 'SolutionsByUseCase', description: 'Use case solutions', url: 'https://market.htpelevate.com/SolutionsByUseCase' },
+    { name: 'Content Studio', slug: 'ContentStudio', description: 'Content tools', url: 'https://market.htpelevate.com/ContentStudio' },
+    { name: 'Admin Setup', slug: 'AdminSetupGuide', description: 'Setup instructions', url: 'https://market.htpelevate.com/AdminSetupGuide' },
+    { name: 'User Guide', slug: 'UserOnboardingGuide', description: 'User onboarding', url: 'https://market.htpelevate.com/UserOnboardingGuide' },
+    { name: 'MILO AI', slug: 'Milo', description: 'AI assistant', url: 'https://market.htpelevate.com/Milo' },
   ];
-
-  const getFullUrl = (slug) => {
-    return `https://market.htpelevate.com${createPageUrl(slug)}`;
-  };
 
   return (
     <div className="min-h-screen elvt-gradient">
@@ -57,7 +53,12 @@ export default function Sitemap() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
             >
-              <Link to={createPageUrl(page.slug)}>
+              <a
+                href={page.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
                 <div className="elvt-glass rounded-xl p-6 hover:elvt-glow transition-all cursor-pointer group h-full">
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-lg font-bold text-gradient group-hover:scale-105 transition-transform">
@@ -69,38 +70,13 @@ export default function Sitemap() {
                     {page.description}
                   </p>
                   <div className="break-all text-xs font-mono p-2 rounded" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--accent)' }}>
-                    {page.slug}
+                    {page.url}
                   </div>
                 </div>
-              </Link>
+              </a>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 p-6 elvt-glass rounded-2xl"
-        >
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Quick Links</h2>
-          <div className="space-y-2">
-            {pages.map(page => (
-              <div key={page.slug} className="flex items-center justify-between">
-                <span style={{ color: 'var(--text-secondary)' }}>{page.name}</span>
-                <a
-                  href={getFullUrl(page.slug)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-mono hover:opacity-70 transition-opacity"
-                  style={{ color: 'var(--accent)' }}
-                >
-                  {getFullUrl(page.slug)}
-                </a>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </div>
   );

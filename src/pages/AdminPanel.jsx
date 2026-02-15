@@ -27,6 +27,7 @@ import {
   Mail,
   TrendingUp
 } from 'lucide-react';
+import PlatformSettingsTab from '@/components/admin/PlatformSettingsTab';
 
 export default function AdminPanel() {
   const queryClient = useQueryClient();
@@ -197,6 +198,7 @@ export default function AdminPanel() {
             <TabsTrigger value="affiliates">Affiliates</TabsTrigger>
             <TabsTrigger value="purchases">Purchases</TabsTrigger>
             <TabsTrigger value="emails">Email Templates</TabsTrigger>
+            <TabsTrigger value="settings">Platform Settings</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
@@ -523,6 +525,11 @@ export default function AdminPanel() {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+
+          {/* Platform Settings Tab */}
+          <TabsContent value="settings">
+            <PlatformSettingsTab />
           </TabsContent>
         </Tabs>
       </div>

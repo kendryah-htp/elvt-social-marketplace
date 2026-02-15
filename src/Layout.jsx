@@ -61,7 +61,10 @@ export default function Layout({ children, currentPageName }) {
 
   const { data: profile } = useQuery({
     queryKey: ['affiliate-profile', user?.email],
-    queryFn: () => base44.entities.AffiliateProfile.filter({ user_email: user.email }).then(p => p[0]),
+    queryFn: async () => {
+      const profiles = await base44.entities.AffiliateProfile.filter({ user_email: user.email });
+      return profiles[0] || null;
+    },
     enabled: !!user?.email
   });
 

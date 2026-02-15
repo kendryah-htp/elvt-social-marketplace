@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, User, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeProvider, { useTheme } from '@/components/ThemeProvider';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 function LayoutContent({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -400,8 +401,10 @@ function LayoutContent({ children, currentPageName }) {
 
 export default function Layout({ children, currentPageName }) {
   return (
-    <ThemeProvider>
-      <LayoutContent children={children} currentPageName={currentPageName} />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <LayoutContent children={children} currentPageName={currentPageName} />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

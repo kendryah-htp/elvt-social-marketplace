@@ -59,17 +59,17 @@ import Docs from './pages/Docs';
 import FAQ from './pages/FAQ';
 import Home from './pages/Home';
 import Join from './pages/Join';
+import LaunchGuide from './pages/LaunchGuide';
 import Milo from './pages/Milo';
 import Onboarding from './pages/Onboarding';
 import Pricing from './pages/Pricing';
 import PurchaseFlow from './pages/PurchaseFlow';
 import PurchaseSuccess from './pages/PurchaseSuccess';
+import SavedPrompts from './pages/SavedPrompts';
 import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
-import SavedPrompts from './pages/SavedPrompts';
-import LaunchGuide from './pages/LaunchGuide';
 import __Layout from './Layout.jsx';
 
 
@@ -86,17 +86,17 @@ export const PAGES = {
     "FAQ": FAQ,
     "Home": Home,
     "Join": Join,
+    "LaunchGuide": LaunchGuide,
     "Milo": Milo,
     "Onboarding": Onboarding,
     "Pricing": Pricing,
     "PurchaseFlow": PurchaseFlow,
     "PurchaseSuccess": PurchaseSuccess,
+    "SavedPrompts": SavedPrompts,
     "SolutionsByRole": SolutionsByRole,
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
-    "SavedPrompts": SavedPrompts,
-    "LaunchGuide": LaunchGuide,
 }
 
 export const pagesConfig = {

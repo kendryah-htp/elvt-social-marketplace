@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const stripePromise = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY 
   ? loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
@@ -234,8 +235,9 @@ export default function PurchaseFlow() {
   }
 
   return (
-    <div className="min-h-screen elvt-gradient py-12">
-      <div className="max-w-5xl mx-auto px-6">
+    <ErrorBoundary>
+      <div className="min-h-screen elvt-gradient py-12">
+        <div className="max-w-5xl mx-auto px-6">
         <Link to={createPageUrl('AppDetail') + '?id=' + appId}>
           <Button variant="ghost" className="text-[#D4AF37] hover:text-[#E5C158] mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -243,14 +245,14 @@ export default function PurchaseFlow() {
           </Button>
         </Link>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-sm:gap-4">
           {/* Order Summary */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <Card className="elvt-glass p-8">
-              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Order Summary</h2>
+            <Card className="elvt-glass p-6 max-sm:p-4">
+              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 max-sm:text-xl">Order Summary</h2>
               
               <div className="space-y-4 mb-6">
                 {app.thumbnail_url && (
@@ -294,8 +296,8 @@ export default function PurchaseFlow() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="elvt-glass p-8">
-              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 flex items-center gap-2">
+            <Card className="elvt-glass p-6 max-sm:p-4">
+              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 flex items-center gap-2 max-sm:text-xl">
                 <CreditCard className="w-6 h-6 text-[#D4AF37]" />
                 Complete Purchase
               </h2>
@@ -323,5 +325,6 @@ export default function PurchaseFlow() {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 }

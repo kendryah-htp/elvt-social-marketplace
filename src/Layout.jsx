@@ -6,9 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Menu, X, User, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '@/components/ThemeProvider';
 
-export default function Layout({ children, currentPageName }) {
+function LayoutContent({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { settings } = useTheme();
@@ -334,5 +334,13 @@ export default function Layout({ children, currentPageName }) {
         </footer>
       )}
     </div>
+  );
+}
+
+export default function Layout({ children, currentPageName }) {
+  return (
+    <ThemeProvider>
+      <LayoutContent children={children} currentPageName={currentPageName} />
+    </ThemeProvider>
   );
 }

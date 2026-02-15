@@ -276,84 +276,84 @@ export default function AdminPanel() {
                       />
                     </div>
                     <div>
-                      <Label>Short Description</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Short Description</Label>
                       <Input
                         value={newApp.short_description}
                         onChange={(e) => setNewApp({ ...newApp, short_description: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Full Description</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Full Description</Label>
                       <Textarea
                         value={newApp.description}
                         onChange={(e) => setNewApp({ ...newApp, description: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label>Price</Label>
+                        <Label style={{ color: 'var(--text-primary)' }}>Price</Label>
                         <Input
                           type="number"
                           value={newApp.price}
                           onChange={(e) => setNewApp({ ...newApp, price: e.target.value })}
-                          className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                          style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                         />
                       </div>
                       <div>
-                        <Label>Commission Rate (%)</Label>
+                        <Label style={{ color: 'var(--text-primary)' }}>Commission Rate (%)</Label>
                         <Input
                           type="number"
                           value={newApp.commission_rate}
                           onChange={(e) => setNewApp({ ...newApp, commission_rate: e.target.value })}
-                          className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                          style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                         />
                       </div>
                     </div>
                     <div>
-                      <Label>Thumbnail URL</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Thumbnail URL</Label>
                       <Input
                         value={newApp.thumbnail_url}
                         onChange={(e) => setNewApp({ ...newApp, thumbnail_url: e.target.value })}
                         placeholder="https://..."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Demo URL (for 90% iframe showcase)</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Demo URL (for 90% iframe showcase)</Label>
                       <Input
                         value={newApp.demo_url}
                         onChange={(e) => setNewApp({ ...newApp, demo_url: e.target.value })}
                         placeholder="https://..."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Landing Page URL (opens in new tab)</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Landing Page URL (opens in new tab)</Label>
                       <Input
                         value={newApp.landing_page_url}
                         onChange={(e) => setNewApp({ ...newApp, landing_page_url: e.target.value })}
                         placeholder="https://..."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Stripe Product ID</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Stripe Product ID</Label>
                       <Input
                         value={newApp.stripe_product_id}
                         onChange={(e) => setNewApp({ ...newApp, stripe_product_id: e.target.value })}
                         placeholder="prod_xxxxx"
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Affiliate Link Template (use {'{affiliate_id}'})</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Affiliate Link Template (use {'{affiliate_id}'})</Label>
                       <Input
                         value={newApp.affiliate_link_template}
                         onChange={(e) => setNewApp({ ...newApp, affiliate_link_template: e.target.value })}
                         placeholder="https://yoursite.com/ref/{affiliate_id}"
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <Button
@@ -475,28 +475,29 @@ export default function AdminPanel() {
                   </DialogHeader>
                   <div className="space-y-4 mt-4">
                     <div>
-                      <Label>Template Name</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Template Name</Label>
                       <Input
                         value={newEmail.name}
                         onChange={(e) => setNewEmail({ ...newEmail, name: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Subject</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Subject</Label>
                       <Input
                         value={newEmail.subject}
                         onChange={(e) => setNewEmail({ ...newEmail, subject: e.target.value })}
                         placeholder="Use {buyer_name}, {app_name}, etc."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
-                      <Label>Body</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>Body</Label>
                       <Textarea
                         value={newEmail.body}
                         onChange={(e) => setNewEmail({ ...newEmail, body: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20 min-h-32"
+                        className="min-h-32"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <Button

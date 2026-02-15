@@ -27,7 +27,7 @@ function LayoutContent({ children, currentPageName }) {
     enabled: !!user?.email
   });
 
-  const isPublicPage = ['Home', 'AppCatalog', 'AppDetail', 'Join', 'Storefront', 'PurchaseFlow', 'PurchaseSuccess'].includes(currentPageName);
+  const isPublicPage = ['Home', 'AppCatalog', 'AppDetail', 'Join', 'Storefront', 'PurchaseFlow', 'PurchaseSuccess', 'Milo'].includes(currentPageName);
 
   const handleLogout = () => {
     base44.auth.logout();
@@ -110,6 +110,13 @@ function LayoutContent({ children, currentPageName }) {
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   Blog
+                </Link>
+                <Link 
+                  to={createPageUrl('Milo')}
+                  className="transition-colors font-medium hover:opacity-70 pulse-glow"
+                  style={{ color: 'var(--accent)' }}
+                >
+                  ✨ MILO
                 </Link>
                 <Link 
                   to={createPageUrl('FAQ')}
@@ -230,6 +237,14 @@ function LayoutContent({ children, currentPageName }) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Pricing
+              </Link>
+              <Link
+                to={createPageUrl('Milo')}
+                className="block py-2 transition-colors"
+                style={{ color: 'var(--accent)' }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                ✨ MILO
               </Link>
               <Link
                 to={createPageUrl('FAQ')}

@@ -54,6 +54,7 @@ import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
 import Blog from './pages/Blog';
 import BlogOnboarding from './pages/BlogOnboarding';
+import ContentStudio from './pages/ContentStudio';
 import Docs from './pages/Docs';
 import FAQ from './pages/FAQ';
 import Home from './pages/Home';
@@ -67,7 +68,7 @@ import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
-import ContentStudio from './pages/ContentStudio';
+import SavedPrompts from './pages/SavedPrompts';
 import __Layout from './Layout.jsx';
 
 
@@ -79,6 +80,7 @@ export const PAGES = {
     "AppDetail": AppDetail,
     "Blog": Blog,
     "BlogOnboarding": BlogOnboarding,
+    "ContentStudio": ContentStudio,
     "Docs": Docs,
     "FAQ": FAQ,
     "Home": Home,
@@ -92,7 +94,7 @@ export const PAGES = {
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
-    "ContentStudio": ContentStudio,
+    "SavedPrompts": SavedPrompts,
 }
 
 export const pagesConfig = {

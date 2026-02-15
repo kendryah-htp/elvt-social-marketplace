@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { isSuperAdmin } from '@/utils/permissions';
+import { isSuperAdmin } from '@/components/permissionsUtil';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Sparkles, AlertCircle } from 'lucide-react';

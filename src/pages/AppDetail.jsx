@@ -8,6 +8,7 @@ import { ArrowLeft, Star, Check, ShoppingCart, Eye } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import QuoteLoader from '@/components/QuoteLoader';
+import AppDemoModal from '@/components/AppDemoModal';
 
 const badgeStyles = {
   bestseller: "bg-[#D4AF37] text-[#0A0A0A]",
@@ -22,6 +23,7 @@ export default function AppDetail() {
   const appId = urlParams.get('id');
   const [showLoader, setShowLoader] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const { data: app, isLoading } = useQuery({
     queryKey: ['app', appId],
@@ -84,6 +86,7 @@ export default function AppDetail() {
   return (
     <>
       {showLoader && <QuoteLoader onComplete={handleLoaderComplete} />}
+      <AppDemoModal app={app} isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
       
       <div className="min-h-screen elvt-gradient">
         <div className="max-w-6xl mx-auto px-6 py-12">
@@ -129,9 +132,9 @@ export default function AppDetail() {
                 </div>
               )}
 
-              {app.demo_url && !showDemo && (
+              {app.demo_url && (
                 <Button
-                  onClick={handleViewDemo}
+                  onClick={() => setIsDemoModalOpen(true)}
                   variant="outline"
                   className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A] mb-6"
                 >

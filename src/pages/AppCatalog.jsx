@@ -5,9 +5,10 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Search, Star, ShoppingCart, Filter } from 'lucide-react';
+import { Search, Star, ShoppingCart, Filter, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import AppDemoModal from '@/components/AppDemoModal';
 import {
   Select,
   SelectContent,
@@ -36,6 +37,20 @@ const badgeStyles = {
 export default function AppCatalog() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [demoApp, setDemoApp] = useState(null);
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
+  const handleViewDemo = (app, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDemoApp(app);
+    setIsDemoOpen(true);
+  };
+
+  const handleCloseDemo = () => {
+    setIsDemoOpen(false);
+    setTimeout(() => setDemoApp(null), 300);
+  };
 
   const { data: apps = [], isLoading } = useQuery({
     queryKey: ['apps'],
@@ -53,8 +68,11 @@ export default function AppCatalog() {
   });
 
   return (
-    <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <>
+      <AppDemoModal app={demoApp} isOpen={isDemoOpen} onClose={handleCloseDemo} />
+      
+      <div className="min-h-screen elvt-gradient">
+        <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -185,9 +203,20 @@ export default function AppCatalog() {
                         )}
                       </div>
                       
-                      <Button className="w-full mt-4 bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-semibold">
-                        View Details
-                      </Button>
+                      <div className="flex gap-2 mt-4">
+                        {app.demo_url && (
+                          <Button
+                            onClick={(e) => handleViewDemo(app, e)}
+                            className="flex-1 bg-[#2A2A2A] hover:bg-[#3A3A3A] text-[#D4AF37] font-semibold border border-[#D4AF37]/30"
+                          >
+                            <Eye className="w-4 h-4 mr-2" />
+                            Demo
+                          </Button>
+                        )}
+                        <Button className="flex-1 bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-semibold">
+                          Details
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -195,7 +224,8 @@ export default function AppCatalog() {
             ))}
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

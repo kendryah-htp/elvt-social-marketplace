@@ -42,6 +42,8 @@ export default function AdminPanel() {
     category: 'templates',
     thumbnail_url: '',
     demo_url: '',
+    landing_page_url: '',
+    stripe_product_id: '',
     affiliate_link_template: '',
     commission_rate: 30,
     features: []
@@ -123,6 +125,8 @@ export default function AdminPanel() {
       category: 'templates',
       thumbnail_url: '',
       demo_url: '',
+      landing_page_url: '',
+      stripe_product_id: '',
       affiliate_link_template: '',
       commission_rate: 30,
       features: []
@@ -210,10 +214,10 @@ export default function AdminPanel() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <Card className="elvt-glass p-6">
+                  <Card className="elvt-glass p-6 border border-[#D4AF37]/20">
                     <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                     <p className="text-3xl font-bold text-[#F5F0EB] mb-1">{stat.value}</p>
-                    <p className="text-sm text-[#E5E0DB]">{stat.label}</p>
+                    <p className="text-sm text-[#A0A0A0]">{stat.label}</p>
                   </Card>
                 </motion.div>
               ))}
@@ -315,11 +319,29 @@ export default function AdminPanel() {
                       />
                     </div>
                     <div>
-                      <Label>Demo URL</Label>
+                      <Label>Demo URL (for 90% iframe showcase)</Label>
                       <Input
                         value={newApp.demo_url}
                         onChange={(e) => setNewApp({ ...newApp, demo_url: e.target.value })}
                         placeholder="https://..."
+                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                      />
+                    </div>
+                    <div>
+                      <Label>Landing Page URL (opens in new tab)</Label>
+                      <Input
+                        value={newApp.landing_page_url}
+                        onChange={(e) => setNewApp({ ...newApp, landing_page_url: e.target.value })}
+                        placeholder="https://..."
+                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                      />
+                    </div>
+                    <div>
+                      <Label>Stripe Product ID</Label>
+                      <Input
+                        value={newApp.stripe_product_id}
+                        onChange={(e) => setNewApp({ ...newApp, stripe_product_id: e.target.value })}
+                        placeholder="prod_xxxxx"
                         className="bg-[#0A0A0A] border-[#D4AF37]/20"
                       />
                     </div>

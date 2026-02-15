@@ -60,10 +60,11 @@ export default function AppDetail() {
               <div className="h-16 bg-[#2A2A2A] rounded animate-pulse" />
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
+          </div>
+          </div>
+          </>
+          );
+          }
 
   if (!app) {
     return (

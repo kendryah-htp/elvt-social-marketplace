@@ -69,7 +69,7 @@ function LayoutContent({ children, currentPageName }) {
                   <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                     Solutions
                   </button>
-                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
                       <Link to={createPageUrl('SolutionsByRole')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                         By Role
@@ -84,7 +84,7 @@ function LayoutContent({ children, currentPageName }) {
                   <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                     Resources
                   </button>
-                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
                       <Link to={createPageUrl('AppCatalog') + '?category=templates'} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                         Templates
@@ -137,7 +137,7 @@ function LayoutContent({ children, currentPageName }) {
                   <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                     Guides
                   </button>
-                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
                       <Link to={createPageUrl('AdminSetupGuide')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                         Admin Setup

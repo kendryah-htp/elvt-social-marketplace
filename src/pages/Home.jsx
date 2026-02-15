@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Zap, Users, TrendingUp, CheckCircle2, Star, Shield, Clock, Target } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Users, TrendingUp, CheckCircle2, Star, Shield, Clock, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useQuery } from '@tanstack/react-query';

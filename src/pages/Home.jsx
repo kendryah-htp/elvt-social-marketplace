@@ -63,10 +63,29 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xl md:text-2xl mb-10 leading-relaxed"
+              className="text-xl md:text-2xl mb-6 leading-relaxed"
               style={{ color: 'var(--text-secondary)' }}
             >
               Build your branded storefront and earn generous commissions promoting premium apps, templates, and training programs. Perfect for creators and marketers looking to monetize their audience.
+            </motion.p>
+
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="text-sm mb-10 font-light"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              "I did the heavy lifting so you don't have to." 
+              <a 
+                href="https://btb.elvt.social/bio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 underline transition-colors hover:opacity-80"
+                style={{ color: 'var(--accent)' }}
+              >
+                Learn the vision.
+              </a>
             </motion.p>
             
             <motion.div 

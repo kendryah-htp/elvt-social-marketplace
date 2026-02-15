@@ -169,8 +169,8 @@ export default function AdminPanel() {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <Card className="elvt-glass p-8 text-center">
-          <h2 className="text-2xl font-bold text-[#F5F0EB] mb-4">Access Denied</h2>
-          <p className="text-[#E5E0DB]">You need admin privileges to access this page</p>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Access Denied</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>You need admin privileges to access this page</p>
         </Card>
       </div>
     );
@@ -188,11 +188,11 @@ export default function AdminPanel() {
           className="mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-gradient">Admin Panel</h1>
-          <p className="text-[#E5E0DB] text-lg">Manage your marketplace</p>
+          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Manage your marketplace</p>
         </motion.div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="bg-[#1A1A1A] border border-[#D4AF37]/20">
+          <TabsList className="elvt-glass border" style={{ borderColor: 'var(--border)' }}>
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="apps">Apps</TabsTrigger>
             <TabsTrigger value="affiliates">Affiliates</TabsTrigger>
@@ -216,29 +216,29 @@ export default function AdminPanel() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <Card className="elvt-glass p-6 border border-[#D4AF37]/20">
+                  <Card className="elvt-glass p-6">
                     <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
-                    <p className="text-3xl font-bold text-[#F5F0EB] mb-1">{stat.value}</p>
-                    <p className="text-sm text-[#A0A0A0]">{stat.label}</p>
+                    <p className="text-3xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{stat.value}</p>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{stat.label}</p>
                   </Card>
                 </motion.div>
               ))}
             </div>
 
             <Card className="elvt-glass p-6">
-              <h3 className="text-xl font-bold text-[#F5F0EB] mb-4">Recent Activity</h3>
+              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Recent Activity</h3>
               <div className="space-y-3">
                 {purchases.slice(0, 5).map(purchase => (
-                  <div key={purchase.id} className="flex items-center justify-between p-3 bg-[#0A0A0A] rounded-lg">
+                  <div key={purchase.id} className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                     <div>
-                      <p className="font-semibold text-[#F5F0EB]">{purchase.product_name}</p>
-                      <p className="text-sm text-[#E5E0DB]">
+                      <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>{purchase.product_name}</p>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {purchase.buyer_name} via {purchase.affiliate_slug || 'Direct'}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-[#D4AF37]">${purchase.amount}</p>
-                      <p className="text-xs text-[#E5E0DB]">
+                      <p className="font-bold" style={{ color: 'var(--accent)' }}>${purchase.amount}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                         {new Date(purchase.created_date).toLocaleDateString()}
                       </p>
                     </div>
@@ -251,16 +251,16 @@ export default function AdminPanel() {
           {/* Apps Tab */}
           <TabsContent value="apps" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-[#F5F0EB]">App Management</h2>
+              <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>App Management</h2>
               
               <Dialog open={showAppDialog} onOpenChange={setShowAppDialog}>
                 <DialogTrigger asChild>
-                  <Button className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]">
+                  <Button style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add App
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB] max-w-2xl max-h-[80vh] overflow-y-auto">
+                <DialogContent className="elvt-glass max-w-2xl max-h-[80vh] overflow-y-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
                   <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-gradient">
                       {editingApp ? 'Edit App' : 'Add New App'}
@@ -268,11 +268,11 @@ export default function AdminPanel() {
                   </DialogHeader>
                   <div className="space-y-4 mt-4">
                     <div>
-                      <Label>App Name</Label>
+                      <Label style={{ color: 'var(--text-primary)' }}>App Name</Label>
                       <Input
                         value={newApp.name}
                         onChange={(e) => setNewApp({ ...newApp, name: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
                       />
                     </div>
                     <div>
@@ -358,7 +358,8 @@ export default function AdminPanel() {
                     </div>
                     <Button
                       onClick={handleSaveApp}
-                      className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]"
+                      className="w-full font-bold"
+                      style={{ backgroundColor: 'var(--accent)', color: 'white' }}
                     >
                       {editingApp ? 'Update App' : 'Create App'}
                     </Button>
@@ -372,10 +373,10 @@ export default function AdminPanel() {
                 <Card key={app.id} className="elvt-glass p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-[#F5F0EB] mb-2">{app.name}</h3>
-                      <p className="text-[#E5E0DB] text-sm mb-3">{app.short_description}</p>
+                      <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{app.name}</h3>
+                      <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>{app.short_description}</p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge className="bg-[#D4AF37] text-[#0A0A0A]">${app.price}</Badge>
+                        <Badge style={{ backgroundColor: 'var(--accent)', color: 'white' }}>${app.price}</Badge>
                         <Badge variant="outline">{app.commission_rate}% commission</Badge>
                         <Badge variant="outline">{app.category}</Badge>
                       </div>
@@ -385,7 +386,7 @@ export default function AdminPanel() {
                         size="sm"
                         variant="outline"
                         onClick={() => handleEditApp(app)}
-                        className="border-[#D4AF37] text-[#D4AF37]"
+                        style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
@@ -406,21 +407,21 @@ export default function AdminPanel() {
 
           {/* Affiliates Tab */}
           <TabsContent value="affiliates">
-            <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Affiliate Management</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Affiliate Management</h2>
             <div className="grid gap-4">
               {affiliates.map(affiliate => (
                 <Card key={affiliate.id} className="elvt-glass p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-bold text-[#F5F0EB]">{affiliate.full_name}</h3>
-                      <p className="text-sm text-[#E5E0DB]">{affiliate.user_email}</p>
-                      <p className="text-sm text-[#D4AF37] mt-1">Slug: {affiliate.slug}</p>
+                      <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{affiliate.full_name}</h3>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{affiliate.user_email}</p>
+                      <p className="text-sm mt-1" style={{ color: 'var(--accent)' }}>Slug: {affiliate.slug}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-[#D4AF37]">
+                      <p className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>
                         ${(affiliate.total_earnings || 0).toFixed(2)}
                       </p>
-                      <p className="text-sm text-[#E5E0DB]">Total Earnings</p>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Total Earnings</p>
                     </div>
                   </div>
                 </Card>
@@ -430,23 +431,23 @@ export default function AdminPanel() {
 
           {/* Purchases Tab */}
           <TabsContent value="purchases">
-            <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">All Purchases</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>All Purchases</h2>
             <div className="space-y-3">
               {purchases.map(purchase => (
                 <Card key={purchase.id} className="elvt-glass p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-semibold text-[#F5F0EB]">{purchase.product_name}</h4>
-                      <p className="text-sm text-[#E5E0DB]">
+                      <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>{purchase.product_name}</h4>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {purchase.buyer_name} ({purchase.buyer_email})
                       </p>
-                      <p className="text-xs text-[#E5E0DB] mt-1">
+                      <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
                         Via: {purchase.affiliate_slug || 'Direct'} · {new Date(purchase.created_date).toLocaleString()}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xl font-bold text-[#D4AF37]">${purchase.amount}</p>
-                      <p className="text-sm text-[#E5E0DB]">
+                      <p className="text-xl font-bold" style={{ color: 'var(--accent)' }}>${purchase.amount}</p>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                         Commission: ${purchase.commission_amount?.toFixed(2)}
                       </p>
                     </div>
@@ -459,16 +460,16 @@ export default function AdminPanel() {
           {/* Email Templates Tab */}
           <TabsContent value="emails" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-[#F5F0EB]">Email Templates</h2>
+              <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Email Templates</h2>
               
               <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
                 <DialogTrigger asChild>
-                  <Button className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]">
+                  <Button style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add Template
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB] max-w-2xl">
+                <DialogContent className="elvt-glass max-w-2xl" style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
                   <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-gradient">Create Email Template</DialogTitle>
                   </DialogHeader>
@@ -500,7 +501,8 @@ export default function AdminPanel() {
                     </div>
                     <Button
                       onClick={() => createEmailMutation.mutate(newEmail)}
-                      className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]"
+                      className="w-full font-bold"
+                      style={{ backgroundColor: 'var(--accent)', color: 'white' }}
                     >
                       Create Template
                     </Button>
@@ -514,9 +516,9 @@ export default function AdminPanel() {
                 <Card key={email.id} className="elvt-glass p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-[#F5F0EB] mb-1">{email.name}</h3>
-                      <p className="text-sm text-[#E5E0DB] mb-2">Trigger: {email.trigger}</p>
-                      <p className="text-sm text-[#D4AF37]">Subject: {email.subject}</p>
+                      <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{email.name}</h3>
+                      <p className="text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Trigger: {email.trigger}</p>
+                      <p className="text-sm" style={{ color: 'var(--accent)' }}>Subject: {email.subject}</p>
                     </div>
                     <Badge className={email.is_active ? 'bg-green-500' : 'bg-gray-500'}>
                       {email.is_active ? 'Active' : 'Inactive'}

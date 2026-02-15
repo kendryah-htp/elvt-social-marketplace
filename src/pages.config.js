@@ -66,11 +66,14 @@ import Pricing from './pages/Pricing';
 import PurchaseFlow from './pages/PurchaseFlow';
 import PurchaseSuccess from './pages/PurchaseSuccess';
 import SavedPrompts from './pages/SavedPrompts';
+import Sitemap from './pages/Sitemap';
 import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
-import Sitemap from './pages/Sitemap';
+import BillingPortal from './pages/BillingPortal';
+import ContentStudioGated from './pages/ContentStudioGated';
+import EmbedGuide from './pages/EmbedGuide';
 import __Layout from './Layout.jsx';
 
 
@@ -94,11 +97,14 @@ export const PAGES = {
     "PurchaseFlow": PurchaseFlow,
     "PurchaseSuccess": PurchaseSuccess,
     "SavedPrompts": SavedPrompts,
+    "Sitemap": Sitemap,
     "SolutionsByRole": SolutionsByRole,
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
-    "Sitemap": Sitemap,
+    "BillingPortal": BillingPortal,
+    "ContentStudioGated": ContentStudioGated,
+    "EmbedGuide": EmbedGuide,
 }
 
 export const pagesConfig = {

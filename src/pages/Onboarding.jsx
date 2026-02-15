@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import { ArrowRight, ArrowLeft, Check, Palette, AppWindow, User } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Check, Palette, AppWindow, User, Loader } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
@@ -299,8 +299,17 @@ export default function Onboarding() {
                   className="font-bold pulse-glow"
                   style={{ backgroundColor: 'var(--accent)', color: 'white' }}
                 >
-                  {updateProfileMutation.isLoading ? 'Creating Storefront...' : 'Launch My Storefront'}
-                  <Check className="ml-2 w-5 h-5" />
+                  {updateProfileMutation.isLoading ? (
+                    <>
+                      <div className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      Creating Storefront...
+                    </>
+                  ) : (
+                    <>
+                      Launch My Storefront
+                      <Check className="ml-2 w-5 h-5" />
+                    </>
+                  )}
                 </Button>
               </div>
             </motion.div>

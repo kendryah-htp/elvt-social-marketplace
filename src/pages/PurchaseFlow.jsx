@@ -22,6 +22,7 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,17 +67,25 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
 
       if (paymentIntent.status === 'succeeded') {
         // Complete purchase and trigger emails
-        await base44.functions.invoke('completePurchase', {
-          app_id: app.id,
-          buyer_name: buyerInfo.name,
-          buyer_email: buyerInfo.email,
-          affiliate_slug: affiliateSlug,
-          payment_id: paymentIntent.id
-        });
+        try {
+          await base44.functions.invoke('completePurchase', {
+            app_id: app.id,
+            buyer_name: buyerInfo.name,
+            buyer_email: buyerInfo.email,
+            affiliate_slug: affiliateSlug,
+            payment_id: paymentIntent.id
+          });
 
-        navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
+          navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
+        } catch (completionError) {
+          // Purchase recorded but email may have failed - still redirect to success
+          console.warn('Purchase completion error:', completionError);
+          navigate(createPageUrl('PurchaseSuccess') + '?app=' + encodeURIComponent(app.name));
+        }
+      } else if (paymentIntent.status === 'requires_action') {
+        setError('Please complete the additional verification step.');
       } else {
-        setError('Payment failed. Please try again.');
+        setError(`Payment failed (${paymentIntent.status}). ${retryCount < 2 ? 'Please try again.' : 'Contact support if this persists.'}`);
       }
     } catch (err) {
       setError(err.message || 'Payment processing error');
@@ -133,14 +142,37 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
         </div>
       )}
 
-      <Button
-        type="submit"
-        size="lg"
-        disabled={!stripe || processing}
-        className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
-      >
-        {processing ? 'Processing...' : `Pay $${app.price}`}
-      </Button>
+      <div className="space-y-3">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={!stripe || processing}
+          className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
+        >
+          {processing ? (
+            <>
+              <div className="inline-block w-4 h-4 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin mr-2" />
+              Processing Payment...
+            </>
+          ) : `Pay $${app.price}`}
+        </Button>
+        
+        {error && retryCount < 2 && (
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            onClick={(e) => {
+              e.preventDefault();
+              setError(null);
+              setRetryCount(retryCount + 1);
+            }}
+            className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 font-semibold"
+          >
+            Try Again
+          </Button>
+        )}
+      </div>
 
       <div className="flex items-center justify-center gap-2 text-sm text-[#E5E0DB]">
         <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
@@ -181,10 +213,14 @@ export default function PurchaseFlow() {
   if (appLoading) {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
+        >
           <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#E5E0DB]">Loading checkout...</p>
-        </div>
+          <p className="text-[#E5E0DB] font-semibold">Loading checkout...</p>
+        </motion.div>
       </div>
     );
   }

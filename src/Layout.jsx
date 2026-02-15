@@ -111,6 +111,21 @@ function LayoutContent({ children, currentPageName }) {
                 >
                   Support
                 </Link>
+                <div className="relative group">
+                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                    Guides
+                  </button>
+                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
+                      <Link to={createPageUrl('AdminSetupGuide')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        Admin Setup
+                      </Link>
+                      <Link to={createPageUrl('UserOnboardingGuide')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        User Onboarding
+                      </Link>
+                    </div>
+                  </div>
+                </div>
 
                 {user ? (
                   <div className="flex items-center gap-3">
@@ -217,6 +232,15 @@ function LayoutContent({ children, currentPageName }) {
               >
                 Support
               </Link>
+              <div className="py-2">
+                <div className="font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Guides</div>
+                <Link to={createPageUrl('AdminSetupGuide')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Admin Setup
+                </Link>
+                <Link to={createPageUrl('UserOnboardingGuide')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  User Onboarding
+                </Link>
+              </div>
               {user ? (
                 <>
                   {profile && (

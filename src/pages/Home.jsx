@@ -66,7 +66,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>{path.title}</h3>
                   <p style={{ color: 'var(--text-secondary)' }}>{path.desc}</p>
-                  <Button className="mt-6 text-white !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+                  <Button className="mt-6 text-white" style={{ backgroundColor: 'var(--accent)' }}>
                   Learn More
                   </Button>
                 </div>
@@ -237,7 +237,7 @@ export default function Home() {
           className="text-center mt-12"
         >
           <Link to={createPageUrl('AppCatalog')}>
-            <Button size="lg" className="px-8 py-6 text-white font-semibold !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="px-8 py-6 text-white font-semibold" style={{ backgroundColor: 'var(--accent)' }}>
               Browse All Templates
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -269,7 +269,7 @@ export default function Home() {
             </div>
           </div>
           <Link to={createPageUrl('Pricing')}>
-            <Button size="lg" className="text-white font-semibold !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="text-white font-semibold" style={{ backgroundColor: 'var(--accent)' }}>
               View All Plans
             </Button>
           </Link>
@@ -318,7 +318,7 @@ export default function Home() {
           className="text-center mt-12"
         >
           <Link to={createPageUrl('FAQ')}>
-            <Button className="px-8 text-white font-semibold !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button className="px-8 text-white font-semibold" style={{ backgroundColor: 'var(--accent)' }}>
               Read All FAQs
             </Button>
           </Link>
@@ -341,7 +341,7 @@ export default function Home() {
             Join thousands of creators who are already building their income with ELVT Social. Your financial freedom journey begins now.
           </p>
           <Link to={createPageUrl('Join')}>
-            <Button size="lg" className="px-14 py-8 text-xl font-black relative z-10 pulse-glow text-white !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="px-14 py-8 text-xl font-black relative z-10 pulse-glow text-white" style={{ backgroundColor: 'var(--accent)' }}>
               Claim Your Free Storefront
               <ArrowRight className="ml-2 w-6 h-6" />
             </Button>

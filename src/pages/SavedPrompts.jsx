@@ -6,6 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Sparkles, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import PromptEditorForm from '@/components/PromptEditorForm';
+import PromptCard from '@/components/PromptCard';
+import VariablesDrawer from '@/components/VariablesDrawer';
+import CopyButton from '@/components/CopyButton';
 
 // Super Admin emails - hardwired for authorization
 const SUPER_ADMIN_EMAILS = [
@@ -26,6 +31,9 @@ export default function SavedPrompts() {
   const [selectedStatus, setSelectedStatus] = useState('active');
   const [sortBy, setSortBy] = useState('-created_date');
   const [selectedPrompt, setSelectedPrompt] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showVariablesDrawer, setShowVariablesDrawer] = useState(false);
 
   // Fetch current user
   useEffect(() => {
@@ -116,6 +124,9 @@ export default function SavedPrompts() {
     staleTime: 30000 // 30 second cache
   });
 
+  // Query client for mutations
+  const queryClient = useQueryClient();
+
   // Fetch categories
   const { data: categories = [] } = useQuery({
     queryKey: ['promptCategories'],
@@ -143,6 +154,101 @@ export default function SavedPrompts() {
       }
     }
   });
+
+  // Save/Update Prompt Mutation
+  const savePromptMutation = useMutation({
+    mutationFn: async (formData) => {
+      if (selectedPrompt?.id) {
+        return await base44.entities.SavedPrompt.update(selectedPrompt.id, formData);
+      } else {
+        return await base44.entities.SavedPrompt.create({
+          ...formData,
+          owner_email: isSuperAdmin(user.email) ? null : user.email
+        });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['savedPrompts'] });
+      toast.success(selectedPrompt?.id ? 'Prompt updated' : 'Prompt created');
+      setSelectedPrompt(null);
+      setIsEditing(false);
+    },
+    onError: (err) => {
+      console.error('Failed to save prompt:', err);
+      toast.error('Failed to save prompt');
+    }
+  });
+
+  // Delete Prompt Mutation
+  const deletePromptMutation = useMutation({
+    mutationFn: async (promptId) => {
+      return await base44.entities.SavedPrompt.delete(promptId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['savedPrompts'] });
+      toast.success('Prompt deleted');
+      setSelectedPrompt(null);
+    },
+    onError: (err) => {
+      console.error('Failed to delete prompt:', err);
+      toast.error('Failed to delete prompt');
+    }
+  });
+
+  // Pin/Unpin Mutation
+  const pinPromptMutation = useMutation({
+    mutationFn: async ({ promptId, isPinned }) => {
+      return await base44.entities.SavedPrompt.update(promptId, {
+        is_pinned_by_admin: isPinned
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['savedPrompts'] });
+      toast.success('Updated');
+    },
+    onError: (err) => {
+      console.error('Failed to pin prompt:', err);
+      toast.error('Failed to update prompt');
+    }
+  });
+
+  // Record usage
+  const recordUsageMutation = useMutation({
+    mutationFn: async ({ promptId, eventType }) => {
+      // Create usage record
+      await base44.entities.PromptUsage.create({
+        prompt_id: promptId,
+        user_email: user.email,
+        event_type: eventType
+      });
+      // Update prompt metrics
+      const currentPrompt = prompts.find(p => p.id === promptId);
+      if (currentPrompt) {
+        await base44.entities.SavedPrompt.update(promptId, {
+          use_count: (currentPrompt.use_count || 0) + 1,
+          last_used_at: new Date().toISOString()
+        });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['savedPrompts'] });
+    }
+  });
+
+  const handleCopyPrompt = async (prompt) => {
+    await recordUsageMutation.mutateAsync({ promptId: prompt.id, eventType: 'copied' });
+    toast.success('Copied to clipboard');
+  };
+
+  const handleUsePrompt = async (prompt) => {
+    await recordUsageMutation.mutateAsync({ promptId: prompt.id, eventType: 'used' });
+  };
+
+  const handleSavePrompt = async (formData) => {
+    setIsSaving(true);
+    await savePromptMutation.mutateAsync(formData);
+    setIsSaving(false);
+  };
 
   if (loading || !user) {
     return (
@@ -175,6 +281,10 @@ export default function SavedPrompts() {
             </div>
             {isAdmin && (
               <Button 
+                onClick={() => {
+                  setSelectedPrompt(null);
+                  setIsEditing(true);
+                }}
                 className="gap-2 pulse-glow"
                 style={{ backgroundColor: 'var(--accent)', color: 'white' }}
               >
@@ -280,95 +390,125 @@ export default function SavedPrompts() {
           ) : (
             <div className="grid gap-4">
               {prompts.map((prompt) => (
-                <motion.div
+                <PromptCard
                   key={prompt.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="elvt-glass rounded-lg p-6 hover:elvt-glow transition-all cursor-pointer"
-                  onClick={() => setSelectedPrompt(prompt)}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-                        {prompt.title}
-                      </h3>
-                      <div className="flex items-center gap-3 mt-2">
-                        {prompt.category && (
-                          <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--accent)' }}>
-                            {prompt.category}
-                          </span>
-                        )}
-                        {prompt.intended_agent && (
-                          <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
-                            {prompt.intended_agent}
-                          </span>
-                        )}
-                        <span className={`text-xs px-2 py-1 rounded ${
-                          prompt.status === 'active' ? 'bg-green-100 text-green-700' :
-                          prompt.status === 'draft' ? 'bg-yellow-100 text-yellow-700' :
-                          'bg-gray-100 text-gray-700'
-                        }`}>
-                          {prompt.status}
-                        </span>
-                      </div>
-                    </div>
-                    {prompt.use_count > 0 && (
-                      <div className="text-right">
-                        <div className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>
-                          {prompt.use_count}
-                        </div>
-                        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>uses</div>
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-sm line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
-                    {prompt.prompt_body}
-                  </p>
-                  {prompt.tags && prompt.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {prompt.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="text-xs px-2 py-1 rounded-full" 
-                          style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
-                          #{tag}
-                        </span>
-                      ))}
-                      {prompt.tags.length > 3 && (
-                        <span className="text-xs px-2 py-1" style={{ color: 'var(--text-muted)' }}>
-                          +{prompt.tags.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </motion.div>
+                  prompt={prompt}
+                  userEmail={user.email}
+                  onSelect={() => setSelectedPrompt(prompt)}
+                  onCopy={handleCopyPrompt}
+                  onUse={handleUsePrompt}
+                  onTogglePin={(id, isPinned) => pinPromptMutation.mutate({ promptId: id, isPinned })}
+                  onDelete={(id) => deletePromptMutation.mutate(id)}
+                />
               ))}
             </div>
           )}
         </motion.div>
 
-        {/* Detail Modal Placeholder */}
-        {selectedPrompt && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        {/* Editor or Detail Modal */}
+        {isEditing && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="elvt-glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-auto p-8"
+              className="elvt-glass rounded-xl w-full max-w-2xl p-8 my-8"
             >
-              <button
-                onClick={() => setSelectedPrompt(null)}
-                className="float-right text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-              <h2 className="text-2xl font-bold mb-4">{selectedPrompt.title}</h2>
-              <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                Status: <strong>{selectedPrompt.status}</strong>
-              </p>
-              <div className="bg-slate-50 rounded p-4 mb-4 font-mono text-sm whitespace-pre-wrap">
-                {selectedPrompt.prompt_body}
-              </div>
-              <Button onClick={() => setSelectedPrompt(null)}>Close</Button>
+              <PromptEditorForm
+                initialData={selectedPrompt}
+                categories={categories}
+                allTags={allTags}
+                isLoading={isSaving}
+                onSubmit={handleSavePrompt}
+                onCancel={() => {
+                  setIsEditing(false);
+                  setSelectedPrompt(null);
+                }}
+              />
             </motion.div>
           </div>
+        )}
+
+        {/* Detail View Modal */}
+        {selectedPrompt && !isEditing && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="elvt-glass rounded-xl max-w-3xl w-full p-8 my-8"
+            >
+              <div className="flex items-start justify-between mb-6">
+                <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                  {selectedPrompt.title}
+                </h2>
+                <button
+                  onClick={() => setSelectedPrompt(null)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-6 mb-6 font-mono text-sm whitespace-pre-wrap border border-gray-200 dark:border-gray-700">
+                {selectedPrompt.prompt_body}
+              </div>
+
+              {selectedPrompt.variables_schema?.length > 0 && (
+                <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                  <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Variables</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {selectedPrompt.variables_schema.map(v => (
+                      <div key={v.key} className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                        <code style={{ color: 'var(--accent)' }}>{{`${v.key}`}}</code>
+                        {v.description && <div className="mt-1">{v.description}</div>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-2 mb-6">
+                {selectedPrompt.tags?.map(tag => (
+                  <span key={tag} className="text-xs px-2 py-1 rounded-full" 
+                    style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3 pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
+                <CopyButton
+                  textToCopy={selectedPrompt.prompt_body}
+                  label="Copy Prompt"
+                  size="sm"
+                />
+                {isSuperAdmin(user.email) && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit
+                  </Button>
+                )}
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setSelectedPrompt(null)}
+                >
+                  Close
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Variables Drawer */}
+        {selectedPrompt && selectedPrompt.variables_schema?.length > 0 && (
+          <VariablesDrawer
+            variablesSchema={selectedPrompt.variables_schema}
+            isOpen={showVariablesDrawer}
+            onClose={() => setShowVariablesDrawer(false)}
+          />
         )}
       </div>
     </div>

@@ -66,6 +66,7 @@ import Storefront from './pages/Storefront';
 import AdminSetupGuide from './pages/AdminSetupGuide';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
 import BlogOnboarding from './pages/BlogOnboarding';
+import Milo from './pages/Milo';
 import __Layout from './Layout.jsx';
 
 
@@ -89,6 +90,7 @@ export const PAGES = {
     "AdminSetupGuide": AdminSetupGuide,
     "UserOnboardingGuide": UserOnboardingGuide,
     "BlogOnboarding": BlogOnboarding,
+    "Milo": Milo,
 }
 
 export const pagesConfig = {

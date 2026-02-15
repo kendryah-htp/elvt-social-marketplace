@@ -12,10 +12,19 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const { new_user_email, admin_id } = body;
 
+    if (!new_user_email || !admin_id) {
+      return Response.json({ error: 'Missing new_user_email or admin_id' }, { status: 400 });
+    }
+
     // Verify admin owns this team
-    const adminTeam = await base44.entities.AdminTeam.get(admin_id);
+    const adminTeams = await base44.entities.AdminTeam.filter({ id: admin_id });
+    if (!adminTeams || adminTeams.length === 0) {
+      return Response.json({ error: 'Admin team not found' }, { status: 404 });
+    }
+
+    const adminTeam = adminTeams[0];
     if (adminTeam.admin_email !== user.email) {
-      return Response.json({ error: 'Forbidden' }, { status: 403 });
+      return Response.json({ error: 'Forbidden: You do not own this team' }, { status: 403 });
     }
 
     // Create user subscription under this admin

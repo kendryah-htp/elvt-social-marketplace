@@ -6,53 +6,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Menu, X, User, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function Layout({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState('dark');
   const location = useLocation();
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('elvt-theme') || 'dark';
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
-
-  const applyTheme = (themeName) => {
-    const root = document.documentElement;
-    const themes = {
-      dark: {
-        '--bg-primary': '#0A0A0A',
-        '--bg-secondary': '#1A1A1A',
-        '--bg-tertiary': '#2A2A2A',
-        '--text-primary': '#F5F0EB',
-        '--text-secondary': '#E5E0DB',
-        '--text-muted': '#A0A0A0',
-        '--accent': '#D4AF37',
-        '--border': 'rgba(212, 175, 55, 0.1)',
-      },
-      light: {
-        '--bg-primary': '#FFFFFF',
-        '--bg-secondary': '#F8F6F2',
-        '--bg-tertiary': '#EDE8E0',
-        '--text-primary': '#1A1A1A',
-        '--text-secondary': '#333333',
-        '--text-muted': '#666666',
-        '--accent': '#D4AF37',
-        '--border': 'rgba(0, 0, 0, 0.1)',
-      }
-    };
-    const themeVars = themes[themeName] || themes.dark;
-    Object.entries(themeVars).forEach(([key, value]) => {
-      root.style.setProperty(key, value);
-    });
-  };
-
-  const changeTheme = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem('elvt-theme', newTheme);
-    applyTheme(newTheme);
-  };
+  const { settings } = useTheme();
 
   const { data: user } = useQuery({
     queryKey: ['user'],
@@ -83,11 +42,17 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex items-center justify-between h-20">
               {/* Logo */}
               <Link to={createPageUrl('Home')} className="flex items-center gap-3 group">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-[#D4AF37] blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
-                  <Sparkles className="w-8 h-8 text-[#D4AF37] relative" />
-                </div>
-                <span className="text-2xl font-bold text-gradient">ELVT Social</span>
+                {settings?.logo_url ? (
+                  <img src={settings.logo_url} alt="Logo" className="h-10 w-auto" />
+                ) : (
+                  <>
+                    <div className="relative">
+                      <div className="absolute inset-0 blur-lg opacity-30 group-hover:opacity-50 transition-opacity" style={{ backgroundColor: 'var(--accent)' }} />
+                      <Sparkles className="w-8 h-8 relative" style={{ color: 'var(--accent)' }} />
+                    </div>
+                    <span className="text-2xl font-bold text-gradient">{settings?.platform_name || 'ELVT Social'}</span>
+                  </>
+                )}
               </Link>
 
               {/* Desktop Navigation */}
@@ -109,25 +74,9 @@ export default function Layout({ children, currentPageName }) {
 
                 {user ? (
                   <div className="flex items-center gap-3">
-                    {user.role === 'admin' && (
-                      <div className="flex items-center gap-1 bg-black/20 rounded-lg p-1">
-                        <button
-                          onClick={() => changeTheme('dark')}
-                          className={`px-3 py-1 rounded transition-colors ${theme === 'dark' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
-                        >
-                          Dark
-                        </button>
-                        <button
-                          onClick={() => changeTheme('light')}
-                          className={`px-3 py-1 rounded transition-colors ${theme === 'light' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
-                        >
-                          Light
-                        </button>
-                      </div>
-                    )}
                     {profile && (
                       <Link to={createPageUrl('AffiliateDashboard')}>
-                        <Button variant="outline" className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]">
+                        <Button variant="outline" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }} className="hover:bg-[var(--accent)] hover:text-white transition-all">
                           <LayoutDashboard className="w-4 h-4 mr-2" />
                           Dashboard
                         </Button>
@@ -135,7 +84,7 @@ export default function Layout({ children, currentPageName }) {
                     )}
                     {user.role === 'admin' && (
                       <Link to={createPageUrl('AdminPanel')}>
-                        <Button variant="ghost" className="text-[#D4AF37]">
+                        <Button variant="ghost" style={{ color: 'var(--accent)' }}>
                           Admin
                         </Button>
                       </Link>
@@ -144,7 +93,7 @@ export default function Layout({ children, currentPageName }) {
                       variant="ghost"
                       onClick={handleLogout}
                       style={{ color: 'var(--text-secondary)' }}
-                      className="hover:text-[#D4AF37]"
+                      className="hover:opacity-70"
                     >
                       <LogOut className="w-4 h-4" />
                     </Button>
@@ -152,7 +101,8 @@ export default function Layout({ children, currentPageName }) {
                 ) : (
                   <Button
                     onClick={() => base44.auth.redirectToLogin()}
-                    className="bg-[#D4AF37] hover:bg-[#E5C158] text-black font-semibold"
+                    className="font-semibold pulse-glow"
+                    style={{ backgroundColor: 'var(--accent)', color: 'white' }}
                   >
                     <User className="w-4 h-4 mr-2" />
                     Sign In
@@ -163,7 +113,8 @@ export default function Layout({ children, currentPageName }) {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden text-[#D4AF37] p-2"
+                className="md:hidden p-2"
+                style={{ color: 'var(--accent)' }}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -177,13 +128,13 @@ export default function Layout({ children, currentPageName }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-[#D4AF37]/10"
-            style={{ backgroundColor: 'var(--bg-primary)' }}
+            className="md:hidden"
+            style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--border)' }}
           >
             <div className="px-6 py-4 space-y-3">
               <Link
                 to={createPageUrl('AppCatalog')}
-                className="block py-2 hover:text-[#D4AF37] transition-colors"
+                className="block py-2 transition-colors"
                 style={{ color: 'var(--text-secondary)' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -191,28 +142,12 @@ export default function Layout({ children, currentPageName }) {
               </Link>
               <Link
                 to={createPageUrl('Join')}
-                className="block py-2 hover:text-[#D4AF37] transition-colors"
+                className="block py-2 transition-colors"
                 style={{ color: 'var(--text-secondary)' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Become an Affiliate
               </Link>
-              {user && user.role === 'admin' && (
-                <div className="flex gap-2 py-2">
-                  <button
-                    onClick={() => { changeTheme('dark'); setMobileMenuOpen(false); }}
-                    className={`flex-1 px-2 py-1 rounded text-sm ${theme === 'dark' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
-                  >
-                    Dark
-                  </button>
-                  <button
-                    onClick={() => { changeTheme('light'); setMobileMenuOpen(false); }}
-                    className={`flex-1 px-2 py-1 rounded text-sm ${theme === 'light' ? 'bg-[#D4AF37] text-black' : 'text-[#D4AF37]'}`}
-                  >
-                    Light
-                  </button>
-                </div>
-              )}
               {user ? (
                 <>
                   {profile && (
@@ -228,7 +163,7 @@ export default function Layout({ children, currentPageName }) {
                   {user.role === 'admin' && (
                     <Link
                       to={createPageUrl('AdminPanel')}
-                      className="block py-2 hover:text-[#D4AF37] transition-colors"
+                      className="block py-2 transition-colors"
                       style={{ color: 'var(--text-secondary)' }}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -237,7 +172,7 @@ export default function Layout({ children, currentPageName }) {
                   )}
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left py-2 hover:text-[#D4AF37] transition-colors"
+                    className="w-full text-left py-2 transition-colors"
                     style={{ color: 'var(--text-secondary)' }}
                   >
                     Sign Out
@@ -246,7 +181,8 @@ export default function Layout({ children, currentPageName }) {
               ) : (
                 <button
                   onClick={() => base44.auth.redirectToLogin()}
-                  className="w-full text-left py-2 text-[#D4AF37] font-semibold"
+                  className="w-full text-left py-2 font-semibold"
+                  style={{ color: 'var(--accent)' }}
                 >
                   Sign In
                 </button>
@@ -270,50 +206,59 @@ export default function Layout({ children, currentPageName }) {
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <Sparkles className="w-6 h-6 text-[#D4AF37]" />
-                  <span className="text-xl font-bold text-gradient">ELVT Social</span>
+                  {settings?.logo_url ? (
+                    <img src={settings.logo_url} alt="Logo" className="h-8 w-auto" />
+                  ) : (
+                    <>
+                      <Sparkles className="w-6 h-6" style={{ color: 'var(--accent)' }} />
+                      <span className="text-xl font-bold text-gradient">{settings?.platform_name || 'ELVT Social'}</span>
+                    </>
+                  )}
                 </div>
-                <p className="text-[#E5E0DB] text-sm">
+                <p style={{ color: 'var(--text-secondary)' }} className="text-sm">
                   Premium marketplace for high-value digital products and affiliate opportunities.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold text-[#F5F0EB] mb-3">Marketplace</h4>
+                <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Marketplace</h4>
                 <div className="space-y-2">
-                  <Link to={createPageUrl('AppCatalog')} className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
+                  <Link to={createPageUrl('AppCatalog')} className="block text-sm transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                     Browse Apps
                   </Link>
-                  <Link to={createPageUrl('Join')} className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
+                  <Link to={createPageUrl('Join')} className="block text-sm transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
                     Become an Affiliate
                   </Link>
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold text-[#F5F0EB] mb-3">Support</h4>
+                <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Support</h4>
                 <div className="space-y-2">
-                  <a href="mailto:support@elvtsocial.com" className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
-                    Contact Us
-                  </a>
-                  <a href="#" className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
-                    Help Center
-                  </a>
+                  {settings?.footer_links?.filter(l => l.label && l.url).slice(0, 2).map((link, i) => (
+                    <a key={i} href={link.url} className="block text-sm transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                      {link.label}
+                    </a>
+                  ))}
+                  {settings?.contact_email && (
+                    <a href={`mailto:${settings.contact_email}`} className="block text-sm transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                      Contact Us
+                    </a>
+                  )}
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold text-[#F5F0EB] mb-3">Legal</h4>
+                <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Legal</h4>
                 <div className="space-y-2">
-                  <a href="#" className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
-                    Terms of Service
-                  </a>
-                  <a href="#" className="block text-[#E5E0DB] hover:text-[#D4AF37] text-sm transition-colors">
-                    Privacy Policy
-                  </a>
+                  {settings?.footer_links?.filter(l => l.label && l.url).slice(2, 4).map((link, i) => (
+                    <a key={i} href={link.url} className="block text-sm transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                      {link.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
-            <div className="border-t border-[#D4AF37]/10 pt-8 text-center">
-              <p className="text-[#E5E0DB] text-sm">
-                © 2026 ELVT Social. All rights reserved.
+            <div className="pt-8 text-center" style={{ borderTop: '1px solid var(--border)' }}>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                © 2026 {settings?.platform_name || 'ELVT Social'}. All rights reserved.
               </p>
             </div>
           </div>

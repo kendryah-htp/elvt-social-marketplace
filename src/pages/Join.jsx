@@ -19,19 +19,19 @@ export default function Join() {
     setError('');
 
     try {
-      const user = await base44.auth.me();
+      const user = await base44.auth.me().catch(() => null);
       
+      // Redirect to login if not authenticated
+      if (!user) {
+        base44.auth.redirectToLogin(createPageUrl('Join'));
+        return;
+      }
+
       // Check if affiliate profile already exists
       const existing = await base44.entities.AffiliateProfile.filter({ user_email: user.email });
       
       if (existing.length > 0) {
         navigate(createPageUrl('Onboarding'));
-        return;
-      }
-
-      // Redirect to login if not authenticated
-      if (!user) {
-        base44.auth.redirectToLogin(createPageUrl('Join'));
         return;
       }
 
@@ -47,11 +47,7 @@ export default function Join() {
 
       navigate(createPageUrl('Onboarding'));
     } catch (err) {
-      if (err.message?.includes('not authenticated')) {
-        base44.auth.redirectToLogin(createPageUrl('Join'));
-      } else {
-        setError(err.message || 'Something went wrong. Please try again.');
-      }
+      setError(err.message || 'Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
     }

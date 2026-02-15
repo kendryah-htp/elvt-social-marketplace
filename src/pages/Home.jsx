@@ -35,11 +35,13 @@ function HomeContent() {
       {/* 1. Hero Block */}
       <HeroSection />
 
-      {/* Trust Signals */}
-      <TrustSignals />
+      {/* Trust Signals - Moved up for early confidence */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <TrustSignals />
+      </div>
 
       {/* 3. Choose Your Path Block */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,10 +74,10 @@ function HomeContent() {
                     <path.icon className="w-8 h-8" style={{ color: 'var(--accent)' }} />
                   </div>
                   <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>{path.title}</h3>
-                  <p style={{ color: 'var(--text-secondary)' }}>{path.desc}</p>
-                  <Button className="mt-6 text-white" style={{ backgroundColor: 'var(--accent)' }}>
-                  Learn More
-                  </Button>
+                   <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>{path.desc}</p>
+                   <Button className="mt-6 w-full font-semibold text-white" style={{ backgroundColor: 'var(--accent)' }}>
+                     Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                   </Button>
                 </div>
               </Link>
             </motion.div>
@@ -123,7 +125,7 @@ function HomeContent() {
       </div>
 
       {/* 5. Feature Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -149,7 +151,7 @@ function HomeContent() {
       </div>
 
       {/* 6. 3-Step Process (Visual) */}
-      <div className="max-w-5xl mx-auto px-6 py-20">
+      <div className="max-w-5xl mx-auto px-6 py-24 bg-gradient-to-r from-[var(--bg-secondary)] to-transparent rounded-3xl p-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -188,7 +190,7 @@ function HomeContent() {
       </div>
 
       {/* 7. Templates / Examples */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -253,7 +255,7 @@ function HomeContent() {
       </div>
 
       {/* 8. Pricing Preview */}
-      <div className="max-w-5xl mx-auto px-6 py-20">
+      <div className="max-w-5xl mx-auto px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -284,7 +286,7 @@ function HomeContent() {
       </div>
 
       {/* 9. FAQ */}
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <div className="max-w-4xl mx-auto px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -333,12 +335,12 @@ function HomeContent() {
       </div>
 
       {/* 10. Final CTA */}
-      <div className="max-w-7xl mx-auto px-6 py-20 pb-32">
+      <div className="max-w-5xl mx-auto px-6 py-24 pb-32">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="elvt-glass rounded-3xl p-16 text-center relative overflow-hidden border pulse-glow" style={{ borderColor: 'var(--border)' }}
+          className="elvt-glass rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border pulse-glow" style={{ borderColor: 'var(--accent)', borderWidth: '2px' }}
         >
           <div className="absolute inset-0 bg-gradient-to-br opacity-10" style={{ background: `radial-gradient(circle, var(--accent) 0%, transparent 70%)` }} />
           <h2 className="text-5xl md:text-6xl font-black mb-6 text-gradient relative z-10">

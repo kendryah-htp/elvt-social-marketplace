@@ -56,7 +56,7 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-5xl md:text-7xl font-black mb-6 leading-tight"
             >
-              Launch Your Digital Empire <span className="text-gradient">Faster, Easier, Better</span>
+              Never Wonder What to Post Again. <span className="text-gradient">Let MILO Help You Build Your Empire</span>
             </motion.h1>
             
             <motion.p 
@@ -66,7 +66,7 @@ export default function Home() {
               className="text-xl md:text-2xl mb-6 leading-relaxed"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Build your branded storefront and earn generous commissions promoting premium apps, templates, and training programs. Perfect for creators and marketers looking to monetize their audience.
+              Meet MILO, your personalized AI co-pilot trained on your unique brand voice and expertise. Generate blog posts, social content, and product recommendations aligned with how YOU speak. Build your branded storefront and earn generous commissions. No more content blocks. No more inconsistency.
             </motion.p>
 
             <motion.p 
@@ -157,9 +157,9 @@ export default function Home() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { icon: Users, title: "I'm a Creator", desc: "Monetize your audience with a branded storefront", link: 'SolutionsByRole' },
-            { icon: TrendingUp, title: "I'm a Marketer", desc: "Access premium products to promote and earn", link: 'SolutionsByRole' },
-            { icon: Target, title: "Achieve Lead Gen", desc: "Build funnels that convert visitors into customers", link: 'SolutionsByUseCase' }
+            { icon: Users, title: "I'm a Creator", desc: "Monetize with your branded storefront + MILO AI creates content in your voice", link: 'SolutionsByRole' },
+            { icon: TrendingUp, title: "I'm a Marketer", desc: "Curated apps + AI content ideas + affiliate earnings from day one", link: 'SolutionsByRole' },
+            { icon: Target, title: "Achieve Lead Gen", desc: "Content funnels built faster with MILO + affiliate monetization", link: 'SolutionsByUseCase' }
           ].map((path, idx) => (
             <motion.div
               key={idx}
@@ -194,17 +194,17 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">How ELVT Social Delivers Results</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Your 3-Step Path to Passive Income</h2>
           <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            We've streamlined affiliate marketing so you can build your empire without the technical hassle
+            From idea to earning, MILO handles the hardest part: content creation
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-12">
           {[
-            { step: '01', title: 'Choose Your Apps', desc: 'Browse our curated catalog of high-converting apps and templates', icon: Sparkles },
-            { step: '02', title: 'Build Your Storefront', desc: 'Customize your branded page in minutes with our intuitive builder', icon: Zap },
-            { step: '03', title: 'Start Earning', desc: 'Share your link and earn up to 30% commission on every sale', icon: TrendingUp }
+            { step: '01', title: '✨ Ask MILO', desc: 'Tell MILO what to write. Get blog posts, social content, email copy in seconds—all in your brand voice', icon: Sparkles },
+            { step: '02', title: 'Share & Build', desc: 'Publish your content, build your audience, and share your curated storefront link', icon: Zap },
+            { step: '03', title: 'Earn Commissions', desc: 'Get paid 30% on every sale + build long-term audience loyalty', icon: TrendingUp }
           ].map((item, idx) => (
             <motion.div
               key={idx}
@@ -233,18 +233,18 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Powerful Features, Real Results</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Everything You Need to Succeed</h2>
           <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
-            Every tool you need to build and monetize your audience, all in one platform
+            From content creation to monetization, we've built the tools that actually solve creator problems
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Sparkles, title: 'Branded Storefronts', desc: 'Create your unique marketplace' },
-            { icon: Shield, title: 'Curated App Catalog', desc: 'Only premium, high-converting products' },
-            { icon: TrendingUp, title: 'Track Earnings', desc: 'Real-time analytics dashboard' },
-            { icon: Clock, title: 'Instant Payouts', desc: 'Get paid fast and securely' }
+            { icon: Sparkles, title: '✨ MILO AI Co-Pilot', desc: 'Generate blog posts & content in YOUR brand voice instantly' },
+            { icon: Shield, title: 'Curated App Catalog', desc: 'Pre-vetted products you can confidently promote' },
+            { icon: TrendingUp, title: 'Built-in Blog Engine', desc: 'Guided onboarding + SEO templates included' },
+            { icon: Clock, title: 'Instant Payouts', desc: 'Get paid fast for every sale and referral' }
           ].map((feature, idx) => (
             <motion.div
               key={idx}
@@ -408,17 +408,18 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Got Questions? We've Got Answers</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Common Questions</h2>
           <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
-            Find quick solutions to common queries about getting started, earnings, and support
+            Everything you need to know about MILO, earning, and success
           </p>
         </motion.div>
 
         <div className="space-y-6">
           {[
-            { q: 'How much does it cost to start?', a: 'Absolutely free! Create your storefront and start promoting with zero upfront costs.' },
-            { q: 'When do I get paid?', a: 'Commissions are paid out automatically within 7 days of each successful sale.' },
-            { q: 'What kind of support do I get?', a: 'Full onboarding, 24/7 email support, plus access to our resource library and community.' }
+            { q: 'How does MILO know my brand voice?', a: 'Admins set up resources, guides, and FAQs. MILO learns from them and generates content that sounds exactly like you.' },
+            { q: 'Can I really avoid content blocks with MILO?', a: 'Yes. Just ask MILO "write a blog post about X" and you get a full draft in your voice in seconds. No more staring at blank pages.' },
+            { q: 'What if I have no experience with affiliate marketing?', a: 'We have guided onboarding for everything: blog setup, storefront customization, content strategies. MILO also answers your questions 24/7.' },
+            { q: 'How much do I earn?', a: 'Up to 30% per sale, paid automatically within 7 days. Admins set margins—you earn the difference between what customers pay and the platform fee.' }
           ].map((faq, idx) => (
             <motion.div
               key={idx}

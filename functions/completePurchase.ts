@@ -95,28 +95,33 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Send confirmation email
-    const emailTemplates = await base44.asServiceRole.entities.EmailTemplate.filter({ 
-      trigger: 'purchase_complete',
-      is_active: true 
-    });
-    
-    if (emailTemplates[0]) {
-      const template = emailTemplates[0];
-      const emailBody = template.body
-        .replace('{buyer_name}', buyer_name)
-        .replace('{app_name}', productName)
-        .replace('{amount}', `$${amount}`);
-      
-      const emailSubject = template.subject
-        .replace('{buyer_name}', buyer_name)
-        .replace('{app_name}', productName);
-
-      await base44.asServiceRole.integrations.Core.SendEmail({
-        to: buyer_email,
-        subject: emailSubject,
-        body: emailBody
+    // Send confirmation email (non-blocking - don't fail purchase if email fails)
+    try {
+      const emailTemplates = await base44.asServiceRole.entities.EmailTemplate.filter({ 
+        trigger: 'purchase_complete',
+        is_active: true 
       });
+      
+      if (emailTemplates && emailTemplates[0]) {
+        const template = emailTemplates[0];
+        const emailBody = template.body
+          .replace('{buyer_name}', buyer_name)
+          .replace('{app_name}', productName)
+          .replace('{amount}', `$${amount}`);
+        
+        const emailSubject = template.subject
+          .replace('{buyer_name}', buyer_name)
+          .replace('{app_name}', productName);
+
+        await base44.asServiceRole.integrations.Core.SendEmail({
+          to: buyer_email,
+          subject: emailSubject,
+          body: emailBody
+        });
+      }
+    } catch (emailError) {
+      // Email failures should not block purchase
+      console.warn('Email send failed (non-critical):', emailError.message);
     }
 
     return Response.json({ 
@@ -125,6 +130,10 @@ Deno.serve(async (req) => {
       commission_earned: affiliateId ? commissionAmount : 0
     });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error('Purchase completion error:', error);
+    return Response.json({ 
+      error: error.message,
+      success: false 
+    }, { status: 500 });
   }
 });

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
+import SocialProofFeed from '@/components/SocialProofFeed';
 
 export default function Home() {
   const { data: apps = [] } = useQuery({
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen elvt-gradient overflow-hidden">
+      <SocialProofFeed />
       {/* 1. Hero Block */}
       <div className="relative">
         <div className="absolute inset-0 overflow-hidden">

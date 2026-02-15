@@ -56,42 +56,41 @@ export default function AffiliateDashboard() {
     queryFn: () => base44.auth.me()
   });
 
-  const { data: profile } = useQuery({
+  const { data: profile, isLoading: profileLoading } = useQuery({
     queryKey: ['affiliate-profile', user?.email],
     queryFn: async () => {
       const profiles = await base44.entities.AffiliateProfile.filter({ user_email: user.email });
       return profiles[0];
     },
-    enabled: !!user
+    enabled: !!user,
+    staleTime: 5 * 60 * 1000
   });
 
-  const { data: purchases = [] } = useQuery({
-    queryKey: ['affiliate-purchases', profile?.id],
-    queryFn: () => base44.entities.Purchase.filter({ affiliate_id: profile.id }),
-    enabled: !!profile
+  const { data: dashboardData = { purchases: [], visits: [], products: [], apps: [] }, isLoading: dataLoading } = useQuery({
+    queryKey: ['dashboard-data', profile?.id],
+    queryFn: async () => {
+      const [purchases, visits, products, apps] = await Promise.all([
+        base44.entities.Purchase.filter({ affiliate_id: profile.id }),
+        base44.entities.StorefrontVisit.filter({ affiliate_slug: profile.slug }),
+        base44.entities.AffiliateProduct.filter({ affiliate_id: profile.id }),
+        base44.entities.App.filter({ is_active: true })
+      ]);
+      return { purchases, visits, products, apps };
+    },
+    enabled: !!profile?.id,
+    staleTime: 2 * 60 * 1000
   });
 
-  const { data: visits = [] } = useQuery({
-    queryKey: ['affiliate-visits', profile?.slug],
-    queryFn: () => base44.entities.StorefrontVisit.filter({ affiliate_slug: profile.slug }),
-    enabled: !!profile
-  });
-
-  const { data: myProducts = [] } = useQuery({
-    queryKey: ['my-products', profile?.id],
-    queryFn: () => base44.entities.AffiliateProduct.filter({ affiliate_id: profile.id }),
-    enabled: !!profile
-  });
-
-  const { data: allApps = [] } = useQuery({
-    queryKey: ['all-apps'],
-    queryFn: () => base44.entities.App.filter({ is_active: true })
-  });
+  const purchases = dashboardData.purchases;
+  const visits = dashboardData.visits;
+  const myProducts = dashboardData.products;
+  const allApps = dashboardData.apps;
 
   const updateProfileMutation = useMutation({
     mutationFn: (data) => base44.entities.AffiliateProfile.update(profile.id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['affiliate-profile']);
+      queryClient.invalidateQueries(['dashboard-data']);
       setShowSettingsDialog(false);
     }
   });
@@ -99,7 +98,7 @@ export default function AffiliateDashboard() {
   const createProductMutation = useMutation({
     mutationFn: (data) => base44.entities.AffiliateProduct.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['my-products']);
+      queryClient.invalidateQueries(['dashboard-data']);
       setShowProductDialog(false);
       setNewProduct({ name: '', description: '', price: '', external_link: '', thumbnail_url: '' });
     }
@@ -108,7 +107,7 @@ export default function AffiliateDashboard() {
   const deleteProductMutation = useMutation({
     mutationFn: (id) => base44.entities.AffiliateProduct.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['my-products']);
+      queryClient.invalidateQueries(['dashboard-data']);
     }
   });
 
@@ -132,12 +131,12 @@ export default function AffiliateDashboard() {
     updateProfileMutation.mutate({ selected_app_ids: newSelected });
   };
 
-  if (!profile) {
+  if (profileLoading || !profile) {
     return (
       <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#E5E0DB]">Loading your dashboard...</p>
+          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading your dashboard...</p>
         </div>
       </div>
     );

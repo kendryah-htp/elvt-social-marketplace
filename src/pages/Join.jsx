@@ -153,8 +153,8 @@ export default function Join() {
                   type="submit"
                   size="lg"
                   disabled={isLoading}
-                  className="w-full font-bold py-6 text-lg group pulse-glow"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="w-full font-bold py-6 text-lg group pulse-glow text-white"
+                  style={{ backgroundColor: 'var(--accent)' }}
                 >
                   {isLoading ? (
                     <span>Setting up your account...</span>

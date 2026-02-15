@@ -81,7 +81,7 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link to={createPageUrl('Join')}>
-              <Button size="lg" className="px-10 py-7 text-lg font-bold pulse-glow" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+              <Button size="lg" className="px-10 py-7 text-lg font-bold pulse-glow text-white" style={{ backgroundColor: 'var(--accent)' }}>
                 Get Started Free
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

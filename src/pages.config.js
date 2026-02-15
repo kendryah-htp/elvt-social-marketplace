@@ -65,6 +65,7 @@ import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import AdminSetupGuide from './pages/AdminSetupGuide';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
+import BlogOnboarding from './pages/BlogOnboarding';
 import __Layout from './Layout.jsx';
 
 
@@ -87,6 +88,7 @@ export const PAGES = {
     "Storefront": Storefront,
     "AdminSetupGuide": AdminSetupGuide,
     "UserOnboardingGuide": UserOnboardingGuide,
+    "BlogOnboarding": BlogOnboarding,
 }
 
 export const pagesConfig = {

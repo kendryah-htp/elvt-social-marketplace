@@ -105,6 +105,13 @@ function LayoutContent({ children, currentPageName }) {
                   Pricing
                 </Link>
                 <Link 
+                  to={createPageUrl('BlogOnboarding')}
+                  className="transition-colors font-medium hover:opacity-70"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Blog
+                </Link>
+                <Link 
                   to={createPageUrl('FAQ')}
                   className="transition-colors font-medium hover:opacity-70"
                   style={{ color: 'var(--text-secondary)' }}

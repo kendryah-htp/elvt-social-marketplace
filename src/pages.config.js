@@ -63,6 +63,8 @@ import PurchaseSuccess from './pages/PurchaseSuccess';
 import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
+import AdminSetupGuide from './pages/AdminSetupGuide';
+import UserOnboardingGuide from './pages/UserOnboardingGuide';
 import __Layout from './Layout.jsx';
 
 
@@ -83,6 +85,8 @@ export const PAGES = {
     "SolutionsByRole": SolutionsByRole,
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
+    "AdminSetupGuide": AdminSetupGuide,
+    "UserOnboardingGuide": UserOnboardingGuide,
 }
 
 export const pagesConfig = {

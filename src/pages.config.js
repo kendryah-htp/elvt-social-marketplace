@@ -52,10 +52,13 @@ import AdminSetupGuide from './pages/AdminSetupGuide';
 import AffiliateDashboard from './pages/AffiliateDashboard';
 import AppCatalog from './pages/AppCatalog';
 import AppDetail from './pages/AppDetail';
+import BillingPortal from './pages/BillingPortal';
 import Blog from './pages/Blog';
 import BlogOnboarding from './pages/BlogOnboarding';
 import ContentStudio from './pages/ContentStudio';
+import ContentStudioGated from './pages/ContentStudioGated';
 import Docs from './pages/Docs';
+import EmbedGuide from './pages/EmbedGuide';
 import FAQ from './pages/FAQ';
 import Home from './pages/Home';
 import Join from './pages/Join';
@@ -71,9 +74,6 @@ import SolutionsByRole from './pages/SolutionsByRole';
 import SolutionsByUseCase from './pages/SolutionsByUseCase';
 import Storefront from './pages/Storefront';
 import UserOnboardingGuide from './pages/UserOnboardingGuide';
-import BillingPortal from './pages/BillingPortal';
-import ContentStudioGated from './pages/ContentStudioGated';
-import EmbedGuide from './pages/EmbedGuide';
 import __Layout from './Layout.jsx';
 
 
@@ -83,10 +83,13 @@ export const PAGES = {
     "AffiliateDashboard": AffiliateDashboard,
     "AppCatalog": AppCatalog,
     "AppDetail": AppDetail,
+    "BillingPortal": BillingPortal,
     "Blog": Blog,
     "BlogOnboarding": BlogOnboarding,
     "ContentStudio": ContentStudio,
+    "ContentStudioGated": ContentStudioGated,
     "Docs": Docs,
+    "EmbedGuide": EmbedGuide,
     "FAQ": FAQ,
     "Home": Home,
     "Join": Join,
@@ -102,9 +105,6 @@ export const PAGES = {
     "SolutionsByUseCase": SolutionsByUseCase,
     "Storefront": Storefront,
     "UserOnboardingGuide": UserOnboardingGuide,
-    "BillingPortal": BillingPortal,
-    "ContentStudioGated": ContentStudioGated,
-    "EmbedGuide": EmbedGuide,
 }
 
 export const pagesConfig = {

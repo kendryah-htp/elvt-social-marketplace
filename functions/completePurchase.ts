@@ -26,13 +26,17 @@ Deno.serve(async (req) => {
     let productName, amount, commissionRate, affiliateId;
     
     if (app_id) {
-      const apps = await base44.entities.App.filter({ id: app_id });
-      const app = apps[0];
-      if (!app) throw new Error('App not found');
-      
-      productName = app.name;
-      amount = app.price;
-      commissionRate = app.commission_rate || 30;
+      try {
+        const apps = await base44.entities.App.filter({ id: app_id });
+        const app = apps[0];
+        if (app) {
+          productName = app.name;
+          amount = app.price;
+          commissionRate = app.commission_rate || 30;
+        }
+      } catch (err) {
+        console.warn('App lookup failed, continuing with purchase:', err.message);
+      }
     } else if (affiliate_product_id) {
       const products = await base44.entities.AffiliateProduct.filter({ id: affiliate_product_id });
       const product = products[0];
@@ -98,20 +102,20 @@ Deno.serve(async (req) => {
     // Send confirmation email (non-blocking - don't fail purchase if email fails)
     try {
       const emailTemplates = await base44.asServiceRole.entities.EmailTemplate.filter({ 
-        trigger: 'purchase_complete',
-        is_active: true 
+        trigger: 'purchase_complete'
       });
       
       if (emailTemplates && emailTemplates[0]) {
         const template = emailTemplates[0];
         const emailBody = template.body
           .replace('{buyer_name}', buyer_name)
-          .replace('{app_name}', productName)
-          .replace('{amount}', `$${amount}`);
+          .replace('{app_name}', productName || 'Your Purchase')
+          .replace('{amount}', `$${amount}`)
+          .replace('{payment_id}', payment_id || '');
         
         const emailSubject = template.subject
           .replace('{buyer_name}', buyer_name)
-          .replace('{app_name}', productName);
+          .replace('{app_name}', productName || 'Your Purchase');
 
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: buyer_email,
@@ -120,7 +124,6 @@ Deno.serve(async (req) => {
         });
       }
     } catch (emailError) {
-      // Email failures should not block purchase
       console.warn('Email send failed (non-critical):', emailError.message);
     }
 

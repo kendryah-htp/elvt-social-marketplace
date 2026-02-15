@@ -458,7 +458,7 @@ export default function SavedPrompts() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedPrompt.variables_schema.map(v => (
                       <div key={v.key} className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                        <code style={{ color: 'var(--accent)' }}>{{`${v.key}`}}</code>
+                        <code style={{ color: 'var(--accent)' }}>{`{{${v.key}}}`}</code>
                         {v.description && <div className="mt-1">{v.description}</div>}
                       </div>
                     ))}

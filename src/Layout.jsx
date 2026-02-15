@@ -59,17 +59,57 @@ export default function Layout({ children, currentPageName }) {
               <div className="hidden md:flex items-center gap-8">
                 <Link 
                   to={createPageUrl('AppCatalog')}
-                  className="hover:text-[#D4AF37] transition-colors font-medium"
+                  className="transition-colors font-medium hover:opacity-70"
                   style={{ color: 'var(--text-secondary)' }}
                 >
-                  Marketplace
+                  Product
+                </Link>
+                <div className="relative group">
+                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                    Solutions
+                  </button>
+                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
+                      <Link to={createPageUrl('SolutionsByRole')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        By Role
+                      </Link>
+                      <Link to={createPageUrl('SolutionsByUseCase')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        By Use Case
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative group">
+                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                    Resources
+                  </button>
+                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
+                      <Link to={createPageUrl('AppCatalog') + '?category=templates'} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        Templates
+                      </Link>
+                      <Link to={createPageUrl('Docs')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        Docs
+                      </Link>
+                      <Link to={createPageUrl('Blog')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                        Blog
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <Link 
+                  to={createPageUrl('Pricing')}
+                  className="transition-colors font-medium hover:opacity-70"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Pricing
                 </Link>
                 <Link 
-                  to={createPageUrl('Join')}
-                  className="hover:text-[#D4AF37] transition-colors font-medium"
+                  to={createPageUrl('FAQ')}
+                  className="transition-colors font-medium hover:opacity-70"
                   style={{ color: 'var(--text-secondary)' }}
                 >
-                  Become an Affiliate
+                  Support
                 </Link>
 
                 {user ? (
@@ -138,15 +178,44 @@ export default function Layout({ children, currentPageName }) {
                 style={{ color: 'var(--text-secondary)' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Marketplace
+                Product
               </Link>
+              <div className="py-2">
+                <div className="font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Solutions</div>
+                <Link to={createPageUrl('SolutionsByRole')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  By Role
+                </Link>
+                <Link to={createPageUrl('SolutionsByUseCase')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  By Use Case
+                </Link>
+              </div>
+              <div className="py-2">
+                <div className="font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Resources</div>
+                <Link to={createPageUrl('AppCatalog') + '?category=templates'} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Templates
+                </Link>
+                <Link to={createPageUrl('Docs')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Docs
+                </Link>
+                <Link to={createPageUrl('Blog')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Blog
+                </Link>
+              </div>
               <Link
-                to={createPageUrl('Join')}
+                to={createPageUrl('Pricing')}
                 className="block py-2 transition-colors"
                 style={{ color: 'var(--text-secondary)' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Become an Affiliate
+                Pricing
+              </Link>
+              <Link
+                to={createPageUrl('FAQ')}
+                className="block py-2 transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Support
               </Link>
               {user ? (
                 <>

@@ -57,6 +57,12 @@ import Onboarding from './pages/Onboarding';
 import PurchaseFlow from './pages/PurchaseFlow';
 import PurchaseSuccess from './pages/PurchaseSuccess';
 import Storefront from './pages/Storefront';
+import Pricing from './pages/Pricing';
+import FAQ from './pages/FAQ';
+import SolutionsByRole from './pages/SolutionsByRole';
+import SolutionsByUseCase from './pages/SolutionsByUseCase';
+import Docs from './pages/Docs';
+import Blog from './pages/Blog';
 import __Layout from './Layout.jsx';
 
 
@@ -71,6 +77,12 @@ export const PAGES = {
     "PurchaseFlow": PurchaseFlow,
     "PurchaseSuccess": PurchaseSuccess,
     "Storefront": Storefront,
+    "Pricing": Pricing,
+    "FAQ": FAQ,
+    "SolutionsByRole": SolutionsByRole,
+    "SolutionsByUseCase": SolutionsByUseCase,
+    "Docs": Docs,
+    "Blog": Blog,
 }
 
 export const pagesConfig = {

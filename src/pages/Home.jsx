@@ -69,7 +69,7 @@ function HomeContent() {
               whileHover={{ y: -8, scale: 1.02 }}
             >
               <Link to={createPageUrl(path.link)}>
-                <div className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8 text-center cursor-pointer group hover:elvt-glow transition-all duration-300 h-full">
+                <div className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8 text-center cursor-pointer group hover:elvt-glow hover:scale-[1.02] transition-all duration-500 h-full">
                   <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                     <path.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: 'var(--accent)' }} />
                   </div>
@@ -93,7 +93,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient px-4">Your 3-Step Path to Passive Income</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Your 3-Step Path to Passive Income</h2>
           <p className="text-base md:text-lg lg:text-xl max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
             From idea to earning, MILO handles the hardest part: content creation
           </p>
@@ -132,7 +132,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient px-4">Everything You Need to Succeed</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Everything You Need to Succeed</h2>
           <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
             From content creation to monetization, we've built the tools that actually solve creator problems
           </p>
@@ -158,7 +158,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient px-4">Your Path to Success in 3 Simple Steps</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Your Path to Success in 3 Simple Steps</h2>
           <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>From signup to earning, we guide you every step of the way</p>
         </motion.div>
 
@@ -174,7 +174,7 @@ function HomeContent() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2 }}
-              className="elvt-glass rounded-xl p-4 md:p-8 flex items-start gap-4 md:gap-6"
+              className="elvt-glass rounded-xl p-4 md:p-8 flex items-start gap-4 md:gap-6 hover:elvt-glow transition-all duration-500"
             >
               <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-xl md:text-2xl font-black" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
                 {step.num}
@@ -197,7 +197,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient px-4">Launch Instantly with Proven Templates</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Launch Instantly with Proven Templates</h2>
           <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
             Stop building from scratch. Choose from expertly designed apps to get online in minutes
           </p>
@@ -214,7 +214,7 @@ function HomeContent() {
               whileHover={{ y: -8 }}
             >
               <Link to={createPageUrl('AppDetail') + '?id=' + app.id} onClick={() => trackConversion('app_clicked', { app_id: app.id, app_name: app.name })}>
-                <div className="elvt-glass rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group hover:elvt-glow transition-all duration-300">
+                <div className="elvt-glass rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group hover:elvt-glow hover:scale-[1.02] transition-all duration-500">
                  {app.thumbnail_url && (
                    <div className="aspect-video overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                      <LazyImage src={app.thumbnail_url} alt={app.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={400} height={300} />
@@ -262,7 +262,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="elvt-glass rounded-2xl md:rounded-3xl p-6 md:p-12 text-center"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient">Simple, Transparent Pricing</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient tracking-tight">Simple, Transparent Pricing</h2>
           <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 px-4" style={{ color: 'var(--text-secondary)' }}>
             Get started free and scale your success with flexible commission rates
           </p>
@@ -293,7 +293,7 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient px-4">Common Questions</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Common Questions</h2>
           <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
             Everything you need to know about MILO, earning, and success
           </p>
@@ -312,7 +312,7 @@ function HomeContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="elvt-glass rounded-xl p-4 md:p-6"
+              className="elvt-glass rounded-xl p-4 md:p-6 hover:border-[var(--accent)] transition-all duration-300"
             >
               <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>{faq.q}</h3>
               <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
@@ -343,7 +343,7 @@ function HomeContent() {
           className="elvt-glass rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden border pulse-glow" style={{ borderColor: 'var(--accent)', borderWidth: '2px' }}
         >
           <div className="absolute inset-0 bg-gradient-to-br opacity-10" style={{ background: `radial-gradient(circle, var(--accent) 0%, transparent 70%)` }} />
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient relative z-10">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient relative z-10 tracking-tighter">
             Stop Waiting, Start Earning Today
           </h2>
           <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-3xl mx-auto relative z-10 px-4" style={{ color: 'var(--text-secondary)' }}>

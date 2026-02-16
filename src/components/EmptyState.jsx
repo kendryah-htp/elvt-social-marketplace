@@ -8,28 +8,45 @@ export default function EmptyState({
   title, 
   description, 
   action, 
-  actionLabel 
+  actionLabel,
+  secondaryAction,
+  secondaryActionLabel
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <Card className="elvt-glass p-12 text-center">
+      <Card className="elvt-glass p-8 md:p-12 text-center">
         {Icon && (
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#D4AF37]/10 flex items-center justify-center">
-            <Icon className="w-8 h-8 text-[#D4AF37]" />
+          <div className="w-12 md:w-16 h-12 md:h-16 mx-auto mb-4 md:mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}>
+            <Icon className="w-6 md:w-8 h-6 md:h-8" style={{ color: 'var(--accent)' }} />
           </div>
         )}
-        <h3 className="text-2xl font-bold text-[#F5F0EB] mb-3">{title}</h3>
-        <p className="text-[#E5E0DB] mb-6 max-w-md mx-auto">{description}</p>
-        {action && actionLabel && (
-          <Button 
-            onClick={action}
-            className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]"
-          >
-            {actionLabel}
-          </Button>
+        <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>{title}</h3>
+        <p className="text-sm md:text-base mb-4 md:mb-6 max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>{description}</p>
+        {(action || secondaryAction) && (
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            {action && actionLabel && (
+              <Button 
+                onClick={action}
+                className="font-semibold h-11 md:h-12"
+                style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+              >
+                {actionLabel}
+              </Button>
+            )}
+            {secondaryAction && secondaryActionLabel && (
+              <Button 
+                onClick={secondaryAction}
+                variant="outline"
+                className="h-11 md:h-12"
+                style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+              >
+                {secondaryActionLabel}
+              </Button>
+            )}
+          </div>
         )}
       </Card>
     </motion.div>

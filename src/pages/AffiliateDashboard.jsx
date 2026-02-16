@@ -272,7 +272,12 @@ export default function AffiliateDashboard() {
           <div>
             <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Apps on Your Storefront</h2>
             <div className="space-y-3">
-              {allApps.length === 0 ? (
+              {dataLoading ? (
+                <Card className="elvt-glass p-6 animate-pulse">
+                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
+                  <div className="h-4 bg-gray-700/20 rounded w-2/3" />
+                </Card>
+              ) : allApps.length === 0 ? (
                 <Card className="elvt-glass p-8 text-center">
                   <p className="text-[#E5E0DB]">No apps available yet</p>
                 </Card>
@@ -378,7 +383,12 @@ export default function AffiliateDashboard() {
             </div>
 
             <div className="space-y-3">
-              {myProducts.length === 0 ? (
+              {dataLoading ? (
+                <Card className="elvt-glass p-6 animate-pulse">
+                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
+                  <div className="h-4 bg-gray-700/20 rounded w-2/3" />
+                </Card>
+              ) : myProducts.length === 0 ? (
                 <Card className="elvt-glass p-8 text-center">
                   <p className="text-[#E5E0DB]">No custom products yet</p>
                 </Card>

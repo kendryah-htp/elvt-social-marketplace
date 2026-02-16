@@ -13,11 +13,13 @@ export default function Join() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [initialLoad, setInitialLoad] = useState(true);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    setInitialLoad(false);
 
     trackConversion('signup_started');
 

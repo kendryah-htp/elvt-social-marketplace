@@ -252,10 +252,10 @@ export default function SavedPrompts() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen elvt-gradient flex items-center justify-center">
         <div className="text-center">
-          <Sparkles className="w-12 h-12 mx-auto mb-4 animate-spin" />
-          <p>Loading...</p>
+          <div className="w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4 animate-spin" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading prompts...</p>
         </div>
       </div>
     );
@@ -375,17 +375,37 @@ export default function SavedPrompts() {
           transition={{ delay: 0.2 }}
         >
           {promptsLoading ? (
-            <div className="text-center py-12">
-              <Sparkles className="w-8 h-8 mx-auto mb-2 animate-spin" style={{ color: 'var(--accent)' }} />
-              <p style={{ color: 'var(--text-secondary)' }}>Loading prompts...</p>
+            <div className="space-y-4">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="elvt-glass rounded-xl p-6 animate-pulse">
+                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
+                  <div className="h-4 bg-gray-700/20 rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-gray-700/20 rounded w-1/2" />
+                </div>
+              ))}
             </div>
           ) : prompts.length === 0 ? (
-            <div className="elvt-glass rounded-xl p-12 text-center">
-              <AlertCircle className="w-12 h-12 mx-auto mb-4" style={{ color: 'var(--accent)' }} />
-              <h3 className="text-lg font-semibold mb-2">No prompts found</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>
+            <div className="elvt-glass rounded-xl p-8 md:p-12 text-center">
+              <div className="w-12 md:w-16 h-12 md:h-16 mx-auto mb-4 md:mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}>
+                <AlertCircle className="w-6 md:w-8 h-6 md:h-8" style={{ color: 'var(--accent)' }} />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>No prompts found</h3>
+              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
                 {isAdmin ? 'Create your first prompt to get started' : 'Check back soon for new prompts'}
               </p>
+              {isAdmin && (
+                <Button 
+                  onClick={() => {
+                    setSelectedPrompt(null);
+                    setIsEditing(true);
+                  }}
+                  className="mt-6 font-semibold"
+                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create First Prompt
+                </Button>
+              )}
             </div>
           ) : (
             <div className="grid gap-4">

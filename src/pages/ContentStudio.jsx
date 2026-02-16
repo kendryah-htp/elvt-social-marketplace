@@ -123,22 +123,22 @@ Generate high-quality, original content that is engaging and authentic. For blog
 
   return (
     <div className="min-h-screen elvt-gradient pt-20">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-              <Sparkles className="w-6 h-6" style={{ color: 'var(--accent)' }} />
+          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+            <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+              <Sparkles className="w-5 md:w-6 h-5 md:h-6" style={{ color: 'var(--accent)' }} />
             </div>
-            <h1 className="text-4xl font-bold text-gradient">Content Studio</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-gradient">Content Studio</h1>
           </div>
-          <p style={{ color: 'var(--text-secondary)' }}>Generate high-quality content in your brand voice instantly</p>
+          <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Generate high-quality content in your brand voice instantly</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Input Panel */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

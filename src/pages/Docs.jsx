@@ -35,34 +35,34 @@ export default function Docs() {
 
   return (
     <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-black mb-6 text-gradient">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient">
             Documentation & Resources
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl lg:text-2xl max-w-3xl mx-auto mb-6 md:mb-8" style={{ color: 'var(--text-secondary)' }}>
             Everything you need to succeed with ELVT Social
           </p>
 
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
+            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5" style={{ color: 'var(--text-muted)' }} />
             <input
               type="text"
               placeholder="Search documentation..."
-              className="w-full pl-12 pr-4 py-4 rounded-xl text-lg"
+              className="w-full pl-10 md:pl-12 pr-3 md:pr-4 py-3 md:py-4 rounded-xl text-base md:text-lg"
               style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
             />
           </div>
         </motion.div>
 
         {/* Documentation Categories */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-20">
           {docCategories.map((category, idx) => (
             <motion.div
               key={idx}

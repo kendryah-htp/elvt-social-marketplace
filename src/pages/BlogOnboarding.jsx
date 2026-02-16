@@ -21,16 +21,16 @@ export default function BlogOnboarding() {
   };
 
   return (
-    <div className="min-h-screen elvt-gradient py-20 px-6">
+    <div className="min-h-screen elvt-gradient py-12 md:py-20 px-4 md:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-5xl font-bold text-gradient mb-4">Start Your Blog</h1>
-          <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
+          <h1 className="text-3xl md:text-5xl font-bold text-gradient mb-3 md:mb-4">Start Your Blog</h1>
+          <p className="text-base md:text-xl" style={{ color: 'var(--text-secondary)' }}>
             Build thought leadership, attract your audience, and drive traffic to your storefront
           </p>
         </motion.div>

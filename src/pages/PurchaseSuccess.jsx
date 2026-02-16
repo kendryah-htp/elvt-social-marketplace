@@ -15,18 +15,18 @@ export default function PurchaseSuccess() {
       animate={{ opacity: 1 }}
       className="min-h-screen elvt-gradient pt-20 flex items-center justify-center px-6"
     >
-      <div className="max-w-2xl w-full">
+      <div className="max-w-2xl w-full px-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 elvt-glow" style={{ backgroundColor: 'var(--accent)' }}>
-            <Check className="w-12 h-12 text-white" />
+          <div className="w-20 md:w-24 h-20 md:h-24 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 elvt-glow" style={{ backgroundColor: 'var(--accent)' }}>
+            <Check className="w-10 md:w-12 h-10 md:h-12 text-white" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-gradient mb-4">Payment Successful!</h1>
-          <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gradient mb-3 md:mb-4">Payment Successful!</h1>
+          <p className="text-base md:text-xl" style={{ color: 'var(--text-secondary)' }}>
             Your purchase is confirmed. Access details have been sent to your email.
           </p>
         </motion.div>

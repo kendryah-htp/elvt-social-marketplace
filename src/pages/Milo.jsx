@@ -9,23 +9,23 @@ export default function Milo() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="border-b p-6" style={{ borderColor: 'var(--border)' }}
+        className="border-b p-4 md:p-6" style={{ borderColor: 'var(--border)' }}
       >
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gradient">MILO Strategy Engine</h1>
-          <p style={{ color: 'var(--text-secondary)' }} className="mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-gradient">MILO Strategy Engine</h1>
+          <p style={{ color: 'var(--text-secondary)' }} className="mt-1 text-sm md:text-base">
             Build high-converting SaaS strategies. No fluff. Architecture-first thinking.
           </p>
         </div>
       </motion.div>
 
       {/* Chat Container */}
-      <div className="flex-1 max-w-6xl w-full mx-auto p-6 overflow-hidden">
+      <div className="flex-1 max-w-6xl w-full mx-auto p-3 md:p-6 overflow-hidden">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="h-full elvt-glass rounded-2xl overflow-hidden flex flex-col border" style={{ borderColor: 'var(--border)' }}
+          className="h-full elvt-glass rounded-xl md:rounded-2xl overflow-hidden flex flex-col border" style={{ borderColor: 'var(--border)' }}
         >
           <MiloChat />
         </motion.div>

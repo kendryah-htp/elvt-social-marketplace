@@ -48,23 +48,23 @@ export default function SolutionsByRole() {
 
   return (
     <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-black mb-6 text-gradient">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient">
             Solutions by Role
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl lg:text-2xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Whether you're a creator, marketer, or entrepreneur, we have tailored tools to accelerate your success
           </p>
         </motion.div>
 
         {/* Role Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-20">
           {roles.map((role, idx) => (
             <motion.div
               key={idx}

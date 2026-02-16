@@ -223,14 +223,14 @@ export default function AdminPanel() {
 
   return (
     <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-gradient">Admin Panel</h1>
-          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Manage your marketplace</p>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 text-gradient">Admin Panel</h1>
+          <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>Manage your marketplace</p>
         </motion.div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">

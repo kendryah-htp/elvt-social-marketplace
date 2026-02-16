@@ -63,38 +63,38 @@ export default function Join() {
   };
 
   return (
-    <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="elvt-glass px-6 py-3 rounded-full inline-flex items-center gap-2 mb-6 border" style={{ borderColor: 'var(--border)' }}>
-            <Sparkles className="w-4 h-4" style={{ color: 'var(--accent)' }} />
-            <span className="font-semibold text-sm" style={{ color: 'var(--accent)' }}>FREE AFFILIATE PROGRAM</span>
+          <div className="elvt-glass px-4 md:px-6 py-2 md:py-3 rounded-full inline-flex items-center gap-2 mb-4 md:mb-6 border" style={{ borderColor: 'var(--border)' }}>
+            <Sparkles className="w-3 md:w-4 h-3 md:h-4" style={{ color: 'var(--accent)' }} />
+            <span className="font-semibold text-xs md:text-sm" style={{ color: 'var(--accent)' }}>FREE AFFILIATE PROGRAM</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight px-4">
             Start Earning with
-            <span className="text-gradient block mt-2">Premium Products</span>
+            <span className="text-gradient block mt-1 md:mt-2">Premium Products</span>
           </h1>
           
-          <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4" style={{ color: 'var(--text-secondary)' }}>
             Get your own branded storefront and earn up to 30% commission on every sale. Setup takes less than 3 minutes.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
           {/* Benefits Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-4 md:space-y-6"
           >
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What You Get:</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8" style={{ color: 'var(--text-primary)' }}>What You Get:</h2>
             
             {[
               {
@@ -118,16 +118,16 @@ export default function Join() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                className="elvt-glass rounded-xl p-6 flex gap-4"
+                className="elvt-glass rounded-xl p-4 md:p-6 flex gap-3 md:gap-4"
               >
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                  <benefit.icon className="w-6 h-6" style={{ color: 'var(--accent)' }} />
+                <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                  <benefit.icon className="w-5 md:w-6 h-5 md:h-6" style={{ color: 'var(--accent)' }} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+                  <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2" style={{ color: 'var(--text-primary)' }}>
                     {benefit.title}
                   </h3>
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
                     {benefit.description}
                   </p>
                 </div>
@@ -140,20 +140,20 @@ export default function Join() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="elvt-glass rounded-2xl p-8"
+            className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8"
           >
-            <h2 className="text-3xl font-bold mb-6 text-center text-gradient">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-gradient">
               Start Your Journey
             </h2>
             
-            <form onSubmit={handleSignup} className="space-y-6">
+            <form onSubmit={handleSignup} className="space-y-4 md:space-y-6">
               <div className="text-center">
-                <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
+                <p className="mb-4 md:mb-6 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
                   Click below to create your free affiliate account. You'll be redirected to complete the quick onboarding.
                 </p>
                 
                 {error && (
-                  <div className="bg-red-500/10 border border-red-500 text-red-500 rounded-lg p-3 mb-6">
+                  <div className="bg-red-500/10 border border-red-500 text-red-500 rounded-lg p-2 md:p-3 mb-4 md:mb-6 text-sm">
                     {error}
                   </div>
                 )}
@@ -162,7 +162,7 @@ export default function Join() {
                   type="submit"
                   size="lg"
                   disabled={isLoading}
-                  className="w-full font-bold py-6 text-lg group pulse-glow text-white"
+                  className="w-full font-bold py-5 md:py-6 text-base md:text-lg group pulse-glow text-white h-12 md:h-auto"
                   style={{ backgroundColor: 'var(--accent)' }}
                 >
                   {isLoading ? (
@@ -170,14 +170,14 @@ export default function Join() {
                   ) : (
                     <>
                       Get Started Free
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </Button>
               </div>
 
-              <div className="pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
-                <div className="space-y-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <div className="pt-4 md:pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
+                <div className="space-y-3 md:space-y-4 text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
                   <div className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />

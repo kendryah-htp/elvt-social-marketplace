@@ -75,32 +75,32 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="min-h-screen elvt-gradient">
-      <div className="max-w-7xl mx-auto px-6 py-20">
+    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
-          <h1 className="text-5xl md:text-6xl font-black mb-6 text-gradient">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient px-4">
             Pricing That Scales With You
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl lg:text-2xl max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
             Start free as an affiliate. Launch your platform as an admin. Both paths to recurring revenue.
           </p>
         </motion.div>
 
         {/* Affiliate Section */}
-        <div className="mb-24">
-          <h2 className="text-3xl font-bold mb-12 text-center" style={{ color: 'var(--text-primary)' }}>Affiliate (Start Free)</h2>
+        <div className="mb-16 md:mb-24">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center px-4" style={{ color: 'var(--text-primary)' }}>Affiliate (Start Free)</h2>
           <div className="max-w-3xl mx-auto">
             {userPlans.map((plan, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="elvt-glass rounded-2xl p-8 relative border-2" style={{ borderColor: 'var(--border)' }}
+                className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8 relative border-2" style={{ borderColor: 'var(--border)' }}
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>

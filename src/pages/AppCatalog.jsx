@@ -74,18 +74,18 @@ export default function AppCatalog() {
     <>
       <AppDemoModal app={demoApp} isOpen={isDemoOpen} onClose={handleCloseDemo} />
       
-      <div className="min-h-screen elvt-gradient">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gradient slide-up">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 text-gradient slide-up px-4">
             Premium App Marketplace
           </h1>
-          <p className="text-xl slide-up" style={{ color: 'var(--text-secondary)', animationDelay: '0.1s' }}>
+          <p className="text-base md:text-xl slide-up px-4" style={{ color: 'var(--text-secondary)', animationDelay: '0.1s' }}>
             Discover world-class apps, templates, and training programs
           </p>
         </motion.div>
@@ -95,21 +95,21 @@ export default function AppCatalog() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-12 flex flex-col md:flex-row gap-4"
+          className="mb-8 md:mb-12 flex flex-col md:flex-row gap-3 md:gap-4"
         >
           <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--accent)' }} />
+            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5" style={{ color: 'var(--accent)' }} />
             <Input
               placeholder="Search apps..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-12 h-12"
+              className="pl-10 md:pl-12 h-11 md:h-12 text-sm md:text-base"
               style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
             />
           </div>
           
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-full md:w-64 h-12" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
+            <SelectTrigger className="w-full md:w-64 h-11 md:h-12 text-sm md:text-base" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
               <Filter className="w-4 h-4 mr-2" />
               <SelectValue placeholder="Category" />
             </SelectTrigger>
@@ -125,12 +125,12 @@ export default function AppCatalog() {
 
         {/* Apps Grid */}
         {isLoading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[1, 2, 3, 4, 5, 6].map(i => (
-              <div key={i} className="elvt-glass rounded-2xl p-6 animate-pulse">
-                <div className="aspect-video bg-[#2A2A2A] rounded-lg mb-4" />
-                <div className="h-6 bg-[#2A2A2A] rounded mb-3" />
-                <div className="h-4 bg-[#2A2A2A] rounded w-2/3" />
+              <div key={i} className="elvt-glass rounded-xl md:rounded-2xl p-4 md:p-6 animate-pulse">
+                <div className="aspect-video bg-[#2A2A2A] rounded-lg mb-3 md:mb-4" />
+                <div className="h-5 md:h-6 bg-[#2A2A2A] rounded mb-2 md:mb-3" />
+                <div className="h-3 md:h-4 bg-[#2A2A2A] rounded w-2/3" />
               </div>
             ))}
           </div>
@@ -138,12 +138,12 @@ export default function AppCatalog() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20"
+            className="text-center py-12 md:py-20"
           >
-            <p className="text-2xl text-[#E5E0DB]">No apps found matching your criteria</p>
+            <p className="text-lg md:text-2xl text-[#E5E0DB]">No apps found matching your criteria</p>
           </motion.div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredApps.map((app, idx) => (
               <motion.div
                 key={app.id}
@@ -154,7 +154,7 @@ export default function AppCatalog() {
                 className="fade-in-scale"
               >
                 <Link to={createPageUrl('AppDetail') + '?id=' + app.id}>
-                  <div className="elvt-glass rounded-2xl overflow-hidden cursor-pointer group h-full flex flex-col transition-all duration-300 hover:elvt-glow">
+                  <div className="elvt-glass rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group h-full flex flex-col transition-all duration-300 hover:elvt-glow">
                     {app.thumbnail_url && (
                       <div className="aspect-video bg-[#2A2A2A] overflow-hidden">
                         <LazyImage
@@ -167,13 +167,13 @@ export default function AppCatalog() {
                       </div>
                     )}
                     
-                    <div className="p-6 flex-1 flex flex-col">
+                    <div className="p-4 md:p-6 flex-1 flex flex-col">
                       {app.badges?.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-3">
+                        <div className="flex flex-wrap gap-1.5 md:gap-2 mb-2 md:mb-3">
                           {app.badges.map(badge => (
                             <Badge 
                               key={badge} 
-                              className={badgeStyles[badge]}
+                              className={`text-xs ${badgeStyles[badge]}`}
                               style={{ backgroundColor: badge === 'bestseller' || badge === 'featured' ? 'var(--accent)' : undefined }}
                             >
                               {badge.replace(/_/g, ' ')}
@@ -182,23 +182,23 @@ export default function AppCatalog() {
                         </div>
                       )}
                       
-                      <h3 className="text-2xl font-bold mb-3 transition-colors" style={{ color: 'var(--text-primary)' }}>
+                      <h3 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 transition-colors" style={{ color: 'var(--text-primary)' }}>
                         {app.name}
                       </h3>
                       
                       {app.short_description && (
-                        <p className="mb-4 line-clamp-2 flex-1" style={{ color: 'var(--text-secondary)' }}>
+                        <p className="mb-3 md:mb-4 line-clamp-2 flex-1 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
                           {app.short_description}
                         </p>
                       )}
                       
                       <div className="flex items-center justify-between mt-auto">
                         <div>
-                          <span className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>
+                          <span className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--accent)' }}>
                             ${app.price}
                           </span>
                           {app.social_proof_purchases > 0 && (
-                            <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+                            <p className="text-xs md:text-sm mt-0.5 md:mt-1" style={{ color: 'var(--text-secondary)' }}>
                               {app.social_proof_purchases}+ purchases
                             </p>
                           )}
@@ -207,25 +207,25 @@ export default function AppCatalog() {
                         {app.social_proof_rating && (
                           <div className="flex items-center gap-1">
                             <Star className="w-4 h-4" style={{ fill: 'var(--accent)', color: 'var(--accent)' }} />
-                            <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+                            <span className="text-sm md:text-base font-semibold" style={{ color: 'var(--text-primary)' }}>
                               {app.social_proof_rating.toFixed(1)}
                             </span>
                           </div>
                         )}
                       </div>
                       
-                      <div className="flex gap-2 mt-4">
+                      <div className="flex gap-2 mt-3 md:mt-4">
                         {app.demo_url && (
                           <Button
                             onClick={(e) => handleViewDemo(app, e)}
-                            className="flex-1 font-semibold hover:opacity-90 transition-all !text-inherit"
+                            className="flex-1 font-semibold hover:opacity-90 transition-all !text-inherit h-9 md:h-10 text-xs md:text-sm"
                             style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--accent)' }}
                           >
-                            <Eye className="w-4 h-4 mr-2" />
+                            <Eye className="w-3 md:w-4 h-3 md:h-4 mr-1 md:mr-2" />
                             Demo
                           </Button>
                         )}
-                        <Button className="flex-1 font-semibold pulse-glow text-white !text-inherit" style={{ backgroundColor: 'var(--accent)' }}>
+                        <Button className="flex-1 font-semibold pulse-glow text-white !text-inherit h-9 md:h-10 text-xs md:text-sm" style={{ backgroundColor: 'var(--accent)' }}>
                           Details
                         </Button>
                       </div>

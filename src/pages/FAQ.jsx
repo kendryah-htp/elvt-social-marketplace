@@ -44,26 +44,26 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="min-h-screen elvt-gradient">
-      <div className="max-w-4xl mx-auto px-6 py-20">
+    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-black mb-6 text-gradient">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient px-4">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
             Everything you need to know about ELVT Social. Can't find what you're looking for?
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button className="gap-2" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mt-6 md:mt-8">
+            <Button className="gap-2 h-11 md:h-12" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
               <Mail className="w-4 h-4" />
               Email Support
             </Button>
-            <Button variant="outline" className="gap-2" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+            <Button variant="outline" className="gap-2 h-11 md:h-12" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
               <MessageCircle className="w-4 h-4" />
               Live Chat
             </Button>

@@ -37,26 +37,36 @@ export default function SocialProofFeed() {
   }, []);
 
   return (
-    <div className="fixed bottom-24 right-6 z-40 max-w-sm pointer-events-none">
+    <div className="fixed bottom-24 right-6 z-40 pointer-events-none">
+      <style>{`
+        @keyframes glow-pulse {
+          0%, 100% { box-shadow: 0 0 12px rgba(139, 92, 246, 0.6); }
+          50% { box-shadow: 0 0 20px rgba(139, 92, 246, 1); }
+        }
+        .social-pill {
+          animation: glow-pulse 2s ease-in-out infinite;
+        }
+      `}</style>
       <AnimatePresence mode="popLayout">
-        {notifications.slice(0, 3).map((notif, idx) => (
+        {notifications.slice(0, 1).map((notif) => (
           <motion.div
             key={notif.id}
-            initial={{ opacity: 0, y: 20, x: 400 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, y: -20, x: 400 }}
-            transition={{ duration: 0.3 }}
-            className="mb-3 p-3 rounded-lg border pointer-events-auto"
+            initial={{ opacity: 0, scale: 0.8, x: 100 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: 100 }}
+            transition={{ duration: 0.4 }}
+            className="px-4 py-2 rounded-full border pointer-events-auto relative social-pill"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               borderColor: 'var(--accent)',
-              borderWidth: '1px'
+              borderWidth: '2px'
             }}
           >
-            <div className="flex items-center gap-3">
-              <ShoppingCart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--accent)' }} />
-              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                {notif.text}
+            <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+            <div className="flex items-center gap-2">
+              <ShoppingCart className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--accent)' }} />
+              <p className="text-xs font-medium whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
+                {notif.text.split(' ').slice(0, 3).join(' ')}...
               </p>
             </div>
           </motion.div>

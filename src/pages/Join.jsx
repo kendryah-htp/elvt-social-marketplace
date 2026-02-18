@@ -65,7 +65,7 @@ export default function Join() {
   };
 
   return (
-    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+    <div className="min-h-screen pb-24 md:pb-12" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Hero Section */}
         <motion.div
@@ -73,17 +73,25 @@ export default function Join() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12 md:mb-16"
         >
-          <div className="elvt-glass px-4 md:px-6 py-2 md:py-3 rounded-full inline-flex items-center gap-2 mb-4 md:mb-6 border" style={{ borderColor: 'var(--border)' }}>
-            <Sparkles className="w-3 md:w-4 h-3 md:h-4" style={{ color: 'var(--accent)' }} />
-            <span className="font-semibold text-xs md:text-sm" style={{ color: 'var(--accent)' }}>FREE AFFILIATE PROGRAM</span>
+          <div className="px-4 md:px-6 py-2 md:py-3 rounded-full inline-flex items-center gap-2 mb-4 md:mb-6 border shadow-md" style={{ 
+            backgroundColor: 'white',
+            borderColor: 'rgba(139, 92, 246, 0.2)'
+          }}>
+            <Sparkles className="w-3 md:w-4 h-3 md:h-4" style={{ color: '#7C3AED' }} />
+            <span className="font-semibold text-xs md:text-sm" style={{ color: '#7C3AED' }}>FREE AFFILIATE PROGRAM</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight px-4">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight px-4" style={{ color: '#1A1A2E' }}>
             Start Earning with
-            <span className="text-gradient block mt-1 md:mt-2">Premium Products</span>
+            <span className="block mt-1 md:mt-2" style={{ 
+              background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Premium Products</span>
           </h1>
           
-          <p className="text-base md:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4" style={{ color: '#2E2E42' }}>
             Get your own branded storefront and earn up to 30% commission on every sale. Setup takes less than 3 minutes.
           </p>
         </motion.div>
@@ -96,7 +104,7 @@ export default function Join() {
             transition={{ delay: 0.2 }}
             className="space-y-4 md:space-y-6 px-4 md:px-0"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8" style={{ color: 'var(--text-primary)' }}>What You Get:</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8" style={{ color: '#1A1A2E' }}>What You Get:</h2>
             
             {[
               {
@@ -120,16 +128,19 @@ export default function Join() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                className="elvt-glass rounded-xl p-4 md:p-6 flex gap-3 md:gap-4 border" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}
+                className="rounded-xl p-4 md:p-6 flex gap-3 md:gap-4 border shadow-lg hover:shadow-xl transition-shadow" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}
               >
-                <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                  <benefit.icon className="w-5 md:w-6 h-5 md:h-6" style={{ color: 'var(--accent)' }} />
+                <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#F0EDFF' }}>
+                  <benefit.icon className="w-5 md:w-6 h-5 md:h-6" style={{ color: '#7C3AED' }} />
                 </div>
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2" style={{ color: 'var(--text-primary)' }}>
+                  <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2" style={{ color: '#1A1A2E' }}>
                     {benefit.title}
                   </h3>
-                  <p className="text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-xs md:text-sm" style={{ color: '#2E2E42' }}>
                     {benefit.description}
                   </p>
                 </div>
@@ -142,20 +153,28 @@ export default function Join() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8"
+            className="rounded-xl md:rounded-2xl p-6 md:p-8 border shadow-xl" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-gradient">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center" style={{ 
+              background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
               Start Your Journey
             </h2>
             
             <form onSubmit={handleSignup} className="space-y-4 md:space-y-6">
               <div className="text-center">
-                <p className="mb-4 md:mb-6 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+                <p className="mb-4 md:mb-6 text-sm md:text-base" style={{ color: '#2E2E42' }}>
                   Click below to create your free affiliate account. You'll be redirected to complete the quick onboarding.
                 </p>
                 
                 {error && (
-                  <div className="bg-red-500/10 border border-red-500 text-red-500 rounded-lg p-2 md:p-3 mb-4 md:mb-6 text-sm">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-2 md:p-3 mb-4 md:mb-6 text-sm" style={{ color: '#DC2626' }}>
                     {error}
                   </div>
                 )}
@@ -164,8 +183,8 @@ export default function Join() {
                   type="submit"
                   size="lg"
                   disabled={isLoading}
-                  className="w-full font-bold py-5 md:py-6 text-base md:text-lg group pulse-glow text-white h-12 md:h-auto"
-                  style={{ backgroundColor: 'var(--accent)' }}
+                  className="w-full font-bold py-5 md:py-6 text-base md:text-lg group text-white h-12 md:h-auto shadow-lg hover:shadow-xl transition-shadow"
+                  style={{ backgroundColor: '#7C3AED' }}
                 >
                   {isLoading ? (
                     <span>Setting up your account...</span>
@@ -178,23 +197,23 @@ export default function Join() {
                 </Button>
               </div>
 
-              <div className="pt-4 md:pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
-                <div className="space-y-3 md:space-y-4 text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <div className="pt-4 md:pt-6 border-t" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}>
+                <div className="space-y-3 md:space-y-4 text-xs md:text-sm" style={{ color: '#6B6B80' }}>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#F0EDFF' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#7C3AED' }} />
                     </div>
                     <p>No credit card required</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#F0EDFF' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#7C3AED' }} />
                     </div>
                     <p>Get your storefront live in under 3 minutes</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#F0EDFF' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#7C3AED' }} />
                     </div>
                     <p>Start earning immediately</p>
                   </div>

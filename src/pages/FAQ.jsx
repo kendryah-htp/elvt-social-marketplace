@@ -44,7 +44,7 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+    <div className="min-h-screen pb-24 md:pb-12" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
@@ -52,18 +52,23 @@ export default function FAQ() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient px-4">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 px-4" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Frequently Asked Questions
           </h1>
-          <p className="text-base md:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl px-4" style={{ color: '#2E2E42' }}>
             Everything you need to know about ELVT Social. Can't find what you're looking for?
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mt-6 md:mt-8">
-            <Button className="gap-2 h-11 md:h-12" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+            <Button className="gap-2 h-11 md:h-12 text-white shadow-lg" style={{ backgroundColor: '#7C3AED' }}>
               <Mail className="w-4 h-4" />
               Email Support
             </Button>
-            <Button variant="outline" className="gap-2 h-11 md:h-12" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+            <Button variant="outline" className="gap-2 h-11 md:h-12" style={{ borderColor: '#7C3AED', color: '#7C3AED' }}>
               <MessageCircle className="w-4 h-4" />
               Live Chat
             </Button>
@@ -79,7 +84,7 @@ export default function FAQ() {
             transition={{ delay: categoryIdx * 0.1 }}
             className="mb-12"
           >
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#1A1A2E' }}>
               {category.category}
             </h2>
 
@@ -91,18 +96,21 @@ export default function FAQ() {
                 return (
                   <div
                     key={faqIdx}
-                    className="elvt-glass rounded-xl overflow-hidden"
+                    className="rounded-xl overflow-hidden border shadow-md hover:shadow-lg transition-shadow" style={{ 
+                      backgroundColor: 'white',
+                      borderColor: 'rgba(139, 92, 246, 0.15)'
+                    }}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : globalIndex)}
                       className="w-full p-6 flex items-center justify-between text-left hover:opacity-80 transition-opacity"
                     >
-                      <span className="text-lg font-semibold pr-4" style={{ color: 'var(--text-primary)' }}>
+                      <span className="text-lg font-semibold pr-4" style={{ color: '#1A1A2E' }}>
                         {faq.q}
                       </span>
                       <ChevronDown
                         className={`w-5 h-5 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                        style={{ color: 'var(--accent)' }}
+                        style={{ color: '#7C3AED' }}
                       />
                     </button>
 
@@ -114,7 +122,7 @@ export default function FAQ() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <div className="px-6 pb-6" style={{ color: 'var(--text-secondary)' }}>
+                          <div className="px-6 pb-6" style={{ color: '#2E2E42' }}>
                             {faq.a}
                           </div>
                         </motion.div>

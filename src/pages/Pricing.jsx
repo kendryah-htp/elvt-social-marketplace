@@ -75,7 +75,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+    <div className="min-h-screen pb-24 md:pb-12" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
         {/* Header */}
         <motion.div
@@ -83,53 +83,61 @@ export default function Pricing() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12 md:mb-20"
         >
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient px-4">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 px-4" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Pricing That Scales With You
           </h1>
-          <p className="text-base md:text-xl lg:text-2xl max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-xl lg:text-2xl max-w-3xl mx-auto px-4" style={{ color: '#2E2E42' }}>
             Start free as an affiliate. Launch your platform as an admin. Both paths to recurring revenue.
           </p>
         </motion.div>
 
         {/* Affiliate Section */}
         <div className="mb-16 md:mb-24">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center px-4" style={{ color: 'var(--text-primary)' }}>Affiliate (Start Free)</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center px-4" style={{ color: '#1A1A2E' }}>Affiliate (Start Free)</h2>
           <div className="max-w-3xl mx-auto">
             {userPlans.map((plan, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8 relative border-2" style={{ borderColor: 'var(--border)' }}
+                className="rounded-xl md:rounded-2xl p-6 md:p-8 relative border-2 shadow-xl" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.2)'
+                }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                    <plan.icon className="w-6 h-6" style={{ color: 'var(--accent)' }} />
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F0EDFF' }}>
+                    <plan.icon className="w-6 h-6" style={{ color: '#7C3AED' }} />
                   </div>
-                  <h3 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>{plan.name}</h3>
+                  <h3 className="text-2xl font-bold" style={{ color: '#1A1A2E' }}>{plan.name}</h3>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-black" style={{ color: 'var(--accent)' }}>{plan.price}</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>/{plan.period}</span>
+                    <span className="text-5xl font-black" style={{ color: '#7C3AED' }}>{plan.price}</span>
+                    <span style={{ color: '#6B6B80' }}>/{plan.period}</span>
                   </div>
-                  <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>{plan.description}</p>
+                  <p className="mt-2" style={{ color: '#2E2E42' }}>{plan.description}</p>
                 </div>
 
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--accent)' }} />
-                      <span style={{ color: 'var(--text-secondary)' }}>{feature}</span>
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#7C3AED' }} />
+                      <span style={{ color: '#2E2E42' }}>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link to={createPageUrl('Join')}>
                   <Button 
-                    className="w-full font-bold"
-                    style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                    className="w-full font-bold text-white shadow-lg hover:shadow-xl transition-shadow"
+                    style={{ backgroundColor: '#7C3AED' }}
                   >
                     {plan.cta}
                   </Button>
@@ -141,8 +149,8 @@ export default function Pricing() {
 
         {/* Admin Section */}
         <div className="mb-24">
-          <h2 className="text-3xl font-bold mb-4 text-center" style={{ color: 'var(--text-primary)' }}>Launch Your Platform (Admin)</h2>
-          <p className="text-center mb-12 text-lg" style={{ color: 'var(--text-secondary)' }}>Build your marketplace. Keep $17+ per user per month. Earn 30% on every product sale.</p>
+          <h2 className="text-3xl font-bold mb-4 text-center" style={{ color: '#1A1A2E' }}>Launch Your Platform (Admin)</h2>
+          <p className="text-center mb-12 text-lg" style={{ color: '#2E2E42' }}>Build your marketplace. Keep $17+ per user per month. Earn 30% on every product sale.</p>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {adminPlans.map((plan, idx) => (
@@ -153,51 +161,57 @@ export default function Pricing() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.15 }}
                 whileHover={{ y: -8 }}
-                className={`elvt-glass rounded-2xl p-8 relative ${plan.highlight ? 'border-2 pulse-glow' : 'border'}`}
-                style={{ borderColor: plan.highlight ? 'var(--accent)' : 'var(--border)' }}
+                className={`rounded-2xl p-8 relative border-2 shadow-xl hover:shadow-2xl transition-shadow ${plan.highlight ? 'shadow-2xl' : ''}`}
+                style={{ 
+                  backgroundColor: 'white',
+                  borderColor: plan.highlight ? '#7C3AED' : 'rgba(139, 92, 246, 0.2)'
+                }}
               >
                 {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: '#FF6B35', color: 'white' }}>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-sm font-bold shadow-lg" style={{ backgroundColor: '#EF4444', color: 'white' }}>
                     {plan.badge}
                   </div>
                 )}
                 {plan.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-sm font-bold shadow-lg" style={{ backgroundColor: '#7C3AED', color: 'white' }}>
                     Most Popular
                   </div>
                 )}
 
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                    <plan.icon className="w-6 h-6" style={{ color: 'var(--accent)' }} />
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F0EDFF' }}>
+                    <plan.icon className="w-6 h-6" style={{ color: '#7C3AED' }} />
                   </div>
-                  <h3 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>{plan.name}</h3>
+                  <h3 className="text-2xl font-bold" style={{ color: '#1A1A2E' }}>{plan.name}</h3>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-3">
-                    <span className="text-5xl font-black" style={{ color: 'var(--accent)' }}>{plan.price}</span>
+                    <span className="text-5xl font-black" style={{ color: '#7C3AED' }}>{plan.price}</span>
                     {plan.originalPrice && (
-                      <span className="text-lg line-through" style={{ color: 'var(--text-muted)' }}>{plan.originalPrice}</span>
+                      <span className="text-lg line-through" style={{ color: '#9CA3AF' }}>{plan.originalPrice}</span>
                     )}
-                    <span style={{ color: 'var(--text-secondary)' }}>/{plan.period}</span>
+                    <span style={{ color: '#6B6B80' }}>/{plan.period}</span>
                   </div>
-                  <p className="mt-2 text-sm" style={{ color: 'var(--text-secondary)' }}>{plan.description}</p>
+                  <p className="mt-2 text-sm" style={{ color: '#2E2E42' }}>{plan.description}</p>
                 </div>
 
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--accent)' }} />
-                      <span style={{ color: 'var(--text-secondary)' }}>{feature}</span>
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#7C3AED' }} />
+                      <span style={{ color: '#2E2E42' }}>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link to={createPageUrl('Join')}>
                   <Button 
-                    className="w-full font-bold"
-                    style={plan.highlight ? { backgroundColor: 'var(--accent)', color: 'white' } : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--accent)' }}
+                    className="w-full font-bold shadow-lg hover:shadow-xl transition-shadow"
+                    style={plan.highlight 
+                      ? { backgroundColor: '#7C3AED', color: 'white' } 
+                      : { backgroundColor: '#F0EDFF', color: '#7C3AED' }
+                    }
                   >
                     {plan.cta}
                   </Button>
@@ -208,24 +222,32 @@ export default function Pricing() {
         </div>
 
         {/* Revenue Model Explainer */}
-        <div className="max-w-5xl mx-auto mb-24 elvt-glass rounded-2xl p-12">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gradient">How the Revenue Model Works</h2>
+        <div className="max-w-5xl mx-auto mb-24 rounded-2xl p-12 border shadow-xl" style={{ 
+          backgroundColor: 'white',
+          borderColor: 'rgba(139, 92, 246, 0.15)'
+        }}>
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>How the Revenue Model Works</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>As an Affiliate</h3>
-              <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                You get <span style={{ color: 'var(--accent)' }} className="font-bold">30% commission</span> on every app or product sold through your storefront, plus <span style={{ color: 'var(--accent)' }} className="font-bold">MILO AI</span> to create content in your voice.
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1A1A2E' }}>As an Affiliate</h3>
+              <p className="mb-4" style={{ color: '#2E2E42' }}>
+                You get <span style={{ color: '#7C3AED' }} className="font-bold">30% commission</span> on every app or product sold through your storefront, plus <span style={{ color: '#7C3AED' }} className="font-bold">MILO AI</span> to create content in your voice.
               </p>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p style={{ color: '#2E2E42' }}>
                 <strong>Example:</strong> A customer buys a $100 app through your link → You earn $30.
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>As an Admin</h3>
-              <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                You earn <span style={{ color: 'var(--accent)' }} className="font-bold">recurring revenue</span> by setting your own user pricing. Platform fee is $17/user/month—you keep the rest.
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1A1A2E' }}>As an Admin</h3>
+              <p className="mb-4" style={{ color: '#2E2E42' }}>
+                You earn <span style={{ color: '#7C3AED' }} className="font-bold">recurring revenue</span> by setting your own user pricing. Platform fee is $17/user/month—you keep the rest.
               </p>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p style={{ color: '#2E2E42' }}>
                 <strong>Example:</strong> You charge users $47/month → You keep $30/month per user + 30% on their product sales.
               </p>
             </div>
@@ -239,7 +261,12 @@ export default function Pricing() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-3xl font-bold mb-8 text-center text-gradient">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Frequently Asked Questions</h2>
           <div className="space-y-6">
             {[
               { q: 'How do I know which path is right for me?', a: 'Start free as an affiliate to test the platform and earn commissions. When you\'re ready to build your own platform and earn recurring revenue, upgrade to Admin.' },
@@ -255,10 +282,13 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="elvt-glass rounded-xl p-6"
+                className="rounded-xl p-6 border shadow-lg hover:shadow-xl transition-shadow" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}
               >
-                <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{faq.q}</h3>
-                <p style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
+                <h3 className="text-lg font-bold mb-2" style={{ color: '#1A1A2E' }}>{faq.q}</h3>
+                <p style={{ color: '#2E2E42' }}>{faq.a}</p>
               </motion.div>
             ))}
           </div>

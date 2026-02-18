@@ -6,7 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Palette, Type, Layout, Upload, Globe, Plus, Trash2 } from 'lucide-react';
+import { Palette, Type, Layout, Upload, Globe, Plus, Trash2, Bell } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function PlatformSettingsTab() {
   const queryClient = useQueryClient();
@@ -29,7 +31,9 @@ export default function PlatformSettingsTab() {
     favicon_url: '',
     platform_name: 'ELVT Social',
     contact_email: '',
-    footer_links: []
+    footer_links: [],
+    announcement_text: '',
+    announcement_enabled: false
   });
 
   const [newFooterLink, setNewFooterLink] = useState({ label: '', url: '' });
@@ -274,6 +278,35 @@ export default function PlatformSettingsTab() {
             <Plus className="w-4 h-4 mr-2" />
             Add Footer Link
           </Button>
+        </div>
+      </Card>
+
+      {/* Announcement Settings */}
+      <Card className="elvt-glass p-6 border" style={{ borderColor: 'var(--border)' }}>
+        <div className="flex items-center gap-2 mb-6">
+          <Bell className="w-5 h-5" style={{ color: 'var(--accent)' }} />
+          <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>Platform Announcement</h3>
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Checkbox
+              checked={formData.announcement_enabled}
+              onCheckedChange={(checked) => setFormData({ ...formData, announcement_enabled: checked })}
+            />
+            <Label style={{ color: 'var(--text-primary)' }}>Enable Announcement</Label>
+          </div>
+
+          <div>
+            <Label style={{ color: 'var(--text-primary)' }}>Announcement Text</Label>
+            <Textarea
+              value={formData.announcement_text || ''}
+              onChange={(e) => setFormData({ ...formData, announcement_text: e.target.value })}
+              placeholder="e.g., 'New products just launched! 🚀'"
+              className="min-h-20"
+            />
+            <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>This notification will appear on the home page when enabled</p>
+          </div>
         </div>
       </Card>
 

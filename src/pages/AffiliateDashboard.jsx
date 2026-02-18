@@ -136,23 +136,24 @@ export default function AffiliateDashboard() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen elvt-gradient flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="text-center">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="w-16 h-16 border-4 border-t-transparent rounded-full mx-auto mb-4"
-            style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }}
+            style={{ borderColor: '#7C3AED', borderTopColor: 'transparent' }}
           />
-          <p style={{ color: 'var(--text-secondary)' }} className="font-semibold">Loading your dashboard...</p>
+          <p style={{ color: '#2E2E42' }} className="font-semibold">Loading your dashboard...</p>
         </div>
       </motion.div>
     );
   }
 
   return (
-    <div className="min-h-screen elvt-gradient">
+    <div className="min-h-screen" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <motion.div
@@ -160,19 +161,24 @@ export default function AffiliateDashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-gradient">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Welcome back, {profile.full_name}
           </h1>
-          <p className="text-[#E5E0DB] text-lg">Here's your affiliate performance</p>
+          <p style={{ color: '#6B6B80' }} className="text-lg">Here's your affiliate performance</p>
         </motion.div>
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {[
-            { icon: DollarSign, label: 'Total Earnings', value: `$${totalEarnings.toFixed(2)}`, color: 'text-green-400' },
-            { icon: ShoppingCart, label: 'Total Sales', value: totalSales, color: 'text-blue-400' },
-            { icon: Eye, label: 'Storefront Visits', value: totalVisits, color: 'text-purple-400' },
-            { icon: LinkIcon, label: 'Active Apps', value: profile.selected_app_ids?.length || 0, color: 'text-orange-400' }
+            { icon: DollarSign, label: 'Total Earnings', value: `$${totalEarnings.toFixed(2)}`, color: '#10B981' },
+            { icon: ShoppingCart, label: 'Total Sales', value: totalSales, color: '#3B82F6' },
+            { icon: Eye, label: 'Storefront Visits', value: totalVisits, color: '#8B5CF6' },
+            { icon: LinkIcon, label: 'Active Apps', value: profile.selected_app_ids?.length || 0, color: '#F59E0B' }
           ].map((stat, idx) => (
             <motion.div
               key={idx}
@@ -181,32 +187,41 @@ export default function AffiliateDashboard() {
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -4 }}
             >
-              <Card className="elvt-glass p-6">
+              <Card className="p-6 border shadow-lg" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}>
                 <div className="flex items-center justify-between mb-3">
-                  <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                  <stat.icon className="w-8 h-8" style={{ color: stat.color }} />
                 </div>
-                <p className="text-3xl font-bold text-[#F5F0EB] mb-1">{stat.value}</p>
-                <p className="text-sm text-[#E5E0DB]">{stat.label}</p>
+                <p className="text-3xl font-bold mb-1" style={{ color: '#1A1A2E' }}>{stat.value}</p>
+                <p className="text-sm" style={{ color: '#6B6B80' }}>{stat.label}</p>
               </Card>
             </motion.div>
           ))}
         </div>
 
         {/* Storefront Link */}
-        <Card className="elvt-glass p-6 mb-12">
+        <Card className="p-6 mb-12 border shadow-lg" style={{ 
+          backgroundColor: 'white',
+          borderColor: 'rgba(139, 92, 246, 0.15)'
+        }}>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl font-bold text-[#F5F0EB] mb-2">Your Storefront</h3>
-              <p className="text-[#E5E0DB] text-sm mb-3">Share this link to start earning commissions</p>
+              <h3 className="text-xl font-bold mb-2" style={{ color: '#1A1A2E' }}>Your Storefront</h3>
+              <p className="text-sm mb-3" style={{ color: '#6B6B80' }}>Share this link to start earning commissions</p>
               <div className="flex items-center gap-2">
-                <code className="bg-[#1A1A1A] px-4 py-2 rounded-lg text-[#D4AF37] text-sm">
+                <code className="px-4 py-2 rounded-lg text-sm" style={{ 
+                  backgroundColor: '#F0EDFF',
+                  color: '#7C3AED'
+                }}>
                   {storefrontUrl}
                 </code>
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={() => copyToClipboard(storefrontUrl)}
-                  className="border-[#D4AF37] text-[#D4AF37]"
+                  style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                 >
                   <Copy className="w-4 h-4" />
                 </Button>
@@ -214,7 +229,9 @@ export default function AffiliateDashboard() {
             </div>
             <div className="flex gap-3">
               <Link to={`/shop?slug=${profile.slug}`} target="_blank">
-                <Button className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]">
+                <Button className="text-white" style={{ 
+                  backgroundColor: '#7C3AED'
+                }}>
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Storefront
                 </Button>
@@ -222,14 +239,23 @@ export default function AffiliateDashboard() {
               
               <Dialog open={showSettingsDialog} onOpenChange={setShowSettingsDialog}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="border-[#D4AF37] text-[#D4AF37]">
+                  <Button variant="outline" style={{ borderColor: '#7C3AED', color: '#7C3AED' }}>
                     <Settings className="w-4 h-4 mr-2" />
                     Settings
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB] max-w-2xl">
+                <DialogContent className="max-w-2xl" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.2)',
+                  color: '#1A1A2E'
+                }}>
                   <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-gradient">Storefront Settings</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold" style={{ 
+                      background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Storefront Settings</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-6 mt-4">
                     <div>
@@ -238,7 +264,10 @@ export default function AffiliateDashboard() {
                         value={profile.theme}
                         onValueChange={(value) => updateProfileMutation.mutate({ theme: value })}
                       >
-                        <SelectTrigger className="bg-[#0A0A0A] border-[#D4AF37]/20">
+                        <SelectTrigger style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}>
                           <Palette className="w-4 h-4 mr-2" />
                           <SelectValue />
                         </SelectTrigger>
@@ -257,7 +286,10 @@ export default function AffiliateDashboard() {
                       <Textarea
                         value={profile.bio || ''}
                         onChange={(e) => updateProfileMutation.mutate({ bio: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                   </div>
@@ -270,32 +302,41 @@ export default function AffiliateDashboard() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Manage Apps */}
           <div>
-            <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Apps on Your Storefront</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#1A1A2E' }}>Apps on Your Storefront</h2>
             <div className="space-y-3">
               {dataLoading ? (
-                <Card className="elvt-glass p-6 animate-pulse">
-                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
-                  <div className="h-4 bg-gray-700/20 rounded w-2/3" />
+                <Card className="p-6 animate-pulse border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <div className="h-6 rounded mb-3" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
+                  <div className="h-4 rounded w-2/3" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
                 </Card>
               ) : allApps.length === 0 ? (
-                <Card className="elvt-glass p-8 text-center">
-                  <p className="text-[#E5E0DB]">No apps available yet</p>
+                <Card className="p-8 text-center border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <p style={{ color: '#6B6B80' }}>No apps available yet</p>
                 </Card>
               ) : (
                 allApps.map(app => (
-                  <Card key={app.id} className="elvt-glass p-4">
+                  <Card key={app.id} className="p-4 border shadow-md hover:shadow-lg transition-shadow" style={{ 
+                    backgroundColor: 'white',
+                    borderColor: 'rgba(139, 92, 246, 0.15)'
+                  }}>
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <h4 className="font-semibold text-[#F5F0EB]">{app.name}</h4>
-                        <p className="text-sm text-[#E5E0DB]">${app.price} · {app.commission_rate}% commission</p>
+                        <h4 className="font-semibold" style={{ color: '#1A1A2E' }}>{app.name}</h4>
+                        <p className="text-sm" style={{ color: '#6B6B80' }}>${app.price} · {app.commission_rate}% commission</p>
                       </div>
                       <Button
                         size="sm"
                         onClick={() => handleToggleApp(app.id)}
-                        className={profile.selected_app_ids?.includes(app.id)
-                          ? 'bg-red-500 hover:bg-red-600'
-                          : 'bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]'
-                        }
+                        className="text-white"
+                        style={{
+                          backgroundColor: profile.selected_app_ids?.includes(app.id) ? '#EF4444' : '#7C3AED'
+                        }}
                       >
                         {profile.selected_app_ids?.includes(app.id) ? 'Remove' : 'Add'}
                       </Button>
@@ -309,18 +350,27 @@ export default function AffiliateDashboard() {
           {/* My Custom Products */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[#F5F0EB]">My Custom Products</h2>
+              <h2 className="text-2xl font-bold" style={{ color: '#1A1A2E' }}>My Custom Products</h2>
               
               <Dialog open={showProductDialog} onOpenChange={setShowProductDialog}>
                 <DialogTrigger asChild>
-                  <Button size="sm" className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]">
+                  <Button size="sm" className="text-white" style={{ backgroundColor: '#7C3AED' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add Product
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]">
+                <DialogContent style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.2)',
+                  color: '#1A1A2E'
+                }}>
                   <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-gradient">Add Custom Product</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold" style={{ 
+                      background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Add Custom Product</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4 mt-4">
                     <div>
@@ -328,7 +378,10 @@ export default function AffiliateDashboard() {
                       <Input
                         value={newProduct.name}
                         onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                     <div>
@@ -336,7 +389,10 @@ export default function AffiliateDashboard() {
                       <Textarea
                         value={newProduct.description}
                         onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                     <div>
@@ -345,7 +401,10 @@ export default function AffiliateDashboard() {
                         type="number"
                         value={newProduct.price}
                         onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                     <div>
@@ -354,7 +413,10 @@ export default function AffiliateDashboard() {
                         value={newProduct.external_link}
                         onChange={(e) => setNewProduct({ ...newProduct, external_link: e.target.value })}
                         placeholder="https://..."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                     <div>
@@ -363,7 +425,10 @@ export default function AffiliateDashboard() {
                         value={newProduct.thumbnail_url}
                         onChange={(e) => setNewProduct({ ...newProduct, thumbnail_url: e.target.value })}
                         placeholder="https://..."
-                        className="bg-[#0A0A0A] border-[#D4AF37]/20"
+                        style={{ 
+                          backgroundColor: '#F8F7FF',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
                       />
                     </div>
                     <Button
@@ -373,7 +438,8 @@ export default function AffiliateDashboard() {
                         affiliate_id: profile.id
                       })}
                       disabled={!newProduct.name || !newProduct.external_link}
-                      className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A]"
+                      className="w-full text-white"
+                      style={{ backgroundColor: '#7C3AED' }}
                     >
                       Add Product
                     </Button>
@@ -384,27 +450,37 @@ export default function AffiliateDashboard() {
 
             <div className="space-y-3">
               {dataLoading ? (
-                <Card className="elvt-glass p-6 animate-pulse">
-                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
-                  <div className="h-4 bg-gray-700/20 rounded w-2/3" />
+                <Card className="p-6 animate-pulse border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <div className="h-6 rounded mb-3" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
+                  <div className="h-4 rounded w-2/3" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
                 </Card>
               ) : myProducts.length === 0 ? (
-                <Card className="elvt-glass p-8 text-center">
-                  <p className="text-[#E5E0DB]">No custom products yet</p>
+                <Card className="p-8 text-center border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <p style={{ color: '#6B6B80' }}>No custom products yet</p>
                 </Card>
               ) : (
                 myProducts.map(product => (
-                  <Card key={product.id} className="elvt-glass p-4">
+                  <Card key={product.id} className="p-4 border shadow-md hover:shadow-lg transition-shadow" style={{ 
+                    backgroundColor: 'white',
+                    borderColor: 'rgba(139, 92, 246, 0.15)'
+                  }}>
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <h4 className="font-semibold text-[#F5F0EB]">{product.name}</h4>
-                        <p className="text-sm text-[#E5E0DB]">${product.price}</p>
+                        <h4 className="font-semibold" style={{ color: '#1A1A2E' }}>{product.name}</h4>
+                        <p className="text-sm" style={{ color: '#6B6B80' }}>${product.price}</p>
                       </div>
                       <Button
                         size="sm"
                         variant="ghost"
                         onClick={() => deleteProductMutation.mutate(product.id)}
-                        className="text-red-400 hover:text-red-500"
+                        style={{ color: '#EF4444' }}
+                        className="hover:bg-red-50"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -418,25 +494,31 @@ export default function AffiliateDashboard() {
 
         {/* Recent Purchases */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6">Recent Sales</h2>
+          <h2 className="text-2xl font-bold mb-6" style={{ color: '#1A1A2E' }}>Recent Sales</h2>
           {purchases.length === 0 ? (
-            <Card className="elvt-glass p-12 text-center">
-              <p className="text-[#E5E0DB] text-lg">No sales yet. Share your storefront to start earning!</p>
+            <Card className="p-12 text-center border shadow-lg" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}>
+              <p className="text-lg" style={{ color: '#6B6B80' }}>No sales yet. Share your storefront to start earning!</p>
             </Card>
           ) : (
             <div className="space-y-3">
               {purchases.slice(0, 10).map(purchase => (
-                <Card key={purchase.id} className="elvt-glass p-4">
+                <Card key={purchase.id} className="p-4 border shadow-md hover:shadow-lg transition-shadow" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-semibold text-[#F5F0EB]">{purchase.product_name}</h4>
-                      <p className="text-sm text-[#E5E0DB]">
+                      <h4 className="font-semibold" style={{ color: '#1A1A2E' }}>{purchase.product_name}</h4>
+                      <p className="text-sm" style={{ color: '#6B6B80' }}>
                         {purchase.buyer_name} · {new Date(purchase.created_date).toLocaleDateString()}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xl font-bold text-[#D4AF37]">+${purchase.commission_amount?.toFixed(2)}</p>
-                      <p className="text-xs text-[#E5E0DB]">{purchase.commission_rate}% commission</p>
+                      <p className="text-xl font-bold" style={{ color: '#10B981' }}>+${purchase.commission_amount?.toFixed(2)}</p>
+                      <p className="text-xs" style={{ color: '#6B6B80' }}>{purchase.commission_rate}% commission</p>
                     </div>
                   </div>
                 </Card>

@@ -38,7 +38,13 @@ function LayoutContent({ children, currentPageName }) {
     <div className="min-h-screen elvt-gradient">
       {/* Navigation */}
       {isPublicPage && (
-        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#D4AF37]/10" style={{ background: 'rgba(0, 0, 0, 0.7)', backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)' }}>
+        <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ 
+          background: 'rgba(15, 15, 26, 0.85)', 
+          backdropFilter: 'saturate(180%) blur(20px)', 
+          WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+          borderColor: 'rgba(139, 92, 246, 0.1)',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.3)'
+        }}>
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-20">
               {/* Logo */}

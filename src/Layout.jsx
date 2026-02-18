@@ -177,7 +177,7 @@ function LayoutContent({ children, currentPageName }) {
                     <Button
                       onClick={() => base44.auth.redirectToLogin()}
                       className="font-bold px-6"
-                      style={{ backgroundColor: '#7C3AED', color: 'white' }}
+                      style={{ backgroundColor: '#7C3AED', color: 'white !important' }}
                     >
                       Sign In
                     </Button>

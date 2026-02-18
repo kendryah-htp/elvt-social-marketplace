@@ -318,7 +318,7 @@ export default function AdminPanel() {
               
               <Dialog open={showAppDialog} onOpenChange={setShowAppDialog}>
                 <DialogTrigger asChild>
-                  <Button className="text-white shadow-lg" style={{ backgroundColor: '#7C3AED' }}>
+                  <Button className="shadow-lg" style={{ backgroundColor: '#7C3AED', color: 'white' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add App
                   </Button>
@@ -546,7 +546,7 @@ export default function AdminPanel() {
               
               <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
                 <DialogTrigger asChild>
-                  <Button className="text-white shadow-lg" style={{ backgroundColor: '#7C3AED' }}>
+                  <Button className="shadow-lg" style={{ backgroundColor: '#7C3AED', color: 'white' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add Template
                   </Button>
@@ -634,7 +634,7 @@ export default function AdminPanel() {
 
               <Dialog open={showResourceDialog} onOpenChange={setShowResourceDialog}>
                 <DialogTrigger asChild>
-                  <Button className="text-white shadow-lg" style={{ backgroundColor: '#7C3AED' }}>
+                  <Button className="shadow-lg" style={{ backgroundColor: '#7C3AED', color: 'white' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Add Resource
                   </Button>

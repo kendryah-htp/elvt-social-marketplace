@@ -215,8 +215,8 @@ Generate high-quality, original content that is engaging and authentic. For blog
                 onClick={generateContent}
                 disabled={isGenerating || !topic.trim()}
                 size="lg"
-                className="w-full font-bold py-6 text-white shadow-lg"
-                style={{ backgroundColor: '#7C3AED' }}
+                className="w-full font-bold py-6 shadow-lg"
+                style={{ backgroundColor: '#7C3AED', color: 'white' }}
               >
                 {isGenerating ? (
                   <>

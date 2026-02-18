@@ -225,7 +225,7 @@ export default function AppCatalog() {
                             Demo
                           </Button>
                         )}
-                        <Button className="flex-1 font-semibold pulse-glow text-white !text-inherit h-9 md:h-10 text-xs md:text-sm" style={{ backgroundColor: 'var(--accent)' }}>
+                        <Button className="flex-1 font-semibold pulse-glow h-9 md:h-10 text-xs md:text-sm" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
                           Details
                         </Button>
                       </div>

@@ -214,8 +214,8 @@ export default function AdminSetupGuide() {
           <Link to={createPageUrl('AdminPanel')}>
             <Button 
               size="lg" 
-              className="px-10 py-6 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-shadow"
-              style={{ backgroundColor: '#7C3AED' }}
+              className="px-10 py-6 text-lg font-bold shadow-lg hover:shadow-xl transition-shadow"
+              style={{ backgroundColor: '#7C3AED', color: 'white' }}
             >
               Go to Admin Dashboard
               <ArrowRight className="ml-2 w-5 h-5" />

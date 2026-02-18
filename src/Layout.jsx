@@ -122,6 +122,13 @@ function LayoutContent({ children, currentPageName }) {
                     </div>
                   </div>
                 </div>
+                <Link 
+                  to={createPageUrl('Pricing')}
+                  className="transition-colors font-semibold hover:text-[#7C3AED]"
+                  style={{ color: '#1A1A2E' }}
+                >
+                  Pricing
+                </Link>
 
                 <div className="flex items-center gap-4 ml-4 pl-4 border-l" style={{ borderColor: 'rgba(139, 92, 246, 0.2)' }}>
                   <Link 
@@ -214,14 +221,17 @@ function LayoutContent({ children, currentPageName }) {
               </div>
               <div className="py-2">
                 <div className="font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Resources</div>
-                <Link to={createPageUrl('AppCatalog') + '?category=templates'} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
-                  Templates
+                <Link to={createPageUrl('Blog')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Blog
                 </Link>
                 <Link to={createPageUrl('Docs')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
                   Docs
                 </Link>
-                <Link to={createPageUrl('Blog')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
-                  Blog
+                <Link to={createPageUrl('FAQ')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Support
+                </Link>
+                <Link to={createPageUrl('AdminSetupGuide')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
+                  Guides
                 </Link>
               </div>
               <Link
@@ -234,37 +244,15 @@ function LayoutContent({ children, currentPageName }) {
               </Link>
               <Link
                 to={createPageUrl('Milo')}
-                className="block py-2 transition-colors"
-                style={{ color: 'var(--accent)' }}
+                className="block py-2 font-bold transition-colors px-4 -mx-4 rounded-lg"
+                style={{ 
+                  background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
+                  color: 'white'
+                }}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 ✨ MILO
               </Link>
-              <Link
-                to={createPageUrl('ContentStudio')}
-                className="block py-2 transition-colors"
-                style={{ color: 'var(--text-secondary)' }}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Content Studio
-              </Link>
-              <Link
-                to={createPageUrl('FAQ')}
-                className="block py-2 transition-colors"
-                style={{ color: 'var(--text-secondary)' }}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Support
-              </Link>
-              <div className="py-2">
-                <div className="font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Guides</div>
-                <Link to={createPageUrl('AdminSetupGuide')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
-                  Admin Setup
-                </Link>
-                <Link to={createPageUrl('UserOnboardingGuide')} className="block py-1 pl-4 text-sm transition-colors" style={{ color: 'var(--text-muted)' }} onClick={() => setMobileMenuOpen(false)}>
-                  User Onboarding
-                </Link>
-              </div>
               {user ? (
                 <>
                   {profile && (

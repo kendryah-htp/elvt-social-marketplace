@@ -52,18 +52,18 @@ export default function AppDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen elvt-gradient">
+      <div className="min-h-screen" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <div className="aspect-video bg-[#2A2A2A] rounded-2xl animate-pulse" />
-              <div className="h-12 bg-[#2A2A2A] rounded animate-pulse" />
+              <div className="aspect-video rounded-2xl animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
+              <div className="h-12 rounded animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
             </div>
             <div className="space-y-6">
-              <div className="h-12 bg-[#2A2A2A] rounded animate-pulse" />
-              <div className="h-8 bg-[#2A2A2A] rounded animate-pulse" />
-              <div className="h-24 bg-[#2A2A2A] rounded animate-pulse" />
-              <div className="h-16 bg-[#2A2A2A] rounded animate-pulse" />
+              <div className="h-12 rounded animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
+              <div className="h-8 rounded animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
+              <div className="h-24 rounded animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
+              <div className="h-16 rounded animate-pulse" style={{ backgroundColor: '#F0EDFF' }} />
             </div>
           </div>
         </div>
@@ -73,11 +73,11 @@ export default function AppDetail() {
 
   if (!app) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center px-4">
+      <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="text-center">
-          <p className="text-xl md:text-2xl text-[#E5E0DB] mb-4 md:mb-6">App not found</p>
+          <p className="text-xl md:text-2xl mb-4 md:mb-6" style={{ color: '#2E2E42' }}>App not found</p>
           <Link to={createPageUrl('AppCatalog')}>
-            <Button className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] h-11 md:h-12">
+            <Button className="text-white h-11 md:h-12" style={{ backgroundColor: '#7C3AED' }}>
               Back to Catalog
             </Button>
           </Link>
@@ -91,7 +91,7 @@ export default function AppDetail() {
       {showLoader && <QuoteLoader onComplete={handleLoaderComplete} />}
       <AppDemoModal app={app} isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
       
-      <div className="min-h-screen elvt-gradient pb-24 md:pb-12">
+      <div className="min-h-screen pb-24 md:pb-12" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-12">
           {/* Back Button */}
           <motion.div
@@ -100,7 +100,7 @@ export default function AppDetail() {
             className="mb-6 md:mb-8"
           >
             <Link to={createPageUrl('AppCatalog')}>
-              <Button variant="ghost" className="text-[#D4AF37] hover:text-[#E5C158] h-10 md:h-11">
+              <Button variant="ghost" className="h-10 md:h-11" style={{ color: '#7C3AED' }}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Catalog
               </Button>
@@ -115,7 +115,7 @@ export default function AppDetail() {
               transition={{ delay: 0.1 }}
             >
               {!showDemo && app.thumbnail_url && (
-                <div className="aspect-video bg-[#2A2A2A] rounded-xl md:rounded-2xl overflow-hidden mb-4 md:mb-6">
+                <div className="aspect-video rounded-xl md:rounded-2xl overflow-hidden mb-4 md:mb-6" style={{ backgroundColor: '#F0EDFF' }}>
                   <img
                     src={app.thumbnail_url}
                     alt={app.name}
@@ -125,7 +125,10 @@ export default function AppDetail() {
               )}
 
               {showDemo && app.demo_url && (
-                <div className="aspect-video rounded-xl md:rounded-2xl overflow-hidden mb-4 md:mb-6 elvt-glass">
+                <div className="aspect-video rounded-xl md:rounded-2xl overflow-hidden mb-4 md:mb-6 border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
                   <iframe
                     src={app.demo_url}
                     className="w-full h-full"
@@ -139,7 +142,8 @@ export default function AppDetail() {
                 <Button
                   onClick={() => setIsDemoModalOpen(true)}
                   variant="outline"
-                  className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A] mb-4 md:mb-6 h-11 md:h-12 hidden md:flex"
+                  className="w-full mb-4 md:mb-6 h-11 md:h-12 hidden md:flex"
+                  style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                 >
                   <Eye className="w-4 md:w-5 h-4 md:h-5 mr-2" />
                   View Live Demo
@@ -148,13 +152,16 @@ export default function AppDetail() {
 
               {/* Features */}
               {app.features?.length > 0 && (
-                <div className="elvt-glass rounded-xl md:rounded-2xl p-4 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-[#F5F0EB] mb-3 md:mb-4">Key Features</h3>
+                <div className="rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4" style={{ color: '#1A1A2E' }}>Key Features</h3>
                   <ul className="space-y-2 md:space-y-3">
                     {app.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2 md:gap-3">
-                        <Check className="w-4 md:w-5 h-4 md:h-5 text-[#D4AF37] mt-0.5 flex-shrink-0" />
-                        <span className="text-sm md:text-base text-[#E5E0DB]">{feature}</span>
+                        <Check className="w-4 md:w-5 h-4 md:h-5 mt-0.5 flex-shrink-0" style={{ color: '#7C3AED' }} />
+                        <span className="text-sm md:text-base" style={{ color: '#2E2E42' }}>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -179,19 +186,24 @@ export default function AppDetail() {
                 </div>
               )}
 
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4" style={{ 
+                background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
                 {app.name}
               </h1>
 
               <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
-                <div className="text-3xl md:text-5xl font-bold text-[#D4AF37]">
+                <div className="text-3xl md:text-5xl font-bold" style={{ color: '#7C3AED' }}>
                   ${app.price}
                 </div>
                 
                 {app.social_proof_rating && (
                   <div className="flex items-center gap-1 md:gap-2">
-                    <Star className="w-4 md:w-5 h-4 md:h-5 fill-[#D4AF37] text-[#D4AF37]" />
-                    <span className="text-lg md:text-xl font-semibold text-[#F5F0EB]">
+                    <Star className="w-4 md:w-5 h-4 md:h-5" style={{ fill: '#7C3AED', color: '#7C3AED' }} />
+                    <span className="text-lg md:text-xl font-semibold" style={{ color: '#1A1A2E' }}>
                       {app.social_proof_rating.toFixed(1)}
                     </span>
                   </div>
@@ -199,14 +211,17 @@ export default function AppDetail() {
               </div>
 
               {app.social_proof_purchases > 0 && (
-                <p className="text-sm md:text-base text-[#E5E0DB] mb-4 md:mb-6">
+                <p className="text-sm md:text-base mb-4 md:mb-6" style={{ color: '#6B6B80' }}>
                   ✨ Trusted by {app.social_proof_purchases}+ customers
                 </p>
               )}
 
-              <div className="elvt-glass rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 hidden md:block">
-                <h3 className="text-base md:text-lg font-semibold text-[#F5F0EB] mb-2 md:mb-3">Description</h3>
-                <p className="text-sm md:text-base text-[#E5E0DB] leading-relaxed whitespace-pre-line">
+              <div className="rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 hidden md:block border shadow-lg" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}>
+                <h3 className="text-base md:text-lg font-semibold mb-2 md:mb-3" style={{ color: '#1A1A2E' }}>Description</h3>
+                <p className="text-sm md:text-base leading-relaxed whitespace-pre-line" style={{ color: '#2E2E42' }}>
                   {app.description || app.short_description}
                 </p>
               </div>
@@ -215,14 +230,18 @@ export default function AppDetail() {
                 <Button
                   onClick={handlePurchase}
                   size="lg"
-                  className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-5 md:py-6 text-base md:text-lg h-12 md:h-auto"
+                  className="w-full font-bold py-5 md:py-6 text-base md:text-lg h-12 md:h-auto text-white"
+                  style={{ backgroundColor: '#7C3AED' }}
                 >
                   <ShoppingCart className="w-4 md:w-5 h-4 md:h-5 mr-2" />
                   Purchase Now
                 </Button>
 
-                <div className="elvt-glass rounded-xl p-3 md:p-4">
-                  <p className="text-xs md:text-sm text-[#E5E0DB] text-center">
+                <div className="rounded-xl p-3 md:p-4 border shadow-md" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <p className="text-xs md:text-sm text-center" style={{ color: '#6B6B80' }}>
                     💰 Earn {app.commission_rate}% commission by sharing this app
                   </p>
                 </div>
@@ -232,13 +251,18 @@ export default function AppDetail() {
         </div>
 
         {/* Mobile Fixed Bottom CTA */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 elvt-glass border-t p-4 z-50" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.2)' }}>
+        <div className="md:hidden fixed bottom-0 left-0 right-0 border-t p-4 z-50 shadow-2xl" style={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.98)',
+          backdropFilter: 'blur(24px)',
+          borderTop: '1px solid rgba(139, 92, 246, 0.2)'
+        }}>
           <div className="flex gap-2">
             {app.demo_url && (
               <Button
                 onClick={() => setIsDemoModalOpen(true)}
                 variant="outline"
-                className="flex-1 h-12 border-[#D4AF37] text-[#D4AF37]"
+                className="flex-1 h-12"
+                style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
               >
                 <Eye className="w-4 h-4 mr-1" />
                 Demo
@@ -246,7 +270,8 @@ export default function AppDetail() {
             )}
             <Button
               onClick={handlePurchase}
-              className="flex-1 h-12 bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold"
+              className="flex-1 h-12 font-bold text-white"
+              style={{ backgroundColor: '#7C3AED' }}
             >
               <ShoppingCart className="w-4 h-4 mr-1" />
               Buy ${app.price}

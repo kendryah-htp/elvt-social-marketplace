@@ -113,7 +113,7 @@ function HomeContent() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
           {[
-            { step: '01', title: '✨ Ask MILO', desc: 'Tell MILO what to write. Get blog posts, social content, email copy in seconds—all in your brand voice', icon: Sparkles },
+            { step: '01', title: 'Ask MILO', desc: 'Tell MILO what to write. Get blog posts, social content, email copy in seconds—all in your brand voice', icon: Sparkles },
             { step: '02', title: 'Share & Build', desc: 'Publish your content, build your audience, and share your curated storefront link', icon: Zap },
             { step: '03', title: 'Earn Commissions', desc: 'Get paid 30% on every sale + build long-term audience loyalty', icon: TrendingUp }
           ].map((item, idx) => (
@@ -158,9 +158,9 @@ function HomeContent() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {[
             { icon: Zap, title: 'MILO AI Strategist', desc: 'Architecture-first AI that helps you build and scale with precision—no fluff', isSpecial: true },
-            { icon: Shield, title: 'Curated App Catalog', desc: 'Pre-vetted products you can confidently promote' },
-            { icon: TrendingUp, title: 'Built-in Blog Engine', desc: 'Guided onboarding + SEO templates included' },
-            { icon: Clock, title: 'Instant Payouts', desc: 'Get paid fast for every sale and referral' }
+            { icon: Shield, title: 'Curated App Catalog', desc: 'Pre-vetted products you can confidently promote', isSpecial: false },
+            { icon: TrendingUp, title: 'Built-in Blog Engine', desc: 'Guided onboarding + SEO templates included', isSpecial: false },
+            { icon: Clock, title: 'Instant Payouts', desc: 'Get paid fast for every sale and referral', isSpecial: false }
           ].map((feature, idx) => (
             <FeatureCard key={idx} {...feature} index={idx} />
           ))}

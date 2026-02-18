@@ -252,10 +252,10 @@ export default function SavedPrompts() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4 animate-spin" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
-          <p style={{ color: 'var(--text-secondary)' }}>Loading prompts...</p>
+          <div className="w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4 animate-spin" style={{ borderColor: '#7C3AED', borderTopColor: 'transparent' }} />
+          <p style={{ color: '#2E2E42' }}>Loading prompts...</p>
         </div>
       </div>
     );
@@ -264,7 +264,7 @@ export default function SavedPrompts() {
   const isAdmin = isSuperAdmin(user.email);
 
   return (
-    <div className="min-h-screen elvt-gradient">
+    <div className="min-h-screen" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <motion.div
@@ -274,8 +274,13 @@ export default function SavedPrompts() {
         >
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-4xl font-bold text-gradient mb-2">Saved Prompts</h1>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <h1 className="text-4xl font-bold mb-2" style={{ 
+                background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>Saved Prompts</h1>
+              <p style={{ color: '#6B6B80' }}>
                 {isAdmin ? 'Manage global and personal prompts' : 'Browse and use saved prompt templates'}
               </p>
             </div>
@@ -285,8 +290,8 @@ export default function SavedPrompts() {
                   setSelectedPrompt(null);
                   setIsEditing(true);
                 }}
-                className="gap-2 pulse-glow"
-                style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                className="gap-2 text-white shadow-lg"
+                style={{ backgroundColor: '#7C3AED' }}
               >
                 <Plus className="w-5 h-5" />
                 New Prompt
@@ -300,30 +305,35 @@ export default function SavedPrompts() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="elvt-glass rounded-xl p-6 mb-8"
+          className="rounded-xl p-6 mb-8 border shadow-lg" style={{ 
+            backgroundColor: 'white',
+            borderColor: 'rgba(139, 92, 246, 0.15)'
+          }}
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search */}
             <div>
-              <label className="text-sm font-medium mb-2 block" style={{ color: 'var(--text-secondary)' }}>
+              <label className="text-sm font-medium mb-2 block" style={{ color: '#6B6B80' }}>
                 Search
               </label>
               <Input
                 placeholder="Search by title or content..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)' }}
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="text-sm font-medium mb-2 block" style={{ color: 'var(--text-secondary)' }}>
+              <label className="text-sm font-medium mb-2 block" style={{ color: '#6B6B80' }}>
                 Category
               </label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white text-sm"
+                className="w-full px-3 py-2 rounded-md border text-sm"
+                style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
               >
                 <option value="">All Categories</option>
                 {categories.map(cat => (
@@ -334,13 +344,14 @@ export default function SavedPrompts() {
 
             {/* Status */}
             <div>
-              <label className="text-sm font-medium mb-2 block" style={{ color: 'var(--text-secondary)' }}>
+              <label className="text-sm font-medium mb-2 block" style={{ color: '#6B6B80' }}>
                 Status
               </label>
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white text-sm"
+                className="w-full px-3 py-2 rounded-md border text-sm"
+                style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
               >
                 <option value="active">Active</option>
                 <option value="draft">Draft</option>
@@ -351,13 +362,14 @@ export default function SavedPrompts() {
 
             {/* Sort */}
             <div>
-              <label className="text-sm font-medium mb-2 block" style={{ color: 'var(--text-secondary)' }}>
+              <label className="text-sm font-medium mb-2 block" style={{ color: '#6B6B80' }}>
                 Sort By
               </label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white text-sm"
+                className="w-full px-3 py-2 rounded-md border text-sm"
+                style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
               >
                 <option value="-created_date">Newest</option>
                 <option value="-use_count">Most Used</option>
@@ -377,20 +389,26 @@ export default function SavedPrompts() {
           {promptsLoading ? (
             <div className="space-y-4">
               {[1, 2, 3].map(i => (
-                <div key={i} className="elvt-glass rounded-xl p-6 animate-pulse">
-                  <div className="h-6 bg-gray-700/20 rounded mb-3" />
-                  <div className="h-4 bg-gray-700/20 rounded w-3/4 mb-2" />
-                  <div className="h-4 bg-gray-700/20 rounded w-1/2" />
+                <div key={i} className="rounded-xl p-6 animate-pulse border shadow-lg" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <div className="h-6 rounded mb-3" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
+                  <div className="h-4 rounded w-3/4 mb-2" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
+                  <div className="h-4 rounded w-1/2" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }} />
                 </div>
               ))}
             </div>
           ) : prompts.length === 0 ? (
-            <div className="elvt-glass rounded-xl p-8 md:p-12 text-center">
-              <div className="w-12 md:w-16 h-12 md:h-16 mx-auto mb-4 md:mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}>
-                <AlertCircle className="w-6 md:w-8 h-6 md:h-8" style={{ color: 'var(--accent)' }} />
+            <div className="rounded-xl p-8 md:p-12 text-center border shadow-lg" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}>
+              <div className="w-12 md:w-16 h-12 md:h-16 mx-auto mb-4 md:mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#F0EDFF' }}>
+                <AlertCircle className="w-6 md:w-8 h-6 md:h-8" style={{ color: '#7C3AED' }} />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>No prompts found</h3>
-              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: '#1A1A2E' }}>No prompts found</h3>
+              <p className="text-sm md:text-base" style={{ color: '#2E2E42' }}>
                 {isAdmin ? 'Create your first prompt to get started' : 'Check back soon for new prompts'}
               </p>
               {isAdmin && (
@@ -399,8 +417,8 @@ export default function SavedPrompts() {
                     setSelectedPrompt(null);
                     setIsEditing(true);
                   }}
-                  className="mt-6 font-semibold"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="mt-6 font-semibold text-white shadow-lg"
+                  style={{ backgroundColor: '#7C3AED' }}
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Create First Prompt
@@ -431,7 +449,10 @@ export default function SavedPrompts() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="elvt-glass rounded-xl w-full max-w-2xl p-8 my-8"
+              className="rounded-xl w-full max-w-2xl p-8 my-8 border shadow-2xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
               <PromptEditorForm
                 initialData={selectedPrompt}
@@ -454,31 +475,42 @@ export default function SavedPrompts() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="elvt-glass rounded-xl max-w-3xl w-full p-8 my-8"
+              className="rounded-xl max-w-3xl w-full p-8 my-8 border shadow-2xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
               <div className="flex items-start justify-between mb-6">
-                <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-2xl font-bold" style={{ color: '#1A1A2E' }}>
                   {selectedPrompt.title}
                 </h2>
                 <button
                   onClick={() => setSelectedPrompt(null)}
-                  className="text-gray-400 hover:text-gray-600"
+                  style={{ color: '#6B6B80' }}
+                  className="hover:opacity-70"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-6 mb-6 font-mono text-sm whitespace-pre-wrap border border-gray-200 dark:border-gray-700">
+              <div className="rounded-lg p-6 mb-6 font-mono text-sm whitespace-pre-wrap border shadow-sm" style={{ 
+                backgroundColor: '#F8F7FF',
+                borderColor: 'rgba(139, 92, 246, 0.2)',
+                color: '#1A1A2E'
+              }}>
                 {selectedPrompt.prompt_body}
               </div>
 
               {selectedPrompt.variables_schema?.length > 0 && (
-                <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                  <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Variables</h3>
+                <div className="mb-6 p-4 rounded-lg border shadow-sm" style={{ 
+                  backgroundColor: '#F0EDFF',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <h3 className="text-sm font-semibold mb-3" style={{ color: '#1A1A2E' }}>Variables</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedPrompt.variables_schema.map(v => (
-                      <div key={v.key} className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                        <code style={{ color: 'var(--accent)' }}>{`{{${v.key}}}`}</code>
+                      <div key={v.key} className="text-xs" style={{ color: '#2E2E42' }}>
+                        <code style={{ color: '#7C3AED' }}>{`{{${v.key}}}`}</code>
                         {v.description && <div className="mt-1">{v.description}</div>}
                       </div>
                     ))}
@@ -489,13 +521,13 @@ export default function SavedPrompts() {
               <div className="flex flex-wrap gap-2 mb-6">
                 {selectedPrompt.tags?.map(tag => (
                   <span key={tag} className="text-xs px-2 py-1 rounded-full" 
-                    style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
+                    style={{ backgroundColor: '#F0EDFF', color: '#2E2E42' }}>
                     #{tag}
                   </span>
                 ))}
               </div>
 
-              <div className="flex items-center gap-3 pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
+              <div className="flex items-center gap-3 pt-6 border-t" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}>
                 <CopyButton
                   textToCopy={selectedPrompt.prompt_body}
                   label="Copy Prompt"

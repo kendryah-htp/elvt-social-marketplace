@@ -66,16 +66,17 @@ export default function Storefront() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen elvt-gradient flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="text-center">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="w-16 h-16 border-4 border-t-transparent rounded-full mx-auto mb-4"
-            style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }}
+            style={{ borderColor: '#7C3AED', borderTopColor: 'transparent' }}
           />
-          <p style={{ color: 'var(--text-secondary)' }} className="font-semibold">Loading storefront...</p>
+          <p style={{ color: '#2E2E42' }} className="font-semibold">Loading storefront...</p>
         </div>
       </motion.div>
     );
@@ -83,10 +84,10 @@ export default function Storefront() {
 
   if (!profile) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Storefront Not Found</h1>
-          <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>This affiliate storefront doesn't exist</p>
+          <h1 className="text-4xl font-bold mb-4" style={{ color: '#1A1A2E' }}>Storefront Not Found</h1>
+          <p className="mb-8" style={{ color: '#2E2E42' }}>This affiliate storefront doesn't exist</p>
         </div>
       </div>
     );

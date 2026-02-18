@@ -95,17 +95,17 @@ export default function Onboarding() {
 
   if (!user || (profileLoading)) {
     return (
-      <div className="min-h-screen elvt-gradient flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--accent)' }} />
-          <p style={{ color: 'var(--text-secondary)' }}>Loading...</p>
+          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: '#7C3AED', borderTopColor: 'transparent' }} />
+          <p style={{ color: '#2E2E42' }}>Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen elvt-gradient flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-4xl w-full">
         {/* Progress Bar */}
         <div className="mb-12">
@@ -113,17 +113,20 @@ export default function Onboarding() {
             {[1, 2, 3].map(s => (
               <div key={s} className="flex items-center flex-1">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
-                  s <= step ? 'text-white' : 'text-[#E5E0DB]'
-                }`} style={{ backgroundColor: s <= step ? 'var(--accent)' : 'var(--bg-tertiary)' }}>
+                  s <= step ? 'text-white' : ''
+                }`} style={{ 
+                  backgroundColor: s <= step ? '#7C3AED' : '#F0EDFF',
+                  color: s <= step ? 'white' : '#6B6B80'
+                }}>
                   {s < step ? <Check className="w-5 h-5" /> : s}
                 </div>
                 {s < 3 && (
-                  <div className={`flex-1 h-1 mx-2 transition-all`} style={{ backgroundColor: s < step ? 'var(--accent)' : 'var(--bg-tertiary)' }} />
+                  <div className={`flex-1 h-1 mx-2 transition-all`} style={{ backgroundColor: s < step ? '#7C3AED' : '#F0EDFF' }} />
                 )}
               </div>
             ))}
           </div>
-          <div className="flex justify-between text-sm" style={{ color: 'var(--text-secondary)' }}>
+          <div className="flex justify-between text-sm" style={{ color: '#6B6B80' }}>
             <span>Choose Theme</span>
             <span>Select Apps</span>
             <span>Personalize</span>
@@ -138,14 +141,22 @@ export default function Onboarding() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="elvt-glass rounded-2xl p-8"
+              className="rounded-2xl p-8 border shadow-xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <Palette className="w-8 h-8" style={{ color: 'var(--accent)' }} />
-                <h2 className="text-3xl font-bold text-gradient">Choose Your Theme</h2>
+                <Palette className="w-8 h-8" style={{ color: '#7C3AED' }} />
+                <h2 className="text-3xl font-bold" style={{ 
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>Choose Your Theme</h2>
               </div>
               
-              <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
+              <p className="mb-8" style={{ color: '#2E2E42' }}>
                 Select the visual style for your affiliate storefront
               </p>
 
@@ -155,19 +166,19 @@ export default function Onboarding() {
                     key={theme.value}
                     whileHover={{ scale: 1.02 }}
                     onClick={() => setFormData({ ...formData, theme: theme.value })}
-                    className={`cursor-pointer rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`cursor-pointer rounded-xl overflow-hidden border-2 transition-all shadow-md hover:shadow-lg ${
                       formData.theme === theme.value 
-                        ? 'elvt-glow' 
+                        ? 'shadow-xl' 
                         : 'hover:opacity-80'
                     }`}
                     style={{ 
-                      borderColor: formData.theme === theme.value ? 'var(--accent)' : 'var(--border)'
+                      borderColor: formData.theme === theme.value ? '#7C3AED' : 'rgba(139, 92, 246, 0.15)'
                     }}
                   >
                     <div className={`h-32 ${theme.preview}`} />
-                    <div className="p-4" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-                      <h3 className="font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{theme.name}</h3>
-                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{theme.description}</p>
+                    <div className="p-4" style={{ backgroundColor: '#F8F7FF' }}>
+                      <h3 className="font-bold mb-1" style={{ color: '#1A1A2E' }}>{theme.name}</h3>
+                      <p className="text-sm" style={{ color: '#2E2E42' }}>{theme.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -177,8 +188,8 @@ export default function Onboarding() {
                 <Button
                   onClick={handleNext}
                   size="lg"
-                  className="font-semibold"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="font-semibold text-white shadow-lg"
+                  style={{ backgroundColor: '#7C3AED' }}
                 >
                   Continue <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -193,14 +204,22 @@ export default function Onboarding() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="elvt-glass rounded-2xl p-8"
+              className="rounded-2xl p-8 border shadow-xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <AppWindow className="w-8 h-8" style={{ color: 'var(--accent)' }} />
-                <h2 className="text-3xl font-bold text-gradient">Select Apps to Promote</h2>
+                <AppWindow className="w-8 h-8" style={{ color: '#7C3AED' }} />
+                <h2 className="text-3xl font-bold" style={{ 
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>Select Apps to Promote</h2>
               </div>
               
-              <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
+              <p className="mb-8" style={{ color: '#2E2E42' }}>
                 Choose which apps you want to feature on your storefront (you can change this anytime)
               </p>
 
@@ -209,15 +228,17 @@ export default function Onboarding() {
                   <div
                     key={app.id}
                     onClick={() => toggleApp(app.id)}
-                    className="flex items-center gap-4 p-4 elvt-glass rounded-lg cursor-pointer border transition-all hover:opacity-80"
-                    style={{ borderColor: 'var(--border)' }}
+                    className="flex items-center gap-4 p-4 rounded-lg cursor-pointer border transition-all hover:opacity-80 shadow-md" style={{ 
+                      backgroundColor: 'white',
+                      borderColor: 'rgba(139, 92, 246, 0.15)'
+                    }}
                   >
                     <Checkbox checked={formData.selectedApps.includes(app.id)} />
                     <div className="flex-1">
-                      <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>{app.name}</h4>
-                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{app.short_description}</p>
+                      <h4 className="font-semibold" style={{ color: '#1A1A2E' }}>{app.name}</h4>
+                      <p className="text-sm" style={{ color: '#2E2E42' }}>{app.short_description}</p>
                     </div>
-                    <span className="font-bold" style={{ color: 'var(--accent)' }}>${app.price}</span>
+                    <span className="font-bold" style={{ color: '#7C3AED' }}>${app.price}</span>
                   </div>
                 ))}
               </div>
@@ -227,7 +248,7 @@ export default function Onboarding() {
                   onClick={() => setStep(1)}
                   variant="outline"
                   size="lg"
-                  style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                  style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                 >
                   <ArrowLeft className="mr-2 w-5 h-5" /> Back
                 </Button>
@@ -235,8 +256,8 @@ export default function Onboarding() {
                   onClick={handleNext}
                   size="lg"
                   disabled={formData.selectedApps.length === 0}
-                  className="font-semibold"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="font-semibold text-white shadow-lg"
+                  style={{ backgroundColor: '#7C3AED' }}
                 >
                   Continue <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -251,43 +272,51 @@ export default function Onboarding() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="elvt-glass rounded-2xl p-8"
+              className="rounded-2xl p-8 border shadow-xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <User className="w-8 h-8" style={{ color: 'var(--accent)' }} />
-                <h2 className="text-3xl font-bold text-gradient">Personalize Your Storefront</h2>
+                <User className="w-8 h-8" style={{ color: '#7C3AED' }} />
+                <h2 className="text-3xl font-bold" style={{ 
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>Personalize Your Storefront</h2>
               </div>
               
-              <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
+              <p className="mb-8" style={{ color: '#2E2E42' }}>
                 Add your bio and social links (optional)
               </p>
 
               <div className="space-y-6 mb-8">
                 <div>
-                  <Label className="mb-2" style={{ color: 'var(--text-primary)' }}>Bio</Label>
+                  <Label className="mb-2" style={{ color: '#1A1A2E' }}>Bio</Label>
                   <Textarea
                     value={formData.bio}
                     onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                     placeholder="Tell people about yourself..."
                     className="min-h-24"
-                    style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                    style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
                   />
                 </div>
 
                 <div>
-                  <Label className="mb-2" style={{ color: 'var(--text-primary)' }}>Profile Image URL (optional)</Label>
+                  <Label className="mb-2" style={{ color: '#1A1A2E' }}>Profile Image URL (optional)</Label>
                   <Input
                     value={formData.avatar_url}
                     onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
                     placeholder="https://..."
-                    style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                    style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   {['instagram', 'youtube', 'facebook', 'linkedin', 'twitter', 'website'].map(platform => (
                     <div key={platform}>
-                      <Label className="mb-2 capitalize" style={{ color: 'var(--text-primary)' }}>{platform}</Label>
+                      <Label className="mb-2 capitalize" style={{ color: '#1A1A2E' }}>{platform}</Label>
                       <Input
                         value={formData.social_links[platform] || ''}
                         onChange={(e) => setFormData({
@@ -295,7 +324,7 @@ export default function Onboarding() {
                           social_links: { ...formData.social_links, [platform]: e.target.value }
                         })}
                         placeholder={`https://${platform}.com/...`}
-                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                        style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
                       />
                     </div>
                   ))}
@@ -307,7 +336,7 @@ export default function Onboarding() {
                   onClick={() => setStep(2)}
                   variant="outline"
                   size="lg"
-                  style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                  style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                 >
                   <ArrowLeft className="mr-2 w-5 h-5" /> Back
                 </Button>
@@ -315,8 +344,8 @@ export default function Onboarding() {
                   onClick={handleComplete}
                   size="lg"
                   disabled={updateProfileMutation.isLoading}
-                  className="font-bold pulse-glow"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="font-bold shadow-lg"
+                  style={{ backgroundColor: '#7C3AED', color: 'white' }}
                 >
                   {updateProfileMutation.isLoading ? (
                     <>

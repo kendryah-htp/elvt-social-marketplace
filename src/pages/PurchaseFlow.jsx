@@ -127,38 +127,41 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <Label className="text-[#F5F0EB]">Full Name</Label>
+        <Label style={{ color: '#1A1A2E' }}>Full Name</Label>
         <Input
           value={buyerInfo.name}
           onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
           placeholder="John Doe"
-          className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+          style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
           required
         />
       </div>
 
       <div>
-        <Label className="text-[#F5F0EB]">Email Address</Label>
+        <Label style={{ color: '#1A1A2E' }}>Email Address</Label>
         <Input
           type="email"
           value={buyerInfo.email}
           onChange={(e) => setBuyerInfo({ ...buyerInfo, email: e.target.value })}
           placeholder="john@example.com"
-          className="bg-[#1A1A1A] border-[#D4AF37]/20 text-[#F5F0EB]"
+          style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.2)', color: '#1A1A2E' }}
           required
         />
       </div>
 
-      <div className="border-t border-[#D4AF37]/20 pt-6">
-        <Label className="text-[#F5F0EB] mb-4 block">Card Details</Label>
-        <div className="bg-[#1A1A1A] border border-[#D4AF37]/20 rounded-lg p-4">
+      <div className="border-t pt-6" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}>
+        <Label className="mb-4 block" style={{ color: '#1A1A2E' }}>Card Details</Label>
+        <div className="border rounded-lg p-4 shadow-sm" style={{ 
+          backgroundColor: '#F8F7FF',
+          borderColor: 'rgba(139, 92, 246, 0.2)'
+        }}>
           <CardElement
             options={{
               style: {
                 base: {
                   fontSize: '16px',
-                  color: '#F5F0EB',
-                  '::placeholder': { color: '#E5E0DB' }
+                  color: '#1A1A2E',
+                  '::placeholder': { color: '#6B6B80' }
                 }
               }
             }}
@@ -177,11 +180,12 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
           type="submit"
           size="lg"
           disabled={!stripe || processing}
-          className="w-full bg-[#D4AF37] hover:bg-[#E5C158] text-[#0A0A0A] font-bold py-6 text-lg"
+          className="w-full font-bold py-6 text-lg text-white shadow-lg"
+          style={{ backgroundColor: '#7C3AED' }}
         >
           {processing ? (
             <>
-              <div className="inline-block w-4 h-4 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin mr-2" />
+              <div className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
               Processing Payment...
             </>
           ) : `Pay $${app.price}`}
@@ -197,15 +201,16 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
               setError(null);
               setRetryCount(retryCount + 1);
             }}
-            className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 font-semibold"
+            className="w-full font-semibold"
+            style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
           >
             Try Again
           </Button>
         )}
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-sm text-[#E5E0DB]">
-        <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+      <div className="flex items-center justify-center gap-2 text-sm" style={{ color: '#6B6B80' }}>
+        <ShieldCheck className="w-4 h-4" style={{ color: '#7C3AED' }} />
         <span>Secure checkout powered by Stripe</span>
       </div>
     </form>
@@ -245,15 +250,17 @@ export default function PurchaseFlow() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen elvt-gradient flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="text-center">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full mx-auto mb-4"
+            className="w-16 h-16 border-4 border-t-transparent rounded-full mx-auto mb-4"
+            style={{ borderColor: '#7C3AED', borderTopColor: 'transparent' }}
           />
-          <p className="text-[#E5E0DB] font-semibold">Loading checkout...</p>
+          <p className="font-semibold" style={{ color: '#2E2E42' }}>Loading checkout...</p>
         </div>
       </motion.div>
     );
@@ -264,12 +271,13 @@ export default function PurchaseFlow() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen elvt-gradient flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="text-center">
-          <p className="text-[#E5E0DB] text-lg mb-6">App not found</p>
+          <p className="text-lg mb-6" style={{ color: '#2E2E42' }}>App not found</p>
           <Link to={createPageUrl('AppCatalog')}>
-            <Button style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+            <Button className="text-white shadow-lg" style={{ backgroundColor: '#7C3AED' }}>
               Browse Apps
             </Button>
           </Link>
@@ -280,10 +288,10 @@ export default function PurchaseFlow() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen elvt-gradient py-12">
+      <div className="min-h-screen py-12" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-5xl mx-auto px-6">
         <Link to={createPageUrl('AppDetail') + '?id=' + appId}>
-          <Button variant="ghost" className="text-[#D4AF37] hover:text-[#E5C158] mb-8">
+          <Button variant="ghost" className="mb-8" style={{ color: '#7C3AED' }}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to App
           </Button>
@@ -295,8 +303,11 @@ export default function PurchaseFlow() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <Card className="elvt-glass p-6 max-sm:p-4">
-              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 max-sm:text-xl">Order Summary</h2>
+            <Card className="p-6 max-sm:p-4 border shadow-lg" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}>
+              <h2 className="text-2xl font-bold mb-6 max-sm:text-xl" style={{ color: '#1A1A2E' }}>Order Summary</h2>
               
               <div className="space-y-4 mb-6">
                 {app.thumbnail_url && (
@@ -308,26 +319,32 @@ export default function PurchaseFlow() {
                 )}
                 
                 <div>
-                  <h3 className="text-xl font-semibold text-[#F5F0EB]">{app.name}</h3>
-                  <p className="text-[#E5E0DB] text-sm mt-1">{app.short_description}</p>
+                  <h3 className="text-xl font-semibold" style={{ color: '#1A1A2E' }}>{app.name}</h3>
+                  <p className="text-sm mt-1" style={{ color: '#6B6B80' }}>{app.short_description}</p>
                 </div>
               </div>
 
-              <div className="border-t border-[#D4AF37]/20 pt-6 space-y-3">
-                <div className="flex justify-between text-[#E5E0DB]">
+              <div className="border-t pt-6 space-y-3" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}>
+                <div className="flex justify-between" style={{ color: '#6B6B80' }}>
                   <span>Price</span>
                   <span className="font-semibold">${app.price}</span>
                 </div>
-                <div className="flex justify-between text-2xl font-bold text-[#D4AF37] pt-3 border-t border-[#D4AF37]/20">
+                <div className="flex justify-between text-2xl font-bold pt-3 border-t" style={{ 
+                  color: '#7C3AED',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
                   <span>Total</span>
                   <span>${app.price}</span>
                 </div>
               </div>
 
               {affiliate && (
-                <div className="mt-6 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-lg p-4">
-                  <p className="text-sm text-[#E5E0DB] text-center">
-                    Supporting: <span className="font-semibold text-[#D4AF37]">{affiliate.full_name}</span>
+                <div className="mt-6 rounded-lg p-4 border shadow-sm" style={{ 
+                  backgroundColor: '#F0EDFF',
+                  borderColor: 'rgba(139, 92, 246, 0.2)'
+                }}>
+                  <p className="text-sm text-center" style={{ color: '#2E2E42' }}>
+                    Supporting: <span className="font-semibold" style={{ color: '#7C3AED' }}>{affiliate.full_name}</span>
                   </p>
                 </div>
               )}
@@ -340,9 +357,12 @@ export default function PurchaseFlow() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="elvt-glass p-6 max-sm:p-4">
-              <h2 className="text-2xl font-bold text-[#F5F0EB] mb-6 flex items-center gap-2 max-sm:text-xl">
-                <CreditCard className="w-6 h-6 text-[#D4AF37]" />
+            <Card className="p-6 max-sm:p-4 border shadow-lg" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 max-sm:text-xl" style={{ color: '#1A1A2E' }}>
+                <CreditCard className="w-6 h-6" style={{ color: '#7C3AED' }} />
                 Complete Purchase
               </h2>
               
@@ -356,10 +376,13 @@ export default function PurchaseFlow() {
                   />
                 </Elements>
               ) : (
-                <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-lg p-6 text-center">
-                  <CreditCard className="w-12 h-12 text-[#D4AF37] mx-auto mb-4" />
-                  <p className="text-[#E5E0DB] font-semibold mb-2">Payment Setup Required</p>
-                  <p className="text-sm text-[#E5E0DB]/80">
+                <div className="rounded-lg p-6 text-center border shadow-md" style={{ 
+                  backgroundColor: '#FEF3C7',
+                  borderColor: '#F59E0B'
+                }}>
+                  <CreditCard className="w-12 h-12 mx-auto mb-4" style={{ color: '#F59E0B' }} />
+                  <p className="font-semibold mb-2" style={{ color: '#78350F' }}>Payment Setup Required</p>
+                  <p className="text-sm" style={{ color: '#92400E' }}>
                     Stripe integration is not configured. Please add VITE_STRIPE_PUBLISHABLE_KEY to your environment variables.
                   </p>
                 </div>

@@ -28,7 +28,7 @@ function HomeContent() {
   });
 
   return (
-    <div className="min-h-screen elvt-gradient overflow-hidden">
+    <div className="min-h-screen overflow-hidden" style={{ backgroundColor: '#FAFAFA' }}>
       <AnalyticsTracker />
       
       {/* 1. Hero Block */}
@@ -47,8 +47,13 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gradient">Find Your Perfect Solution</h2>
-          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Find Your Perfect Solution</h2>
+          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: '#2E2E42' }}>
             Whether you're a creator, marketer, or entrepreneur, we have the tools to accelerate your success
           </p>
         </motion.div>
@@ -68,13 +73,16 @@ function HomeContent() {
               whileHover={{ y: -8, scale: 1.02 }}
             >
               <Link to={createPageUrl(path.link)}>
-                <div className="elvt-glass rounded-xl md:rounded-2xl p-6 md:p-8 text-center cursor-pointer group hover:elvt-glow hover:scale-[1.02] transition-all duration-500 h-full">
-                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                    <path.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: 'var(--accent)' }} />
+                <div className="rounded-xl md:rounded-2xl p-6 md:p-8 text-center cursor-pointer group hover:scale-[1.02] transition-all duration-500 h-full border shadow-lg hover:shadow-2xl" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
+                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F0EDFF' }}>
+                    <path.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: '#7C3AED' }} />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>{path.title}</h3>
-                   <p className="text-sm md:text-base leading-relaxed flex-1 mb-4" style={{ color: 'var(--text-secondary)' }}>{path.desc}</p>
-                   <Button className="mt-4 md:mt-6 w-full font-semibold text-white text-sm md:text-base py-5 md:py-6" style={{ backgroundColor: 'var(--accent)' }}>
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: '#1A1A2E' }}>{path.title}</h3>
+                   <p className="text-sm md:text-base leading-relaxed flex-1 mb-4" style={{ color: '#2E2E42' }}>{path.desc}</p>
+                   <Button className="mt-4 md:mt-6 w-full font-semibold text-white text-sm md:text-base py-5 md:py-6" style={{ backgroundColor: '#7C3AED' }}>
                      Learn More <ArrowRight className="ml-2 w-4 h-4" />
                    </Button>
                 </div>
@@ -85,15 +93,16 @@ function HomeContent() {
       </div>
 
       {/* 4. Mechanism / How It Works */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20" style={{ backgroundColor: '#F8F7FF' }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10 md:mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Your 3-Step Path to Passive Income</h2>
-          <p className="text-base md:text-lg lg:text-xl max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
+...
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Your 3-Step Path to Passive Income</h2>
+          <p className="text-base md:text-lg lg:text-xl max-w-3xl mx-auto px-4" style={{ color: '#2E2E42' }}>
             From idea to earning, MILO handles the hardest part: content creation
           </p>
         </motion.div>
@@ -112,12 +121,12 @@ function HomeContent() {
               transition={{ delay: idx * 0.2 }}
               className="relative px-4 md:px-0"
             >
-              <div className="text-5xl md:text-6xl font-black mb-3 md:mb-4" style={{ color: 'var(--accent)', opacity: 0.2 }}>{item.step}</div>
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-4" style={{ backgroundColor: 'var(--accent)' }}>
+              <div className="text-5xl md:text-6xl font-black mb-3 md:mb-4" style={{ color: '#7C3AED', opacity: 0.2 }}>{item.step}</div>
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-4" style={{ backgroundColor: '#7C3AED' }}>
                 <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
-              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>{item.desc}</p>
+              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3" style={{ color: '#1A1A2E' }}>{item.title}</h3>
+              <p className="text-sm md:text-base" style={{ color: '#2E2E42' }}>{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -131,8 +140,13 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Everything You Need to Succeed</h2>
-          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Everything You Need to Succeed</h2>
+          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: '#2E2E42' }}>
             From content creation to monetization, we've built the tools that actually solve creator problems
           </p>
         </motion.div>
@@ -150,15 +164,20 @@ function HomeContent() {
       </div>
 
       {/* 6. 3-Step Process (Visual) */}
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-24 bg-gradient-to-r from-[var(--bg-secondary)] to-transparent rounded-2xl md:rounded-3xl p-6 md:p-12">
+      <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-24 rounded-2xl md:rounded-3xl p-6 md:p-12" style={{ backgroundColor: '#F8F7FF' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Your Path to Success in 3 Simple Steps</h2>
-          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>From signup to earning, we guide you every step of the way</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Your Path to Success in 3 Simple Steps</h2>
+          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: '#2E2E42' }}>From signup to earning, we guide you every step of the way</p>
         </motion.div>
 
         <div className="space-y-4 md:space-y-8">
@@ -173,16 +192,19 @@ function HomeContent() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2 }}
-              className="elvt-glass rounded-xl p-4 md:p-8 flex items-start gap-4 md:gap-6 hover:elvt-glow transition-all duration-500"
+              className="rounded-xl p-4 md:p-8 flex items-start gap-4 md:gap-6 transition-all duration-500 border shadow-md hover:shadow-xl" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
-              <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-xl md:text-2xl font-black" style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
+              <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-xl md:text-2xl font-black" style={{ backgroundColor: '#7C3AED', color: 'white' }}>
                 {step.num}
               </div>
               <div className="flex-1">
-                <h3 className="text-lg md:text-2xl font-bold mb-1 md:mb-2" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
-                <p className="text-sm md:text-lg" style={{ color: 'var(--text-secondary)' }}>{step.desc}</p>
+                <h3 className="text-lg md:text-2xl font-bold mb-1 md:mb-2" style={{ color: '#1A1A2E' }}>{step.title}</h3>
+                <p className="text-sm md:text-lg" style={{ color: '#2E2E42' }}>{step.desc}</p>
               </div>
-              <CheckCircle2 className="flex-shrink-0 w-6 h-6 md:w-8 md:h-8" style={{ color: 'var(--accent)' }} />
+              <CheckCircle2 className="flex-shrink-0 w-6 h-6 md:w-8 md:h-8" style={{ color: '#7C3AED' }} />
             </motion.div>
           ))}
         </div>
@@ -196,8 +218,13 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Launch Instantly with Proven Templates</h2>
-          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Launch Instantly with Proven Templates</h2>
+          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: '#2E2E42' }}>
             Stop building from scratch. Choose from expertly designed apps to get online in minutes
           </p>
         </motion.div>
@@ -213,21 +240,24 @@ function HomeContent() {
               whileHover={{ y: -8 }}
             >
               <Link to={createPageUrl('AppDetail') + '?id=' + app.id} onClick={() => trackConversion('app_clicked', { app_id: app.id, app_name: app.name })}>
-                <div className="elvt-glass rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group hover:elvt-glow hover:scale-[1.02] transition-all duration-500">
+                <div className="rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group hover:scale-[1.02] transition-all duration-500 border shadow-lg hover:shadow-2xl" style={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'rgba(139, 92, 246, 0.15)'
+                }}>
                  {app.thumbnail_url && (
-                   <div className="aspect-video overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                   <div className="aspect-video overflow-hidden" style={{ backgroundColor: '#F0EDFF' }}>
                      <LazyImage src={app.thumbnail_url} alt={app.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={400} height={300} />
                    </div>
                  )}
                  <div className="p-4 md:p-6">
-                   <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{app.name}</h3>
-                   <p className="text-xs md:text-sm mb-3 md:mb-4 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>{app.short_description}</p>
+                   <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#1A1A2E' }}>{app.name}</h3>
+                   <p className="text-xs md:text-sm mb-3 md:mb-4 line-clamp-2" style={{ color: '#2E2E42' }}>{app.short_description}</p>
                    <div className="flex items-center justify-between">
-                     <span className="text-xl md:text-2xl font-bold" style={{ color: 'var(--accent)' }}>${app.price}</span>
+                     <span className="text-xl md:text-2xl font-bold" style={{ color: '#7C3AED' }}>${app.price}</span>
                      {app.social_proof_rating && (
                        <div className="flex items-center gap-1">
-                         <Star className="w-4 h-4" style={{ fill: 'var(--accent)', color: 'var(--accent)' }} />
-                         <span className="text-sm md:text-base font-semibold" style={{ color: 'var(--text-primary)' }}>{app.social_proof_rating.toFixed(1)}</span>
+                         <Star className="w-4 h-4" style={{ fill: '#7C3AED', color: '#7C3AED' }} />
+                         <span className="text-sm md:text-base font-semibold" style={{ color: '#1A1A2E' }}>{app.social_proof_rating.toFixed(1)}</span>
                        </div>
                      )}
                    </div>
@@ -245,7 +275,7 @@ function HomeContent() {
           className="text-center mt-8 md:mt-12"
         >
           <Link to={createPageUrl('AppCatalog')}>
-            <Button size="lg" className="px-6 md:px-8 py-5 md:py-6 text-sm md:text-base text-white font-semibold w-full md:w-auto" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="px-6 md:px-8 py-5 md:py-6 text-sm md:text-base text-white font-semibold w-full md:w-auto" style={{ backgroundColor: '#7C3AED' }}>
               Browse All Templates
               <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
             </Button>
@@ -259,25 +289,33 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="elvt-glass rounded-2xl md:rounded-3xl p-6 md:p-12 text-center"
+          className="rounded-2xl md:rounded-3xl p-6 md:p-12 text-center border shadow-xl" style={{ 
+            backgroundColor: 'white',
+            borderColor: 'rgba(139, 92, 246, 0.15)'
+          }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient tracking-tight">Simple, Transparent Pricing</h2>
-          <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 px-4" style={{ color: 'var(--text-secondary)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Simple, Transparent Pricing</h2>
+          <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 px-4" style={{ color: '#2E2E42' }}>
             Get started free and scale your success with flexible commission rates
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-4 mb-6 md:mb-8">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black mb-2" style={{ color: 'var(--accent)' }}>Free</div>
-              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>To start your storefront</p>
+              <div className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#7C3AED' }}>Free</div>
+              <p className="text-sm md:text-base" style={{ color: '#2E2E42' }}>To start your storefront</p>
             </div>
-            <div className="hidden md:block w-px h-16" style={{ backgroundColor: 'var(--border)' }} />
+            <div className="hidden md:block w-px h-16" style={{ backgroundColor: 'rgba(139, 92, 246, 0.2)' }} />
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black mb-2" style={{ color: 'var(--accent)' }}>30%</div>
-              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Commission on sales</p>
+              <div className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#7C3AED' }}>30%</div>
+              <p className="text-sm md:text-base" style={{ color: '#2E2E42' }}>Commission on sales</p>
             </div>
           </div>
           <Link to={createPageUrl('Pricing')} onClick={() => trackConversion('pricing_clicked')}>
-            <Button size="lg" className="text-white font-semibold text-sm md:text-base py-5 md:py-6 w-full md:w-auto px-8" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="text-white font-semibold text-sm md:text-base py-5 md:py-6 w-full md:w-auto px-8" style={{ backgroundColor: '#7C3AED' }}>
               View All Plans
             </Button>
           </Link>
@@ -292,8 +330,13 @@ function HomeContent() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 text-gradient px-4 tracking-tight">Common Questions</h2>
-          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: 'var(--text-secondary)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Common Questions</h2>
+          <p className="text-base md:text-lg lg:text-xl px-4" style={{ color: '#2E2E42' }}>
             Everything you need to know about MILO, earning, and success
           </p>
         </motion.div>
@@ -311,10 +354,13 @@ function HomeContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="elvt-glass rounded-xl p-4 md:p-6 hover:border-[var(--accent)] transition-all duration-300"
+              className="rounded-xl p-4 md:p-6 transition-all duration-300 border shadow-md hover:shadow-lg hover:border-[#7C3AED]" style={{ 
+                backgroundColor: 'white',
+                borderColor: 'rgba(139, 92, 246, 0.15)'
+              }}
             >
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3" style={{ color: 'var(--text-primary)' }}>{faq.q}</h3>
-              <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
+              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3" style={{ color: '#1A1A2E' }}>{faq.q}</h3>
+              <p className="text-sm md:text-base" style={{ color: '#2E2E42' }}>{faq.a}</p>
             </motion.div>
           ))}
         </div>
@@ -326,7 +372,7 @@ function HomeContent() {
           className="text-center mt-8 md:mt-12"
         >
           <Link to={createPageUrl('FAQ')}>
-            <Button className="px-6 md:px-8 py-5 md:py-6 text-sm md:text-base text-white font-semibold w-full md:w-auto" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button className="px-6 md:px-8 py-5 md:py-6 text-sm md:text-base text-white font-semibold w-full md:w-auto" style={{ backgroundColor: '#7C3AED' }}>
               Read All FAQs
             </Button>
           </Link>
@@ -339,17 +385,26 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="elvt-glass rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden border pulse-glow" style={{ borderColor: 'var(--accent)', borderWidth: '2px' }}
+          className="rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden border shadow-2xl" style={{ 
+            backgroundColor: 'white',
+            borderColor: '#7C3AED', 
+            borderWidth: '2px' 
+          }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br opacity-10" style={{ background: `radial-gradient(circle, var(--accent) 0%, transparent 70%)` }} />
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gradient relative z-10 tracking-tighter">
+          <div className="absolute inset-0 bg-gradient-to-br opacity-10" style={{ background: `radial-gradient(circle, #7C3AED 0%, transparent 70%)` }} />
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 relative z-10 tracking-tighter" style={{ 
+            background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Stop Waiting, Start Earning Today
           </h2>
-          <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-3xl mx-auto relative z-10 px-4" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-3xl mx-auto relative z-10 px-4" style={{ color: '#2E2E42' }}>
             Join thousands of creators who are already building their income with ELVT Social. Your financial freedom journey begins now.
           </p>
           <Link to={createPageUrl('Join')}>
-            <Button size="lg" className="px-8 md:px-14 py-6 md:py-8 text-base md:text-xl font-black relative z-10 pulse-glow text-white w-full md:w-auto" style={{ backgroundColor: 'var(--accent)' }}>
+            <Button size="lg" className="px-8 md:px-14 py-6 md:py-8 text-base md:text-xl font-black relative z-10 text-white w-full md:w-auto shadow-xl hover:shadow-2xl transition-all" style={{ backgroundColor: '#7C3AED' }}>
               Claim Your Free Storefront
               <ArrowRight className="ml-2 w-5 md:w-6 h-5 md:h-6" />
             </Button>

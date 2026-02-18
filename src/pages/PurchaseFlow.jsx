@@ -35,13 +35,22 @@ function CheckoutForm({ app, affiliateSlug, buyerInfo, setBuyerInfo }) {
       return;
     }
 
+    // Validate inputs
     if (!buyerInfo.name?.trim()) {
       setError('Please enter your full name');
+      trackConversion('checkout_error', { error_type: 'missing_name' });
       return;
     }
 
-    if (!buyerInfo.email?.trim() || !buyerInfo.email.includes('@')) {
+    if (buyerInfo.name.trim().length < 2) {
+      setError('Please enter your complete name');
+      trackConversion('checkout_error', { error_type: 'invalid_name' });
+      return;
+    }
+
+    if (!buyerInfo.email?.trim() || !buyerInfo.email.includes('@') || !buyerInfo.email.includes('.')) {
       setError('Please enter a valid email address');
+      trackConversion('checkout_error', { error_type: 'invalid_email' });
       return;
     }
 

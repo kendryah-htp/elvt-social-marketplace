@@ -54,7 +54,7 @@ function HomeContent() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {[
             { icon: Users, title: "I'm a Creator", desc: "Monetize with your branded storefront + MILO AI creates content in your voice", link: 'SolutionsByRole' },
             { icon: TrendingUp, title: "I'm a Marketer", desc: "Curated apps + AI content ideas + affiliate earnings from day one", link: 'SolutionsByRole' },
@@ -99,7 +99,7 @@ function HomeContent() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
           {[
             { step: '01', title: '✨ Ask MILO', desc: 'Tell MILO what to write. Get blog posts, social content, email copy in seconds—all in your brand voice', icon: Sparkles },
             { step: '02', title: 'Share & Build', desc: 'Publish your content, build your audience, and share your curated storefront link', icon: Zap },
@@ -138,7 +138,7 @@ function HomeContent() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {[
             { icon: Zap, title: '✨ MILO AI Co-Pilot', desc: 'Generate blog posts & content in YOUR brand voice instantly' },
             { icon: Shield, title: 'Curated App Catalog', desc: 'Pre-vetted products you can confidently promote' },
@@ -203,7 +203,7 @@ function HomeContent() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {apps.map((app, idx) => (
             <motion.div
               key={app.id}

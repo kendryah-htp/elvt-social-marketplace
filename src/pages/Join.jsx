@@ -94,7 +94,7 @@ export default function Join() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="space-y-4 md:space-y-6"
+            className="space-y-4 md:space-y-6 px-4 md:px-0"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8" style={{ color: 'var(--text-primary)' }}>What You Get:</h2>
             
@@ -120,7 +120,7 @@ export default function Join() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                className="elvt-glass rounded-xl p-4 md:p-6 flex gap-3 md:gap-4"
+                className="elvt-glass rounded-xl p-4 md:p-6 flex gap-3 md:gap-4 border" style={{ borderColor: 'rgba(139, 92, 246, 0.15)' }}
               >
                 <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                   <benefit.icon className="w-5 md:w-6 h-5 md:h-6" style={{ color: 'var(--accent)' }} />

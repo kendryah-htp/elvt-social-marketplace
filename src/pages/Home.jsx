@@ -95,7 +95,11 @@ function HomeContent() {
       {/* 4. Mechanism / How It Works */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20" style={{ backgroundColor: '#F8F7FF' }}>
         <motion.div
-...
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-10 md:mb-16"
+        >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 md:mb-4 px-4 tracking-tight" style={{ 
             background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
             WebkitBackgroundClip: 'text',

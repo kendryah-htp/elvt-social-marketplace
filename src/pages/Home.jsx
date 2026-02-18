@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import SocialProofFeed from '@/components/SocialProofFeed';
+
 import TrustSignals from '@/components/TrustSignals';
 import HeroSection from '@/components/HeroSection';
 import StatCard from '@/components/StatCard';
@@ -30,7 +30,6 @@ function HomeContent() {
   return (
     <div className="min-h-screen elvt-gradient overflow-hidden">
       <AnalyticsTracker />
-      <SocialProofFeed />
       
       {/* 1. Hero Block */}
       <HeroSection />

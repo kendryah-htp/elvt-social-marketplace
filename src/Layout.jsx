@@ -39,11 +39,11 @@ function LayoutContent({ children, currentPageName }) {
       {/* Navigation */}
       {isPublicPage && (
         <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ 
-          background: 'rgba(15, 15, 26, 0.85)', 
+          background: 'rgba(255, 255, 255, 0.85)', 
           backdropFilter: 'saturate(180%) blur(20px)', 
           WebkitBackdropFilter: 'saturate(180%) blur(20px)',
-          borderColor: 'rgba(139, 92, 246, 0.1)',
-          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.3)'
+          borderColor: 'rgba(139, 92, 246, 0.15)',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(139, 92, 246, 0.08)'
         }}>
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-20">
@@ -57,7 +57,12 @@ function LayoutContent({ children, currentPageName }) {
                       <div className="absolute inset-0 blur-lg opacity-30 group-hover:opacity-50 transition-opacity" style={{ backgroundColor: 'var(--accent)' }} />
                       <Sparkles className="w-8 h-8 relative" style={{ color: 'var(--accent)' }} />
                     </div>
-                    <span className="text-2xl font-bold text-gradient">{settings?.platform_name || 'ELVT Social'}</span>
+                    <span className="text-2xl font-bold" style={{ 
+                      background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>{settings?.platform_name || 'ELVT Social'}</span>
                   </>
                 )}
               </Link>
@@ -66,8 +71,8 @@ function LayoutContent({ children, currentPageName }) {
               <div className="hidden md:flex items-center gap-8">
                 <Link 
                   to={createPageUrl('AppCatalog')}
-                  className="transition-colors font-medium hover:opacity-70"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className="transition-colors font-semibold hover:text-[#7C3AED]"
+                  style={{ color: '#1A1A2E' }}
                 >
                   Product
                 </Link>
@@ -155,49 +160,61 @@ function LayoutContent({ children, currentPageName }) {
                   </div>
                 </div>
 
-                {user ? (
-                  <div className="flex items-center gap-3">
-                    {profile && (
-                      <Link to={createPageUrl('AffiliateDashboard')}>
-                        <Button variant="outline" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }} className="hover:bg-[var(--accent)] hover:text-white transition-all">
-                          <LayoutDashboard className="w-4 h-4 mr-2" />
-                          Dashboard
-                        </Button>
-                      </Link>
-                    )}
-                    {user.role === 'admin' && (
-                      <Link to={createPageUrl('AdminPanel')}>
-                        <Button variant="ghost" style={{ color: 'var(--accent)' }}>
-                          Admin
-                        </Button>
-                      </Link>
-                    )}
-                    <Button
-                      variant="ghost"
-                      onClick={handleLogout}
-                      style={{ color: 'var(--text-secondary)' }}
-                      className="hover:opacity-70"
-                    >
-                      <LogOut className="w-4 h-4" />
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    onClick={() => base44.auth.redirectToLogin()}
-                    className="font-semibold pulse-glow"
-                    style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                <div className="flex items-center gap-4 ml-4 pl-4 border-l" style={{ borderColor: 'rgba(139, 92, 246, 0.2)' }}>
+                  <Link 
+                    to={createPageUrl('Milo')}
+                    className="transition-all font-bold px-4 py-2 rounded-lg"
+                    style={{ 
+                      background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
+                      color: 'white',
+                      boxShadow: '0 2px 8px rgba(139, 92, 246, 0.25)'
+                    }}
                   >
-                    <User className="w-4 h-4 mr-2" />
-                    Sign In
-                  </Button>
-                )}
+                    ✨ MILO
+                  </Link>
+                  
+                  {user ? (
+                    <div className="flex items-center gap-2">
+                      {profile && (
+                        <Link to={createPageUrl('AffiliateDashboard')}>
+                          <Button variant="ghost" className="font-semibold hover:bg-purple-50" style={{ color: '#1A1A2E' }}>
+                            Dashboard
+                          </Button>
+                        </Link>
+                      )}
+                      {user.role === 'admin' && (
+                        <Link to={createPageUrl('AdminPanel')}>
+                          <Button variant="ghost" className="font-semibold hover:bg-purple-50" style={{ color: '#7C3AED' }}>
+                            Admin
+                          </Button>
+                        </Link>
+                      )}
+                      <Button
+                        variant="ghost"
+                        onClick={handleLogout}
+                        className="hover:bg-purple-50"
+                        style={{ color: '#6B6B80' }}
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      onClick={() => base44.auth.redirectToLogin()}
+                      className="font-bold px-6"
+                      style={{ backgroundColor: '#7C3AED', color: 'white' }}
+                    >
+                      Sign In
+                    </Button>
+                  )}
+                </div>
               </div>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2"
-                style={{ color: 'var(--accent)' }}
+                style={{ color: '#7C3AED' }}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>

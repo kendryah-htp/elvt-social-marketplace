@@ -63,10 +63,10 @@ export default function SocialProofFeed() {
             }}
           >
             <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-            <div className="flex items-center gap-2">
-              <ShoppingCart className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--accent)' }} />
-              <p className="text-xs font-medium whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
-                {notif.text.split(' ').slice(0, 3).join(' ')}...
+            <div className="flex items-center gap-3">
+              <ShoppingCart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--accent)' }} />
+              <p className="text-xs font-semibold whitespace-nowrap" style={{ color: 'var(--text-primary)' }}>
+                {notif.text}
               </p>
             </div>
           </motion.div>

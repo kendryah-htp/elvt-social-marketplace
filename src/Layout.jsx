@@ -77,84 +77,47 @@ function LayoutContent({ children, currentPageName }) {
                   Product
                 </Link>
                 <div className="relative group">
-                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                  <button className="transition-colors font-semibold hover:text-[#7C3AED]" style={{ color: '#1A1A2E' }}>
                     Solutions
                   </button>
-                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
-                      <Link to={createPageUrl('SolutionsByRole')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="rounded-xl p-2 border shadow-xl" style={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.98)', 
+                      backdropFilter: 'blur(24px)',
+                      borderColor: 'rgba(139, 92, 246, 0.2)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+                    }}>
+                      <Link to={createPageUrl('SolutionsByRole')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
                         By Role
                       </Link>
-                      <Link to={createPageUrl('SolutionsByUseCase')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                      <Link to={createPageUrl('SolutionsByUseCase')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
                         By Use Case
                       </Link>
                     </div>
                   </div>
                 </div>
                 <div className="relative group">
-                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                  <button className="transition-colors font-semibold hover:text-[#7C3AED]" style={{ color: '#1A1A2E' }}>
                     Resources
                   </button>
-                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
-                      <Link to={createPageUrl('AppCatalog') + '?category=templates'} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
-                        Templates
-                      </Link>
-                      <Link to={createPageUrl('Docs')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
-                        Docs
-                      </Link>
-                      <Link to={createPageUrl('Blog')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="rounded-xl p-2 border shadow-xl" style={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.98)', 
+                      backdropFilter: 'blur(24px)',
+                      borderColor: 'rgba(139, 92, 246, 0.2)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+                    }}>
+                      <Link to={createPageUrl('Blog')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
                         Blog
                       </Link>
-                    </div>
-                  </div>
-                </div>
-                <Link 
-                  to={createPageUrl('Pricing')}
-                  className="transition-colors font-medium hover:opacity-70"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Pricing
-                </Link>
-                <Link 
-                  to={createPageUrl('BlogOnboarding')}
-                  className="transition-colors font-medium hover:opacity-70"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Blog
-                </Link>
-                <Link 
-                  to={createPageUrl('Milo')}
-                  className="transition-colors font-medium hover:opacity-70 pulse-glow"
-                  style={{ color: 'var(--accent)' }}
-                >
-                  ✨ MILO
-                </Link>
-                <Link 
-                  to={createPageUrl('ContentStudio')}
-                  className="transition-colors font-medium hover:opacity-70"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Content Studio
-                </Link>
-                <Link 
-                  to={createPageUrl('FAQ')}
-                  className="transition-colors font-medium hover:opacity-70"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Support
-                </Link>
-                <div className="relative group">
-                  <button className="transition-colors font-medium hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
-                    Guides
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="elvt-glass rounded-lg p-2 border" style={{ borderColor: 'var(--border)' }}>
-                      <Link to={createPageUrl('AdminSetupGuide')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
-                        Admin Setup
+                      <Link to={createPageUrl('Docs')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
+                        Docs
                       </Link>
-                      <Link to={createPageUrl('UserOnboardingGuide')} className="block px-4 py-2 rounded transition-colors hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
-                        User Onboarding
+                      <Link to={createPageUrl('FAQ')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
+                        Support
+                      </Link>
+                      <Link to={createPageUrl('AdminSetupGuide')} className="block px-4 py-2.5 rounded-lg transition-colors hover:bg-purple-50 font-medium" style={{ color: '#1A1A2E' }}>
+                        Guides
                       </Link>
                     </div>
                   </div>

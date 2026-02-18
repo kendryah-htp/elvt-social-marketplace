@@ -157,7 +157,7 @@ function HomeContent() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {[
-            { icon: Zap, title: '✨ MILO AI Co-Pilot', desc: 'Generate blog posts & content in YOUR brand voice instantly' },
+            { icon: Zap, title: 'MILO AI Strategist', desc: 'Architecture-first AI that helps you build and scale with precision—no fluff', isSpecial: true },
             { icon: Shield, title: 'Curated App Catalog', desc: 'Pre-vetted products you can confidently promote' },
             { icon: TrendingUp, title: 'Built-in Blog Engine', desc: 'Guided onboarding + SEO templates included' },
             { icon: Clock, title: 'Instant Payouts', desc: 'Get paid fast for every sale and referral' }

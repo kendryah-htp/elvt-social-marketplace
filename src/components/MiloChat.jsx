@@ -12,6 +12,7 @@ export default function MiloChat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -67,6 +68,13 @@ export default function MiloChat() {
     if (!input.trim() || !conversation || loading) return;
 
     setLoading(true);
+    setIsTyping(true);
+    
+    // Simulate human-like delay before MILO starts responding
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 800 + Math.random() * 400);
+
     try {
       await base44.agents.addMessage(conversation, {
         role: 'user',
@@ -75,6 +83,7 @@ export default function MiloChat() {
       setInput('');
     } catch (error) {
       console.error('Failed to send message:', error);
+      setIsTyping(false);
     } finally {
       setLoading(false);
     }
@@ -99,19 +108,21 @@ export default function MiloChat() {
               animate={{ opacity: 1, y: 0 }}
               className="h-full flex flex-col items-center justify-center text-center"
             >
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                <span className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>M</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Hey! I'm MILO</h3>
-              <p style={{ color: 'var(--text-secondary)' }} className="max-w-sm">
-                I'm your AI co-pilot designed to help you create content, answer questions, and grow your business using proven strategies from your admin.
+              <img 
+                src="https://storage.googleapis.com/msgsndr/2baC3dJ9Apyv9hhVPhn4/media/68e5977fae13a44eb1179e7e.gif"
+                alt="MILO"
+                className="w-24 h-24 rounded-full mb-6 object-cover shadow-xl"
+              />
+              <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>MILO</h3>
+              <p style={{ color: 'var(--text-secondary)' }} className="max-w-md text-sm">
+                Your AI strategist. No fluff. Architecture-first thinking. I help you build and scale with precision.
               </p>
               <div className="mt-6 space-y-2">
                 <p style={{ color: 'var(--text-muted)' }} className="text-sm">Try asking:</p>
                 <div className="text-sm space-y-1" style={{ color: 'var(--accent)' }}>
-                  <p>• Help me write a blog post about...</p>
-                  <p>• What should I post on TikTok?</p>
-                  <p>• How do I get started?</p>
+                  <p>• Help me build a go-to-market strategy</p>
+                  <p>• What's the real problem I'm solving?</p>
+                  <p>• How do I position this product?</p>
                 </div>
               </div>
             </motion.div>
@@ -121,10 +132,18 @@ export default function MiloChat() {
                 key={idx}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                transition={{ delay: idx * 0.05 }}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-2`}
               >
+                {msg.role !== 'user' && (
+                  <img 
+                    src="https://storage.googleapis.com/msgsndr/2baC3dJ9Apyv9hhVPhn4/media/68e5977fae13a44eb1179e7e.gif"
+                    alt="MILO"
+                    className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
+                  />
+                )}
                 <div
-                  className="max-w-xs lg:max-w-md rounded-lg px-4 py-3"
+                  className="max-w-xs lg:max-w-md rounded-xl px-4 py-3 shadow-md"
                   style={{
                     backgroundColor: msg.role === 'user' ? 'var(--accent)' : 'var(--bg-tertiary)',
                     color: msg.role === 'user' ? 'white' : 'var(--text-primary)'
@@ -136,9 +155,9 @@ export default function MiloChat() {
                     <div className="text-sm prose prose-invert prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_a]:text-blue-400 [&_a]:underline">
                       <ReactMarkdown
                         components={{
-                          p: ({ children }) => <p className="mb-2">{children}</p>,
-                          ul: ({ children }) => <ul className="list-disc list-inside mb-2">{children}</ul>,
-                          ol: ({ children }) => <ol className="list-decimal list-inside mb-2">{children}</ol>,
+                          p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+                          ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
                           li: ({ children }) => <li className="ml-2">{children}</li>,
                           strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                           code: ({ children }) => <code style={{ backgroundColor: 'rgba(0,0,0,0.2)', padding: '2px 4px', borderRadius: '3px' }}>{children}</code>
@@ -152,14 +171,38 @@ export default function MiloChat() {
               </motion.div>
             ))
           )}
-          {loading && (
+          {(loading || isTyping) && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex justify-start"
+              className="flex justify-start items-center gap-3"
             >
-              <div className="rounded-lg px-4 py-3" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                <Loader2 className="w-4 h-4 animate-spin" style={{ color: 'var(--accent)' }} />
+              <img 
+                src="https://storage.googleapis.com/msgsndr/2baC3dJ9Apyv9hhVPhn4/media/68e5977fae13a44eb1179e7e.gif"
+                alt="MILO"
+                className="w-8 h-8 rounded-full object-cover"
+              />
+              <div className="rounded-lg px-4 py-3 flex items-center gap-2" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                <div className="flex gap-1">
+                  <motion.div
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: 'var(--accent)' }}
+                  />
+                  <motion.div
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: 'var(--accent)' }}
+                  />
+                  <motion.div
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: 'var(--accent)' }}
+                  />
+                </div>
               </div>
             </motion.div>
           )}

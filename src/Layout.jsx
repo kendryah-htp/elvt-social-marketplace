@@ -133,14 +133,19 @@ function LayoutContent({ children, currentPageName }) {
                 <div className="flex items-center gap-4 ml-4 pl-4 border-l" style={{ borderColor: 'rgba(139, 92, 246, 0.2)' }}>
                   <Link 
                     to={createPageUrl('Milo')}
-                    className="transition-all font-bold px-4 py-2 rounded-lg"
+                    className="transition-all font-bold px-4 py-2 rounded-lg flex items-center gap-2"
                     style={{ 
                       background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
                       color: 'white',
                       boxShadow: '0 2px 8px rgba(139, 92, 246, 0.25)'
                     }}
                   >
-                    ✨ MILO
+                    <img 
+                      src="https://storage.googleapis.com/msgsndr/2baC3dJ9Apyv9hhVPhn4/media/68e5977fae13a44eb1179e7e.gif"
+                      alt="MILO"
+                      className="w-5 h-5 rounded-full object-cover"
+                    />
+                    MILO
                   </Link>
                   
                   {user ? (
@@ -244,14 +249,19 @@ function LayoutContent({ children, currentPageName }) {
               </Link>
               <Link
                 to={createPageUrl('Milo')}
-                className="block py-2 font-bold transition-colors px-4 -mx-4 rounded-lg"
+                className="block py-2 font-bold transition-colors px-4 -mx-4 rounded-lg flex items-center gap-2"
                 style={{ 
                   background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
                   color: 'white'
                 }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                ✨ MILO
+                <img 
+                  src="https://storage.googleapis.com/msgsndr/2baC3dJ9Apyv9hhVPhn4/media/68e5977fae13a44eb1179e7e.gif"
+                  alt="MILO"
+                  className="w-5 h-5 rounded-full object-cover"
+                />
+                MILO
               </Link>
               {user ? (
                 <>

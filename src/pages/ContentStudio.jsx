@@ -122,7 +122,7 @@ Generate high-quality, original content that is engaging and authentic. For blog
   };
 
   return (
-    <div className="min-h-screen elvt-gradient pt-20">
+    <div className="min-h-screen pt-20" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -130,12 +130,17 @@ Generate high-quality, original content that is engaging and authentic. For blog
           className="mb-8 md:mb-12"
         >
           <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-            <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-              <Sparkles className="w-5 md:w-6 h-5 md:h-6" style={{ color: 'var(--accent)' }} />
+            <div className="w-10 md:w-12 h-10 md:h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F0EDFF' }}>
+              <Sparkles className="w-5 md:w-6 h-5 md:h-6" style={{ color: '#7C3AED' }} />
             </div>
-            <h1 className="text-2xl md:text-4xl font-bold text-gradient">Content Studio</h1>
+            <h1 className="text-2xl md:text-4xl font-bold" style={{ 
+              background: 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Content Studio</h1>
           </div>
-          <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Generate high-quality content in your brand voice instantly</p>
+          <p className="text-sm md:text-base" style={{ color: '#6B6B80' }}>Generate high-quality content in your brand voice instantly</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
@@ -144,14 +149,17 @@ Generate high-quality, original content that is engaging and authentic. For blog
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="elvt-glass rounded-2xl p-8"
+            className="rounded-2xl p-8 border shadow-xl" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}
           >
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Create Content</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#1A1A2E' }}>Create Content</h2>
 
             <div className="space-y-6">
               {/* Content Type */}
               <div>
-                <label className="block text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Content Type</label>
+                <label className="block text-sm font-semibold mb-3" style={{ color: '#1A1A2E' }}>Content Type</label>
                 <Select value={contentType} onValueChange={setContentType}>
                   <SelectTrigger>
                     <SelectValue />
@@ -167,7 +175,7 @@ Generate high-quality, original content that is engaging and authentic. For blog
               {/* Brand Voice */}
               {brandVoices.length > 0 && (
                 <div>
-                  <label className="block text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Brand Voice (Optional)</label>
+                  <label className="block text-sm font-semibold mb-3" style={{ color: '#1A1A2E' }}>Brand Voice (Optional)</label>
                   <Select value={selectedVoiceId} onValueChange={setSelectedVoiceId}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a brand voice" />
@@ -185,7 +193,7 @@ Generate high-quality, original content that is engaging and authentic. For blog
 
               {/* Topic Input */}
               <div>
-                <label className="block text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Topic or Keywords</label>
+                <label className="block text-sm font-semibold mb-3" style={{ color: '#1A1A2E' }}>Topic or Keywords</label>
                 <Textarea
                   placeholder={`Enter the topic for your ${contentType === 'blog_post' ? 'blog post' : contentType === 'social_post' ? 'social post' : 'email'}...`}
                   value={topic}
@@ -207,8 +215,8 @@ Generate high-quality, original content that is engaging and authentic. For blog
                 onClick={generateContent}
                 disabled={isGenerating || !topic.trim()}
                 size="lg"
-                className="w-full font-bold py-6"
-                style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                className="w-full font-bold py-6 text-white shadow-lg"
+                style={{ backgroundColor: '#7C3AED' }}
               >
                 {isGenerating ? (
                   <>
@@ -230,17 +238,20 @@ Generate high-quality, original content that is engaging and authentic. For blog
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="elvt-glass rounded-2xl p-8"
+            className="rounded-2xl p-8 border shadow-xl" style={{ 
+              backgroundColor: 'white',
+              borderColor: 'rgba(139, 92, 246, 0.15)'
+            }}
           >
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Generated Content</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#1A1A2E' }}>Generated Content</h2>
 
             {generatedContent ? (
               <div className="space-y-4">
                 <div
-                  className="p-6 rounded-lg max-h-96 overflow-y-auto"
-                  style={{ backgroundColor: 'var(--bg-tertiary)' }}
+                  className="p-6 rounded-lg max-h-96 overflow-y-auto border shadow-sm"
+                  style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.15)' }}
                 >
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
+                  <p style={{ color: '#1A1A2E', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
                     {generatedContent}
                   </p>
                 </div>
@@ -250,7 +261,7 @@ Generate high-quality, original content that is engaging and authentic. For blog
                     onClick={copyToClipboard}
                     variant="outline"
                     className="flex-1"
-                    style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                    style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                   >
                     <Copy className="w-4 h-4 mr-2" />
                     Copy
@@ -259,25 +270,29 @@ Generate high-quality, original content that is engaging and authentic. For blog
                     onClick={downloadAsMarkdown}
                     variant="outline"
                     className="flex-1"
-                    style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                    style={{ borderColor: '#7C3AED', color: '#7C3AED' }}
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Download
                   </Button>
                 </div>
 
-                <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: 'rgba(34, 197, 94, 0.1)', borderLeft: '3px solid #22C55E' }}>
-                  <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: '#22C55E' }} />
-                  <p className="text-sm" style={{ color: '#22C55E' }}>Content generated successfully</p>
+                <div className="flex items-center gap-2 p-3 rounded-lg border shadow-sm" style={{ 
+                  backgroundColor: '#ECFDF5',
+                  borderLeftColor: '#10B981',
+                  borderLeftWidth: '3px'
+                }}>
+                  <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: '#10B981' }} />
+                  <p className="text-sm" style={{ color: '#047857' }}>Content generated successfully</p>
                 </div>
               </div>
             ) : (
               <div
-                className="flex flex-col items-center justify-center p-12 rounded-lg text-center"
-                style={{ backgroundColor: 'var(--bg-tertiary)' }}
+                className="flex flex-col items-center justify-center p-12 rounded-lg text-center border shadow-sm"
+                style={{ backgroundColor: '#F8F7FF', borderColor: 'rgba(139, 92, 246, 0.15)' }}
               >
-                <Sparkles className="w-12 h-12 mb-4" style={{ color: 'var(--text-muted)' }} />
-                <p style={{ color: 'var(--text-muted)' }}>Generate content to see it here</p>
+                <Sparkles className="w-12 h-12 mb-4" style={{ color: '#9CA3AF' }} />
+                <p style={{ color: '#9CA3AF' }}>Generate content to see it here</p>
               </div>
             )}
           </motion.div>
